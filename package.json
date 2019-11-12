@@ -4,7 +4,7 @@
   "description": "D&D encounter generator",
   "main": "app.js",
   "dependencies": {
-    "@types/jquery": "^3.3.30",
+    "@types/jquery": "^3.3.31",
     "express": "^4.17.1",
     "mongodb": "^3.3.3",
     "webpack": "^4.41.2"

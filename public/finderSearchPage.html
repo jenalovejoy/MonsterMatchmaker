@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./finderStyles.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <title>Monster Matchmaker</title>
+
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Monster Matchmaker</a>
+        <ul class="navbar-nav" href="#">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Encounter Builder</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Monster Search</a>
+            </li>
+        </ul>
+    </nav>  
+
+    <div class="container text-light">
+        <div class="row">
+            <h6 class="display-5 text-light">Select the filters to search for monsters</h6>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="text-light">Challenge Rating</h6>
+                <b>0</b> <input id="challengeSlider" type="text" class="doubleSlider" value="" data-slider-min="0" data-slider-max="30" data-slider-step="5" data-slider-value="[250,450]"/> <b>30</b>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-light">Size</h6>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-light">Movement</h6>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="walkCheck">
+                    <label class="form-check-label" for="walkCheck">
+                        Walk
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flyCheck">
+                    <label class="form-check-label" for="flyCheck">
+                        Fly
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="swimCheck">
+                    <label class="form-check-label" for="swimCheck">
+                        Swim
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="climbCheck">
+                    <label class="form-check-label" for="climbCheck">
+                        Climb
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="burrowCheck">
+                    <label class="form-check-label" for="burrowCheck">
+                        Burrow
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6" id="typeSelector">
+                <h6 class="text-light">Type</h6>
+                <table id="typeTable">
+                <tr><div class="form-check form-check-inline">
+                    <td>
+                        <input class="form-check-input" type="checkbox" value="" id="aberrationCheck">
+                        <label class="form-check-label" for="aberrationCheck">
+                            Aberration
+                        </label>
+                    </td>
+                    <td>
+                        <input class="form-check-input" type="checkbox" value="" id="neutralGoodCheck">
+                        <label class="form-check-label" for="neutralGoodCheck">
+                            Beast
+                        </label>
+                    </td>
+                    <td>
+                        <input class="form-check-input" type="checkbox" value="" id="celestialCheck">
+                        <label class="form-check-label" for="celestialCheck">
+                            Celestial
+                        </label>
+                    </td>
+                    <td>
+                        <input class="form-check-input" type="checkbox" value="" id="constructCheck">
+                        <label class="form-check-label" for="constructCheck">
+                            Construct
+                        </label>
+                    </td>
+                </div></tr>
+                <tr>
+                <div class="form-check form-check-inline">
+                    <td>
+                        <input class="form-check-input" type="checkbox" value="" id="dragonCheck">
+                        <label class="form-check-label" for="dragonCheck">
+                            Dragon
+                        </label>
+                    </td>
+                    <td>
+                        <input class="form-check-input" type="checkbox" value="" id="elementalCheck">
+                        <label class="form-check-label" for="elementalCheck">
+                            Elemental
+                        </label>
+                    </td>
+                    <td>
+                        <input class="form-check-input" type="checkbox" value="" id="feyCheck">
+                        <label class="form-check-label" for="feyCheck">
+                            Fey
+                        </label>
+                    </td>
+                    <td>
+                        <input class="form-check-input" type="checkbox" value="" id="fiendCheck">
+                        <label class="form-check-label" for="fiendCheck">
+                            Fiend
+                        </label>
+                    </td>
+                </div></tr>
+                <tr>
+                <div class="form-check form-check-inline">
+                    <td>
+                        <input class="form-check-input" type="checkbox" value="" id="giantCheck">
+                        <label class="form-check-label" for="giantCheck">
+                            Giant
+                        </label>
+                    </td>
+                    <td>
+                        <input class="form-check-input" type="checkbox" value="" id="humanoidCheck">
+                        <label class="form-check-label" for="humanoidCheck">
+                            Humanoid
+                        </label>
+                    </td>
+                    <td>
+                        <input class="form-check-input" type="checkbox" value="" id="monstrosityCheck">
+                        <label class="form-check-label" for="monstrosityCheck">
+                            Monstrosity
+                        </label>
+                    </td>
+                    <td>
+                        <input class="form-check-input" type="checkbox" value="" id="oozeCheck">
+                        <label class="form-check-label" for="oozeCheck">
+                            Ooze
+                        </label>
+                    </td>
+                </div></tr>
+                <tr>
+                <div class="form-check form-check-inline">
+                    <td>
+                        <input class="form-check-input" type="checkbox" value="" id="plantCheck">
+                        <label class="form-check-label" for="plantCheck">
+                            Plant
+                        </label>
+                    </td>
+                    <td>
+                        <input class="form-check-input" type="checkbox" value="" id="undeadCheck">
+                        <label class="form-check-label" for="undeadCheck">
+                            Undead
+                        </label>
+                    </td>
+                </table>
+                </div></tr>
+            </div>
+            <div class="col-md-7">
+                <h6 class="text-light">Alignment</h6>
+                <table>
+                <tr><div class="form-check form-check-inline">
+                        <td>
+                        <input class="form-check-input" type="checkbox" value="" id="lawfulGoodCheck">
+                        <label class="form-check-label" for="lawfulNeutralCheck">
+                            Lawful Good
+                        </label></td>
+                        <td>
+                        <input class="form-check-input" type="checkbox" value="" id="trueGoodCheck">
+                        <label class="form-check-label" for="trueNeutralCheck">
+                            True Good
+                        </label></td>
+                        <td>
+                        <input class="form-check-input" type="checkbox" value="" id="chaoticGoodCheck">
+                        <label class="form-check-label" for="chaoticNuetralCheck">
+                            Chaotic Good
+                        </label></td>
+                    </div></tr>
+                    <tr><div class="form-check form-check-inline">
+                        <td>
+                        <input class="form-check-input" type="checkbox" value="" id="lawfulEvilCheck">
+                        <label class="form-check-label" for="lawfulNeutralCheck">
+                            Lawful Evil
+                        </label></td>
+                        <td>
+                        <input class="form-check-input" type="checkbox" value="" id="neutralEvilCheck">
+                        <label class="form-check-label" for="trueNeutralCheck">
+                            True Evil
+                        </label></td>
+                        <td>
+                        <input class="form-check-input" type="checkbox" value="" id="chaoticEvilCheck">
+                        <label class="form-check-label" for="chaoticNuetralCheck">
+                            Chaotic Evil
+                        </label></td>
+                    </div></tr>
+                </table>
+                
+            </div>
+        </div>
+    </div>
+    
+    
+
+</body>
+</html>
