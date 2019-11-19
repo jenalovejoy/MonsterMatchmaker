@@ -23,5 +23,14 @@ app.get('/monsterFilter', (req, res) => {
     })
 });
 
+// FOR BRANDAE: creates the special URL, and sends the html to be rendered
+app.get('/encounterBuilder', (req, res) => {
+    const code = req.query.code;
+    const path = require('path');
+    res.sendFile('./public/encounterBuilder.html', {
+        root: '.'
+    })
+});
+
 app.listen(port, () => console.log(`Site launched successfully at port ${port}`))
 
