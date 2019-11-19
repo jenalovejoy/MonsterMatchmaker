@@ -2,7 +2,7 @@ const express = require('express'); // import express.js
 const mongo = require('mongodb'); // import package to connect with MongoDB
 
 const app = express();
-const port = 8888;
+const port = 3030;
 
 app.use(express.static('public'));
 
@@ -15,5 +15,22 @@ app.get('/', (req, res) => {
     })
 });
 
-app.listen(port, () => console.log(`Site launched successfully`))
+app.get('/monsterFilter', (req, res) => {
+    const code = req.query.code;
+    const path = require('path');
+    res.sendFile('./public/finderSearchPage.html', {
+        root: '.'
+    })
+});
+
+// FOR BRANDAE: creates the special URL, and sends the html to be rendered
+app.get('/encounterBuilder', (req, res) => {
+    const code = req.query.code;
+    const path = require('path');
+    res.sendFile('./public/encounterBuilder.html', {
+        root: '.'
+    })
+});
+
+app.listen(port, () => console.log(`Site launched successfully at port ${port}`))
 
