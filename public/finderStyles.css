@@ -42,14 +42,12 @@ header {
 #TypeTableItem {
     min-width: 130px;
     vertical-align: middle;
-    padding-left: 20px;
     
 }
 
 #AlignmentTableItem {
     min-width: 160px;
     vertical-align: middle;
-    padding-left: 20px;
 }
 
 #TypeTable {
