@@ -21,17 +21,106 @@
         <a class="nav-link" href="/monsterFilter" title="Monster Search">Monster Search</a>
     </header>  
 
+<!-- 
+    
+I recognize that the listing out of each option is attrocious, 
+especially since there are 30 options. I'm looking into 
+wasy to make this dropdown menu still ADA approved without having to list out every option,
+but I didn't find any on an intial search.
+
+-->
     <body>
         <h5 id="promptHeader">Enter your party information and encounter preferences</h5>
         <article id="filter-body">
             <div class="filter-component" id="challengeRatingFilter">
-                <h6 title="Challenge Rating">Challenge Rating</h6>
-                <input type="range" min="1" value="50" class="slider" id="challengeSlider">
+                <h6 title="Minimum Challenge Rating">Minimum Challenge Rating</h6>
+                <select id = "ChallengeRatingList">
+                    <option value = "0">0</option>
+                    <option value = "1/8">1/8</option>
+                    <option value = "1/4">1/4</option>
+                    <option value = "1/2">1/2</option>
+                    <option value = "1">1</option>
+                    <option value = "2">2</option>
+                    <option value = "3">3</option>
+                    <option value = "4">4</option>
+                    <option value = "5">5</option>
+                    <option value = "6">6</option>
+                    <option value = "7">7</option>
+                    <option value = "8">8</option>
+                    <option value = "9">9</option>
+                    <option value = "10 ">10</option>
+                    <option value = "11">11</option>
+                    <option value = "12">12</option>
+                    <option value = "13 ">13</option>
+                    <option value = "14">14</option>
+                    <option value = "15">15</option>
+                    <option value = "16 ">10</option>
+                    <option value = "17">11</option>
+                    <option value = "18">12</option>
+                    <option value = "19 ">19</option>
+                    <option value = "20">20</option>
+                    <option value = "21">21</option>
+                    <option value = "22 ">22</option>
+                    <option value = "23">23</option>
+                    <option value = "24">24</option>
+                    <option value = "30">30</option>
+
+                </select>
+                <h6 title="Maximum Challenge Rating">Maximum Challenge Rating</h6>
+                <select id = "ChallengeRatingList">
+                        <option value = "0">0</option>
+                        <option value = "1/8">1/8</option>
+                        <option value = "1/4">1/4</option>
+                        <option value = "1/2">1/2</option>
+                        <option value = "1">1</option>
+                        <option value = "2">2</option>
+                        <option value = "3">3</option>
+                        <option value = "4">4</option>
+                        <option value = "5">5</option>
+                        <option value = "6">6</option>
+                        <option value = "7">7</option>
+                        <option value = "8">8</option>
+                        <option value = "9">9</option>
+                        <option value = "10 ">10</option>
+                        <option value = "11">11</option>
+                        <option value = "12">12</option>
+                        <option value = "13 ">13</option>
+                        <option value = "14">14</option>
+                        <option value = "15">15</option>
+                        <option value = "16 ">10</option>
+                        <option value = "17">11</option>
+                        <option value = "18">12</option>
+                        <option value = "19 ">19</option>
+                        <option value = "20">20</option>
+                        <option value = "21">21</option>
+                        <option value = "22 ">22</option>
+                        <option value = "23">23</option>
+                        <option value = "24">24</option>
+                        <option value = "30">30</option>
+    
+                    </select>
+
             </div>
 
             <div class="filter-component" id="sizeFilter">
-                <h6 title="Size">Size</h6>
-                <input type="range" min="1" value="50" class="slider" id="sizeSlider">
+                <h6 title="Min Size">Minimum Creature Size</h6>
+                <select id = "MinSizeList">
+                    <option value = "tiny">Tiny</option>
+                    <option value = "small">Small</option>
+                    <option value = "medium">Medium</option>
+                    <option value = "large">Large</option>
+                    <option value = "huge">Huge</option>
+                    <option value = "gargantuan">Gargantuan</option>
+                </select>
+                <h6 title="Max Size">Maximum Creature Size</h6>
+                <select id = "MaxSizeList">
+                    <option value = "tiny">Tiny</option>
+                    <option value = "small">Small</option>
+                    <option value = "medium">Medium</option>
+                    <option value = "large">Large</option>
+                    <option value = "huge">Huge</option>
+                    <option value = "gargantuan">Gargantuan</option>
+                </select>
             </div>
 
             <div class="filter-component" id="typeSelector"></div>
@@ -70,8 +159,46 @@
                             Burrow
                         </label>
                     </div>
+                    <button onclick="myFunction()">Build My Encounter</button>
+                    
                 </div>
+                
         </div>
+        
     </div>
+    
+
+<p id="demo"></p>
+
+
+<!-- 
+NOTE NOVEMBER 21st 2019 -- BRANDAE GREIN
+There are two scripts here. The first is simply getting the button to 
+work, and will eventually lead to the results page.
+
+The second script I'm leaving in, although at the moment it's doing nothing.
+It is a function call to get the information off of a list. Meaning that
+when a user presses enter, this will get the values selected from
+each dropdown list we used. 
+I thought it might be useful later on.
+-->  
+<script>
+function myFunction() {
+  var x = document.getElementById("mySelect").length;
+  document.getElementById("demo").innerHTML = x;
+}
+
+  
+function getSelectValue()
+{
+    var selectedValue = document.getElementById("list").value;
+    console.log(selectedValue);
+}
+getSelectValue();
+
+   
+
+    
+</script>
 </body>
 </html>
