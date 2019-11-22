@@ -1,7 +1,22 @@
 body {
-<<<<<<< HEAD
-    background-color: #AAAAAA;
-=======
     background-color:#707070;
->>>>>>> c1a83fae226cb9e1ab5ab8712542c99b92077eb9
+    color: white; 
+}
+
+header {
+    background-color: #303030;
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    align-items: center;
+}
+
+.nav-link {
+    color: white;
+}
+
+#promptHeader {
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-right: 20px;
 }
