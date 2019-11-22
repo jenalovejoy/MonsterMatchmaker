@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="./homeScreenStyles.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    
+    <title>Monster Matchmaker</title>
+    <head>
+        <style>
+        table, th, td {
+          border: 1px solid black;
+          padding: 5px;
+          border-spacing: 10px;
+          color:black
+        }
+        th{
+            background: #808080;
+            color: white;
+            font-size: 15px;
+        }
+        tr:hover{background-color: pink}
+        
+        tr:nth-child(even){background: #E8E8E8;}
+        tr:nth-child(odd){background: #C0C0C0;}
+
+        </style>
+    </head>
+
+</head>
+<body>
+    <header>
+        <a id="homepage-link" class="nav-link" href="/" title="Monster Matchmaker">Monster Matchmaker</a>
+        <a class="nav-link" href="/encounterBuilder" title="Encounter Builder">Encounter Builder</a>
+        <a class="nav-link" href="/monsterFilter" title="Monster Search">Monster Search</a>
+    </header> 
+
+    <div class="container">
+        <h3 class="text-light text-center">Here's Some Monsters I Found</h3>
+    </div>
+    <div>
+        <table align="center" style="overflow-x:auto;">
+            <tr>
+                <th>Monster Name</th>
+                <th>Challenge Rating</th>
+                <th>Size</th>
+                <th>Type</th>
+                <th>Subtype</th>
+                <th>Alignment</th>
+                <th>Armor Class</th>
+                <th>Hit Points</th>
+                <th>Hit Dice</th>
+                <th>Speed</th>
+                <th>Strength</th>
+                <th>Dexterity</th>
+                <th>Constitution</th>
+                <th>Intelligence</th>
+                <th>Wisdom</th>
+                <th>Charisma</th>
+            </tr>
+            <tr>
+                <td>Blink Dog</td>
+                <td>1/4 (50 XP)</td>
+                <td>Medium</td>
+                <td>Fey</td>
+                <td></td>
+                <td>Lawful Good</td>
+                <td>13</td>
+                <td>22</td>
+                <td>4d8+4</td>
+                <td>40 feet</td>
+                <td>12</td>
+                <td>17</td>
+                <td>12</td>
+                <td>10</td>
+                <td>13</td>
+                <td>11</td>
+            </tr>
+            <tr>
+                <td>Green Hag</td>
+                <td>3 (700 XP)</td>
+                <td>Medium</td>
+                <td>Fey</td>
+                <td></td>
+                <td>Neutral Evil</td>
+                <td>17</td>
+                <td>82</td>
+                <td>11d8+33</td>
+                <td>30 ft</td>
+                <td>18</td>
+                <td>12</td>
+                <td>16</td>
+                <td>13</td>
+                <td>14</td>
+                <td>14</td>
+            </tr>
+            <tr>
+                <td>Dryad</td>
+                <td>1 (200 XP)</td>
+                <td>Medium</td>
+                <td>Fey</td>
+                <td></td>
+                <td>Neutral</td>
+                <td>11</td>
+                <td>22</td>
+                <td>5d8</td>
+                <td>30 ft</td>
+                <td>10</td>
+                <td>12</td>
+                <td>11</td>
+                <td>14</td>
+                <td>15</td>
+                <td>18</td>
+            </tr>
+             
+        </table>
+    </div>
+
+</body>
+</html>
