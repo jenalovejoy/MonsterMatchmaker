@@ -4,31 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="screen" href="./homeScreenStyles.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="./monsterResultsPage.css"/>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     
     <title>Monster Matchmaker</title>
-    <head>
-        <style>
-        table, th, td {
-          border: 1px solid black;
-          padding: 5px;
-          border-spacing: 10px;
-          color:black
-        }
-        th{
-            background: #808080;
-            color: white;
-            font-size: 15px;
-        }
-        tr:hover{background-color: pink}
-        
-        tr:nth-child(even){background: #E8E8E8;}
-        tr:nth-child(odd){background: #C0C0C0;}
-
-        </style>
-    </head>
+    
 
 </head>
 <body>
@@ -38,11 +19,11 @@
         <a class="nav-link" href="/monsterFilter" title="Monster Search">Monster Search</a>
     </header> 
 
-    <div class="container">
-        <h3 class="text-light text-center">Here's Some Monsters I Found</h3>
+    <div id="filter-component">
+        <h3 class="text-light text-center">I have found some monsters for you</h3>
     </div>
-    <div>
-        <table align="center" style="overflow-x:auto;">
+    <div id="filter-component" style="overflow-x:auto;">
+        <table>
             <tr>
                 <th>Monster Name</th>
                 <th>Challenge Rating</th>
