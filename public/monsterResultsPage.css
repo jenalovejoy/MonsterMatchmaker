@@ -4,16 +4,19 @@ table, th, td {
     border-spacing: 10px;
     color:black;
     overflow-x:auto;
-  }
+}
+
   th{
       background: #808080;
       color: white;
       font-size: 15px;
   }
+
   tr:hover{background-color: pink}
   
   tr:nth-child(even){background: #E8E8E8;}
   tr:nth-child(odd){background: #C0C0C0;}
+
 body {
     background-color:#707070;
     color: white; 
@@ -30,6 +33,7 @@ header {
 .nav-link {
     color: white;
 }
+
 #TypeTable {
     padding-left: 10px;
 }
@@ -50,4 +54,14 @@ header {
 .filter-component {
     padding-right: 40px;
     padding-bottom: 40px;
+}
+
+#results-table {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+#resultsTitle {
+    margin: 20px;
 }
