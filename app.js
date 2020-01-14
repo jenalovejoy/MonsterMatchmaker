@@ -23,11 +23,26 @@ app.get('/monsterFilter', (req, res) => {
     })
 });
 
-// FOR BRANDAE: creates the special URL, and sends the html to be rendered
 app.get('/encounterBuilder', (req, res) => {
     const code = req.query.code;
     const path = require('path');
     res.sendFile('./public/encounterBuilder.html', {
+        root: '.'
+    })
+});
+
+app.get('/encounterResultsPage', (req, res) => {
+    const code = req.query.code;
+    const path = require('path');
+    res.sendFile('./public/encounterResultsPage.html', {
+        root: '.'
+    })
+});
+
+app.get('/monsterResultsPage', (req, res) => {
+    const code = req.query.code;
+    const path = require('path');
+    res.sendFile('./public/monsterResultsPage.html', {
         root: '.'
     })
 });

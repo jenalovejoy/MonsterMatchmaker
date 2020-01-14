@@ -20,3 +20,26 @@ header {
     padding-left: 50px;
     padding-right: 20px;
 }
+
+.parent-container-pair-horizontal {
+   
+    display: flex; /* or inline-flex */
+    flex-direction: row; /*order left to right normally*/
+    flex-wrap: wrap; /*place second item below when small*/
+    justify-content: space-evenly; /* justifies to far left and right, may not work on Edge */
+    align-items:flex-start;
+    margin-top: 100px;
+}
+
+.homescreen-button {
+    background-color: white;
+    border: none;
+    color: dimgrey;
+    padding: 20px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
