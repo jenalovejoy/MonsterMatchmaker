@@ -1,5 +1,4 @@
 node_modules
-*.js
 !app.js
 !webpack.config.js
 .vscode/

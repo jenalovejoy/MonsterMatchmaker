@@ -8,6 +8,10 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
     <script src="filterBuilder.bundle.js"></script>
 
     <title>Encounter Builder</title>
@@ -21,6 +25,8 @@
     </header>  
 
     <h4 id="promptHeader">Enter your party information and encounter preferences</h4><br>
+    <div id="like_button_container"></div>
+
     
     <article class="mainArticle" id="filter-body" > <!-- css style for the whole page frame -->
     <div class="parent-container-list-vertical">
@@ -209,101 +215,8 @@
             <div class="sub-container-pair-horizontal">
                 <div class="sub-container-pair-vertical"> <!-- these parameters should be in a list -->
                     <!--CHALLENGE RATING SELECTOR--> <!-- first item in sub pairing -->
-                    <fieldset class="dropdown" id="challengeRatingSelector"> <!-- dropdown is a css style to make the dropdown fields appear side by side-->
-                        <legend>Challenge Rating</legend>
-                        <!-- MINIMUM CHALLENGE RATING DROPDOWN -->
-                        <span>Min</span>
-                        <select id="MinChallengeRatingDropdown" name="MinimumChallengeRating">
-                            <optgroup label="Pathetic">
-                                <option value="1">0</option>
-                                <option value="2">1/8</option>
-                                <option value="3">1/4</option>
-                                <option value="4">1/2</option>
-                            </optgroup>
-                            <optgroup label="Low">
-                                <option value="5">1</option>
-                                <option value="6">2</option>
-                                <option value="7">3</option>
-                                <option value="8">4</option>
-                                <option value="9">5</option>
-                                <option value="10">6</option>
-                                <option value="11">7</option>
-                                <option value="12">8</option>
-                                <option value="13">9</option>
-                                <option value="14">10</option>
-                            </optgroup>
-                            <optgroup label="Medium">
-                                <option value="15">11</option>
-                                <option value="16">12</option>
-                                <option value="17">13</option>
-                                <option value="18">14</option>
-                                <option value="19">15</option>
-                                <option value="20">16</option>
-                                <option value="21">17</option>
-                                <option value="22">18</option>
-                                <option value="23">19</option>
-                                <option value="24">20</option>
-                            </optgroup>
-                            <optgroup label="High">
-                                <option value="25">21</option>
-                                <option value="26">22</option>
-                            <option value="27">23</option>
-                                <option value="28">24</option>
-                                <option value="29">25</option>
-                                <option value="30">26</option>
-                                <option value="31">27</option>
-                                <option value="32">28</option>
-                                <option value="33">29</option>
-                                <option value="34">30</option>
-                            </optgroup>
-                        </select>
-                        <!-- MAXIMUM CHALLENGE RATING DROPDOWN -->
-                        <span>Max</span>
-                        <select id="MaxChallengeRatingDropdown" name="MaximumChallengeRating">
-                            <optgroup label="Pathetic">
-                                <option value="1">0</option>
-                                <option value="2">1/8</option>
-                                <option value="3">1/4</option>
-                                <option value="4">1/2</option>
-                            </optgroup>
-                            <optgroup label="Low">
-                                <option value="5">1</option>
-                                <option value="6">2</option>
-                                <option value="7">3</option>
-                                <option value="8">4</option>
-                                <option value="9">5</option>
-                                <option value="10">6</option>
-                                <option value="11">7</option>
-                                <option value="12">8</option>
-                                <option value="13">9</option>
-                                <option value="14">10</option>
-                            </optgroup>
-                            <optgroup label="Medium">
-                                <option value="15">11</option>
-                                <option value="16">12</option>
-                                <option value="17">13</option>
-                                <option value="18">14</option>
-                                <option value="19">15</option>
-                                <option value="20">16</option>
-                                <option value="21">17</option>
-                                <option value="22">18</option>
-                                <option value="23">19</option>
-                                <option value="24">20</option>
-                            </optgroup>
-                            <optgroup label="High">
-                                <option value="25">21</option>
-                                <option value="26">22</option>
-                                <option value="27">23</option>
-                                <option value="28">24</option>
-                                <option value="29">25</option>
-                                <option value="30">26</option>
-                                <option value="31">27</option>
-                                <option value="32">28</option>
-                                <option value="33">29</option>
-                                <option value="34">30</option>
-                            </optgroup>
-                        </select>                       
-                    </fieldset>
+                    
+                    <div id = "challenge-rating-select"></div>
     
                     <!-- SIZE SLECTOR --> <!-- second item in sub pairing -->
                     <fieldset class="dropdown" id="sizeFilter">
@@ -369,6 +282,9 @@
         </div> <!-- end third pairing -->
     </div>    
     </article>
+
+<script src="ChallengeRating.js" type = "text/babel"></script>
+<script src="BrandaeSucks.js"></script>
 
 </body>
 </html>
