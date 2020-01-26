@@ -14,7 +14,6 @@ class ChallengeRatings extends React.Component {
           <Dropdowns title="Minimum Challenge Rating" isSize={false} />
           <Dropdowns title="Maximum Challenge Rating" isSize={false} />
         </div>
-        <Brandaetest />
         <div>
           <legend>Size</legend>
           <Dropdowns title="Minimum Creature Size" isSize={true} />
