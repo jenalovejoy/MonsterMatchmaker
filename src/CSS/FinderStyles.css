@@ -1,0 +1,142 @@
+#AlignmentTableItem {
+  min-width: 160px;
+  vertical-align: middle;
+}
+
+body {
+  background-color: #707070;
+  color: white;
+}
+
+h6 {
+  font-size: 1.5rem;
+}
+
+.button {
+  background-color: white;
+  border: none;
+  color: dimgrey;
+  padding: 20px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.parent-container-list-vertical {
+  display: flex; /* or inline-flex */
+  flex-direction: column; /*order left to right normally*/
+  flex-wrap: wrap; /*place second item below when small*/
+  justify-content: space-between; /* justifies to far left and right, may not work on Edge */
+}
+/* This is the parent flex box */
+.parent-container-pair-horizontal {
+  display: flex; /* or inline-flex */
+  flex-direction: row; /*order left to right normally*/
+  flex-wrap: wrap; /*place second item below when small*/
+  justify-content: space-between; /* justifies to far left and right, may not work on Edge */
+  align-items: flex-start;
+}
+
+.sub-container-pair-horizontal {
+  display: flex; /* or inline-flex */
+  flex-direction: row; /*order left to right normally*/
+  flex-wrap: wrap; /*place second item below when small*/
+  justify-content: space-between; /* justifies to far left and right, may not work on Edge */
+  align-items: flex-start;
+  padding-right: 50px;
+}
+
+.sub-container-pair-vertical {
+  display: flex; /* or inline-flex */
+  flex-direction: column; /*order left to right normally*/
+  flex-wrap: wrap; /*place second item below when small*/
+  justify-content: center; /* id like this to say space-between but it is not supported on edge*/
+  padding-right: 25px;
+  padding-bottom: 25px;
+}
+
+.dropdown {
+  display: block;
+  padding-bottom: 50px;
+  padding-right: 50px;
+}
+
+#filter-body {
+  margin: auto;
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#resultsButtonContainer {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+header {
+  background-color: #303030;
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  align-items: center;
+}
+
+/*this is the child flex box*/
+.item {
+  order: 0; /* default is 0 */
+  padding: 25px;
+}
+/*this is the child flex box*/
+.sub-item {
+  order: 0; /* default is 0 */
+  padding: 25px;
+}
+/*this is the child flex box*/
+.sub-sub-item {
+  order: 0; /* default is 0 */
+  padding: 25px;
+}
+
+.nav-link {
+  color: white;
+}
+
+#promptHeader {
+  padding-top: 20px;
+  padding-left: 50px;
+  padding-right: 20px;
+}
+
+#TypeTable {
+  padding-left: 10px;
+}
+
+#TypeTableItem {
+  min-width: 130px;
+  vertical-align: middle;
+}
+
+#typeSelector {
+  padding-left: 40px;
+}
+
+ul.movementCheckbox {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  column-count: 1; /* makes items stay in one column */
+}
+
+ul.movementCheckbox li input {
+  margin-right: 0.25em; /* adjusts the margin between the checkbox and the label */
+}
