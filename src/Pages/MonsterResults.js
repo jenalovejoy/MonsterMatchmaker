@@ -10,7 +10,8 @@ class MonsterResults extends React.Component {
             I have found some monsters for you
           </h3>
         </div>
-        <div id="results-table" style="overflow-x:auto;">
+        <div id="results-table" //style="overflow-x:auto;"
+        >
           <table>
             <tr>
               <th>Monster Name</th>
