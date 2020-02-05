@@ -57,6 +57,11 @@ class MonsterTypeSelector extends React.Component {
     return (
       <form style={gridFormat}>
         {this.createCheckboxes()}
+      <form  onSubmit={this.handleFormSubmit}>
+        <legend style = {{fontSize: '25px'}}>Type</legend>
+        <div style={gridFormat}>
+          {this.createCheckboxes()}
+        </div>
       </form>
     );
   }

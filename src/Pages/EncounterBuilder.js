@@ -1,118 +1,57 @@
 import React from "react";
+import { Link } from "react-router-dom";
+//import styles from "../CSS/FinderStyles.css";
 import PlayerLevelSelector from "../Components/PlayerLevelSelector";
 import ChallengeAndSize from "../Components/ChallengeAndSize";
-import "../CSS/FinderStyles.css";
 import AlignmentTypeSelector from "../Components/AlignmentTypeSelector";
 import MonsterTypeSelector from "../Components/MonsterTypeSelector";
-import { Link } from "react-router-dom";
+import Movement from "../Components/Movement";
+
 
 class EncounterBuilder extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h4 id="promptHeader">
+        <h4 style={promptHeader}>
           Enter your party information and encounter preferences
         </h4>
 
-        <article class="mainArticle" id="filter-body">
+        <article style={filterBody}>
           {/* <!-- css style for the whole page frame --> */}
-          <div class="parent-container-list-vertical">
+          <div style={parentContainerListVertical}>
+            
             {/* <!-- FIRST PAIRING --> */}
-            <div class="parent-container-pair-horizontal">
-              {/* <!-- css style for the first two items --> */}
-
-              {/* <!-- ITEM 1 IN FIRST PAIRING -->
-            <!--CHALLENGE RATING SELECTOR--> <!-- first item in sub pairing --> */}
+            <div style={parentContainerPairHorizontal}>
+              {/* <!-- ITEM 1 IN FIRST PAIRING --> */}
               <PlayerLevelSelector />
 
               {/* <!-- ITEM 2 IN FIRST PAIRING -->
-            <!-- SUB PAIRING IN 2ND ITEM OF FIRST PAIRING --> */}
-              <div class="sub-container-pair-horizontal">
-                <div class="sub-container-pair-vertical">
-                  {/* <!-- these parameters should be in a list -->
-                    <!--CHALLENGE RATING SELECTOR--> <!-- first item in sub pairing --> */}
-
+                  <!-- SUB PAIRING IN 2ND ITEM OF FIRST PAIRING --> */}
+                <div style={subContainerPairHorizontal}>
                   <ChallengeAndSize />
+                  <Movement />
                   <AlignmentTypeSelector />
                   <MonsterTypeSelector />
 
                   {/* <!-- second item in inner horizontal pairing --> */}
-                  {/* <fieldset fieldset class="checkbox" id="movementSelector">
-                    <legend>Movement</legend>
-                    <ul class="movementCheckbox">
-                      <li>
-                        <input
-                          id="walk"
-                          type="checkbox"
-                          name="movement"
-                          value="walk"
-                        >
-                          <label for="walk">Walk</label>
-                        </input>
-                      </li>
-                      <li>
-                        <input
-                          id="fly"
-                          type="checkbox"
-                          name="movement"
-                          value="fly"
-                        >
-                          <label for="fly">Fly</label>
-                        </input>
-                      </li>
-                      <li>
-                        <input
-                          id="swim"
-                          type="checkbox"
-                          name="movement"
-                          value="swim"
-                        >
-                          <label for="swim">Swim</label>
-                        </input>
-                      </li>
-                      <li>
-                        <input
-                          id="climb"
-                          type="checkbox"
-                          name="movement"
-                          value="climb"
-                        >
-                          <label for="climb">Climb</label>
-                        </input>
-                      </li>
-                      <li>
-                        <input
-                          id="burrow"
-                          type="checkbox"
-                          name="movement"
-                          value="burrow"
-                        >
-                          <label for="burrow">Burrow</label>
-                        </input>
-                      </li>
-                    </ul>
-                  </fieldset> */}
                 </div>
                 {/* <!-- end inner horizontal poairing --> */}
-              </div>
+                </div>
               {/* <!-- end first pairing --> */}
+              </div>
 
-              {/* <!-- SECOND PAIRING -->
-        <!-- JENA'S .TS GENERATED FIELDS --> */}
-              <div class="parent-container-pair-horizontal">
-                <div class="filter-component" id="alignmentSelector"></div>
-                <div class="filter-component" id="typeSelector"></div>
-                {/* <!-- this is the type selector field. it is generated by typescript -->  */}
+              {/* <!-- ALIGNMENT AND TYPE ROW --> */}
+              <div style={parentContainerPairHorizontal}>
+                <AlignmentTypeSelector />
+                <MonsterTypeSelector />
               </div>
               {/* <!--end second pairing--> */}
 
-              {/* <!-- THIRD PAIRING --> */}
-              <div
-                class="parent-container-pair-horizontal"
-                id="resultsButtonContainer"
-              >
+              {/* <!-- BUTTON ROW --> */}
+              <div style={parentContainerPairHorizontal}>
                 <Link to="/encounterResults">
-                  <button
+                  <button 
+                    style = {resultsButtonContainer}
                     className="button"
                     onClick="window.location.href = '/encounterResults;"
                     title="Encounter Results"
@@ -123,7 +62,6 @@ class EncounterBuilder extends React.Component {
               </div>
               {/* <!-- end third pairing --> */}
             </div>
-          </div>
         </article>
       </React.Fragment>
     );
@@ -131,3 +69,48 @@ class EncounterBuilder extends React.Component {
 }
 
 export default EncounterBuilder;
+
+const promptHeader = { /* The discriptive text at the top of each search page*/
+  paddingTop: '20px',
+  paddingLeft: '50px',
+  paddingRight: '20px'
+}
+
+const filterBody = { /* CSS style for the whole search page */
+  margin: 'auto',
+  width: '95%',
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'wrap'
+}
+
+const parentContainerListVertical = {
+  display: 'flex', /* or inline-flex */
+  flexDirection: 'column', /*order left to right normally*/
+  flexWrap: 'wrap', /*place second item below when small*/
+  justifyContent: 'space-between' /* justifies to far left and right, may not work on Edge */
+}
+
+const parentContainerPairHorizontal = {
+  display: 'flex', /* or inline-flex */
+  flexDirection: 'row', /*order left to right normally*/
+  flexWrap: 'wrap', /*place second item below when small*/
+  justifyContent: 'space-between', /* justifies to far left and right, may not work on Edge */
+  alignItems: 'flex-start',
+  padding: '30px'
+}
+
+const subContainerPairHorizontal = {
+  display: 'flex', /* or inline-flex */
+  flexDirection: 'row', /*order left to right normally*/
+  flexWrap: 'wrap', /*place second item below when small*/
+  justifyContent: 'space-between', /* justifies to far left and right, may not work on Edge */
+  alignItems: 'flex-start',
+  paddingRight: '50px',
+}
+
+ const resultsButtonContainer = {
+  paddingTop: '30px',
+  display: 'flex',
+  justifyContent: 'center'
+}
