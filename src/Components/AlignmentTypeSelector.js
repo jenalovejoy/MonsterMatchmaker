@@ -79,9 +79,12 @@ class AlignmentTypeSelector extends React.Component {
 
   render() {
     return (
-      <form style={gridFormatAlignment} onSubmit={this.handleFormSubmit}>
-        {this.createCheckboxes()}
-      </form>
+        <form  onSubmit={this.handleFormSubmit}>
+          <legend style = {{fontSize: '25px'}}>Alignment</legend>
+          <div style={gridFormatAlignment}>
+            {this.createCheckboxes()}
+          </div>
+        </form>
     );
   }
 }
