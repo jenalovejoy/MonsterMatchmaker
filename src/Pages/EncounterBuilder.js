@@ -37,61 +37,6 @@ class EncounterBuilder extends React.Component {
                   <MonsterTypeSelector />
 
                   {/* <!-- second item in inner horizontal pairing --> */}
-                  {/* <fieldset fieldset class="checkbox" id="movementSelector">
-                    <legend>Movement</legend>
-                    <ul class="movementCheckbox">
-                      <li>
-                        <input
-                          id="walk"
-                          type="checkbox"
-                          name="movement"
-                          value="walk"
-                        >
-                          <label for="walk">Walk</label>
-                        </input>
-                      </li>
-                      <li>
-                        <input
-                          id="fly"
-                          type="checkbox"
-                          name="movement"
-                          value="fly"
-                        >
-                          <label for="fly">Fly</label>
-                        </input>
-                      </li>
-                      <li>
-                        <input
-                          id="swim"
-                          type="checkbox"
-                          name="movement"
-                          value="swim"
-                        >
-                          <label for="swim">Swim</label>
-                        </input>
-                      </li>
-                      <li>
-                        <input
-                          id="climb"
-                          type="checkbox"
-                          name="movement"
-                          value="climb"
-                        >
-                          <label for="climb">Climb</label>
-                        </input>
-                      </li>
-                      <li>
-                        <input
-                          id="burrow"
-                          type="checkbox"
-                          name="movement"
-                          value="burrow"
-                        >
-                          <label for="burrow">Burrow</label>
-                        </input>
-                      </li>
-                    </ul>
-                  </fieldset> */}
                 </div>
                 {/* <!-- end inner horizontal poairing --> */}
               </div>
