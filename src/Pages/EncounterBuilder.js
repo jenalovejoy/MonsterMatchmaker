@@ -30,6 +30,11 @@ class EncounterBuilder extends React.Component {
                 <div style={subContainerPairHorizontal}>
                   <ChallengeAndSize />
                   <Movement />
+                  <AlignmentTypeSelector />
+                  <MonsterTypeSelector />
+
+                  {/* <!-- second item in inner horizontal pairing --> */}
+                </div>
                 {/* <!-- end inner horizontal poairing --> */}
                 </div>
               {/* <!-- end first pairing --> */}
