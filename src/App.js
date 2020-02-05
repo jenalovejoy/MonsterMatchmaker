@@ -11,10 +11,23 @@ import EncounterResults from "./Pages/EncounterResults";
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
 } from "../node_modules/react-router-dom";
 
 class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      data: [], //stores data from mongo for all the pages
+    };
+    this.storeData = this.storeData.bind(this);
+  }
+
+  storeData(i){
+    this.setState({data: i});
+    console.log(this.state.data);
+  }
+
   render() {
     return (
       <div className="App">
@@ -22,10 +35,10 @@ class App extends React.Component {
           <Header />
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route path="/encounterBuilder" component={EncounterBuilder} />
-            <Route path="/monsterFinder" component={MonsterFinder} />
-            <Route path="/monsterResults" component={MonsterResults} />
-            <Route path="/encounterResults" component={EncounterResults} />
+            <Route path="/encounterBuilder" render={props => <EncounterBuilder storeData={this.storeData}/>} />
+            <Route path="/monsterFinder" render={props => <MonsterFinder storeData={this.storeData}/>} />
+            <Route path="/monsterResults" render={props => <MonsterResults data={this.state.data}/>} />
+            <Route path="/encounterResults" render={props => <EncounterResults data={this.state.data}/>} />
           </Switch>
         </Router>
       </div>

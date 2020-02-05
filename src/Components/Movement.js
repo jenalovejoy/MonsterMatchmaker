@@ -9,26 +9,22 @@ class Checkbox extends React.Component {
 }
 
 class Movement extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      speedA: Array(5).fill(false)
-    };
-  }
-  handleClick(i) {
-    const speedA = this.state.speedA.slice();
-    speedA[i] = !speedA[i];
-    this.setState({ speedA: speedA });
-    console.log(speedA[i], i);
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     speedA: Array(5).fill(false)
+  //   };
+  // }
+  // handleClick(i) {
+  //   const speedA = this.state.speedA.slice();
+  //   speedA[i] = !speedA[i];
+  //   this.setState({ speedA: speedA });
+  //   console.log(speedA[i], i);
+  // }
 
   renderSquare(i) {
-    return (
-      <Checkbox
-        value={this.state.speedA[i]}
-        onClick={() => this.handleClick(i)}
-      />
-    );
+    return <Checkbox value={this.props.speedA[i]}
+    onClick={()=>this.props.onClick(i)}/>;
   }
   render() {
     return (
