@@ -101,6 +101,7 @@ class MonsterFinder extends React.Component {
     console.log(speedA[i], i);
   }
 
+  // alignment
   handleClick2(i) {
     this.setState(prevState => ({
       checkboxes: {
@@ -115,6 +116,8 @@ class MonsterFinder extends React.Component {
         console.log(checkbox, "is selected.");
       });
   }
+
+  //monster type
   handleClick3(i) {
     this.setState(prevState => ({
       checkboxes2: {
@@ -134,7 +137,7 @@ class MonsterFinder extends React.Component {
     return (
       <React.Fragment>
         <h4 style={promptHeader}>
-          Enter your party information and encounter preferences
+          Enter your monster preferences.
         </h4>
 
         <article style={filterBody}>
@@ -143,36 +146,32 @@ class MonsterFinder extends React.Component {
             {/* <!-- FIRST PAIRING --> */}
             <div style={parentContainerPairHorizontal}>
               <ChallengeAndSize />
-                  <AlignmentTypeSelector
-                    onClick={(i) => this.handleClick2(i)}
-                    checkboxes={this.state.checkboxes}
-                    handleCheckBoxChange={(i) => this.handleCheckBoxChange}
-                  />
-                  <MonsterTypeSelector onClick={(i) => this.handleClick3(i)}
-                    checkboxes2={this.state.checkboxes2}
-                    handleCheckBoxChange={(i) => this.handleCheckBoxChange}
-                  />
-                      <Movement
-            speedA={this.state.speedA}
-            onClick={(i) => this.handleClick(i)}
-      />
+              <Movement
+                speedA={this.state.speedA}
+                onClick={(i) => this.handleClick(i)}/>
+              <AlignmentTypeSelector
+                onClick={(i) => this.handleClick2(i)}
+                checkboxes={this.state.checkboxes}
+                handleCheckBoxChange={(i) => this.handleCheckBoxChange}
+              />
             </div>
               {/* <!-- end first pairing --> */}
 
               {/* <!-- SECOND PAIRING -->
         <!-- JENA'S .TS GENERATED FIELDS --> */}
             <div style={parentContainerPairHorizontal}>
-              <MonsterTypeSelector />
+              <MonsterTypeSelector onClick={(i) => this.handleClick3(i)}
+                checkboxes2={this.state.checkboxes2}
+                handleCheckBoxChange={(i) => this.handleCheckBoxChange}
+              />
             </div>
               {/* <!--end second pairing--> */}
 
               {/* <!-- THIRD PAIRING --> */}
-              <div
-                class="parent-container-pair-horizontal"
-                id="resultsButtonContainer"
-              >
+              <div style={parentContainerPairHorizontal}>
                 {/* <Link to="/MonsterResults"> */}
                   <button
+                    style = {resultsButtonContainer}
                     className="button"
                     onClick={() => this.findInDB()}
                     //onClick="window.location.href = '/monsterResults';"
@@ -182,19 +181,6 @@ class MonsterFinder extends React.Component {
                   </button>
                 {/* </Link> */}
               </div>
-              {/* <!-- end third pairing --> */}
-            <div style={parentContainerPairHorizontal}>
-              <Link to="/encounterBuilder">
-                <button
-                  style = {resultsButtonContainer}
-                  className="button"
-                  onClick="window.location.href = '/monsterResults';"
-                  title="Monster Results"
-                >
-                  Find Monsters
-                </button>
-              </Link>
-            </div>
             {/* <!-- end third pairing --> */}
           </div>
         </article>
@@ -234,31 +220,8 @@ const parentContainerPairHorizontal = {
   padding: '30px'
 }
 
-const subContainerPairHorizontal = {
-  display: 'flex', /* or inline-flex */
-  flexDirection: 'row', /*order left to right normally*/
-  flexWrap: 'wrap', /*place second item below when small*/
-  justifyContent: 'space-between', /* justifies to far left and right, may not work on Edge */
-  alignItems: 'flex-start',
-  paddingRight: '50px',
-}
-
  const resultsButtonContainer = {
   paddingTop: '30px',
   display: 'flex',
   justifyContent: 'center'
 }
-
-// const subContainerPairVertical = {
-//   display: 'flex', /* or inline-flex */
-//   flexDirection: 'column', /*order left to right normally*/
-//   flexWrap: 'wrap', /*place second item below when small*/
-//   justifyContent: 'center', /* id like this to say space-between but it is not supported on edge*/
-//   paddingRight: '25px',
-//   paddingBottom: '25px'
-// }
-// const dropdown = { /* makes the dropdown fields appear side by side */
-//   display: 'block',
-//   paddingBottom: '50px',
-//   paddingRight: '50px',
-// }
