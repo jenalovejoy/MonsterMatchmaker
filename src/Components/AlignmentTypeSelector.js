@@ -35,24 +35,17 @@ const gridFormatAlignment = {
         onClick={()=>this.props.onClick(option)}
         key={option}
       />
-
-  render() {
-    return (
-        <form  onSubmit={this.handleFormSubmit}>
-          <legend style = {{fontSize: '25px'}}>Alignment</legend>
-          <div style={gridFormatAlignment}>
-            {this.createCheckboxes()}
-          </div>
-        </form>
-
     );
   
     createCheckboxes = () => OPTIONS.map(this.createCheckbox);
   
     render() {
       return (
-        <form style={gridFormatAlignment}>
-          {this.createCheckboxes()}
+        <form  onSubmit={this.handleFormSubmit}>
+          <legend style = {{fontSize: '25px'}}>Alignment</legend>
+          <div style={gridFormatAlignment}>
+            {this.createCheckboxes()}
+          </div>
         </form>
       );
     }
