@@ -24,6 +24,8 @@ class ResultsTable extends React.Component {
             <th>Charisma</th>
             </tr>
             <ResultsRow/>
+            <ResultsRow/>
+            <ResultsRow/>
                 
         </table>
     );
