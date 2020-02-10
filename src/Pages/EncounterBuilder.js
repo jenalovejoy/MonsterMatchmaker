@@ -7,7 +7,6 @@ import AlignmentTypeSelector from "../Components/AlignmentTypeSelector";
 import MonsterTypeSelector from "../Components/MonsterTypeSelector";
 import Movement from "../Components/Movement";
 
-
 class EncounterBuilder extends React.Component {
   render() {
     return (
@@ -19,7 +18,6 @@ class EncounterBuilder extends React.Component {
         <article style={filterBody}>
           {/* <!-- css style for the whole page frame --> */}
           <div style={parentContainerListVertical}>
-            
             {/* <!-- FIRST PAIRING --> */}
             <div style={parentContainerPairHorizontal}>
               {/* <!-- ITEM 1 IN FIRST PAIRING --> */}
@@ -27,41 +25,40 @@ class EncounterBuilder extends React.Component {
 
               {/* <!-- ITEM 2 IN FIRST PAIRING -->
                   <!-- SUB PAIRING IN 2ND ITEM OF FIRST PAIRING --> */}
-                <div style={subContainerPairHorizontal}>
-                  <ChallengeAndSize />
-                  <Movement />
-                  <AlignmentTypeSelector />
-                  <MonsterTypeSelector />
-
-                  {/* <!-- second item in inner horizontal pairing --> */}
-                </div>
-                {/* <!-- end inner horizontal poairing --> */}
-                </div>
-              {/* <!-- end first pairing --> */}
-              </div>
-
-              {/* <!-- ALIGNMENT AND TYPE ROW --> */}
-              <div style={parentContainerPairHorizontal}>
+              <div style={subContainerPairHorizontal}>
+                <ChallengeAndSize />
+                <Movement />
                 <AlignmentTypeSelector />
                 <MonsterTypeSelector />
-              </div>
-              {/* <!--end second pairing--> */}
 
-              {/* <!-- BUTTON ROW --> */}
-              <div style={parentContainerPairHorizontal}>
-                <Link to="/encounterResults">
-                  <button 
-                    style = {resultsButtonContainer}
-                    className="button"
-                    onClick="window.location.href = '/encounterResults;"
-                    title="Encounter Results"
-                  >
-                    Build Encounter
-                  </button>
-                </Link>
+                {/* <!-- second item in inner horizontal pairing --> */}
               </div>
-              {/* <!-- end third pairing --> */}
+              {/* <!-- end inner horizontal poairing --> */}
             </div>
+            {/* <!-- end first pairing --> */}
+          </div>
+
+          {/* <!-- ALIGNMENT AND TYPE ROW --> */}
+          <div style={parentContainerPairHorizontal}>
+            <AlignmentTypeSelector />
+            <MonsterTypeSelector />
+          </div>
+          {/* <!--end second pairing--> */}
+
+          {/* <!-- BUTTON ROW --> */}
+          <div style={parentContainerPairHorizontal}>
+            <Link to="/encounterResults">
+              <button
+                style={resultsButtonContainer}
+                className="button"
+                onClick="window.location.href = '/encounterResults;"
+                title="Encounter Results"
+              >
+                Build Encounter
+              </button>
+            </Link>
+          </div>
+          {/* <!-- end third pairing --> */}
         </article>
       </React.Fragment>
     );
@@ -70,47 +67,52 @@ class EncounterBuilder extends React.Component {
 
 export default EncounterBuilder;
 
-const promptHeader = { /* The discriptive text at the top of each search page*/
-  paddingTop: '20px',
-  paddingLeft: '50px',
-  paddingRight: '20px'
-}
+const promptHeader = {
+  /* The discriptive text at the top of each search page*/
+  paddingTop: "20px",
+  paddingLeft: "50px",
+  paddingRight: "20px"
+};
 
-const filterBody = { /* CSS style for the whole search page */
-  margin: 'auto',
-  width: '95%',
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap'
-}
+const filterBody = {
+  /* CSS style for the whole search page */
+  margin: "auto",
+  width: "95%",
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "wrap"
+};
 
 const parentContainerListVertical = {
-  display: 'flex', /* or inline-flex */
-  flexDirection: 'column', /*order left to right normally*/
-  flexWrap: 'wrap', /*place second item below when small*/
-  justifyContent: 'space-between' /* justifies to far left and right, may not work on Edge */
-}
+  display: "flex" /* or inline-flex */,
+  flexDirection: "column" /*order left to right normally*/,
+  flexWrap: "wrap" /*place second item below when small*/,
+  justifyContent:
+    "space-between" /* justifies to far left and right, may not work on Edge */
+};
 
 const parentContainerPairHorizontal = {
-  display: 'flex', /* or inline-flex */
-  flexDirection: 'row', /*order left to right normally*/
-  flexWrap: 'wrap', /*place second item below when small*/
-  justifyContent: 'space-between', /* justifies to far left and right, may not work on Edge */
-  alignItems: 'flex-start',
-  padding: '30px'
-}
+  display: "flex" /* or inline-flex */,
+  flexDirection: "row" /*order left to right normally*/,
+  flexWrap: "wrap" /*place second item below when small*/,
+  justifyContent:
+    "space-between" /* justifies to far left and right, may not work on Edge */,
+  alignItems: "flex-start",
+  padding: "30px"
+};
 
 const subContainerPairHorizontal = {
-  display: 'flex', /* or inline-flex */
-  flexDirection: 'row', /*order left to right normally*/
-  flexWrap: 'wrap', /*place second item below when small*/
-  justifyContent: 'space-between', /* justifies to far left and right, may not work on Edge */
-  alignItems: 'flex-start',
-  paddingRight: '50px',
-}
+  display: "flex" /* or inline-flex */,
+  flexDirection: "row" /*order left to right normally*/,
+  flexWrap: "wrap" /*place second item below when small*/,
+  justifyContent:
+    "space-between" /* justifies to far left and right, may not work on Edge */,
+  alignItems: "flex-start",
+  paddingRight: "50px"
+};
 
- const resultsButtonContainer = {
-  paddingTop: '30px',
-  display: 'flex',
-  justifyContent: 'center'
-}
+const resultsButtonContainer = {
+  paddingTop: "30px",
+  display: "flex",
+  justifyContent: "center"
+};
