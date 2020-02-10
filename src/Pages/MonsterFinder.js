@@ -3,7 +3,6 @@ import axios from 'axios';
 import ChallengeAndSize from "../Components/ChallengeAndSize";
 import "../CSS/FinderStyles.css";
 import { Link } from "react-router-dom";
-import ChallengeAndSize from "../Components/ChallengeAndSize";
 //import styles from "../CSS/FinderStyles.css";
 import MonsterTypeSelector from "../Components/MonsterTypeSelector";
 import AlignmentTypeSelector from "../Components/AlignmentTypeSelector";

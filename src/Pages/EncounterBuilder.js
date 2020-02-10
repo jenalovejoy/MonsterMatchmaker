@@ -27,41 +27,37 @@ class EncounterBuilder extends React.Component {
 
               {/* <!-- ITEM 2 IN FIRST PAIRING -->
                   <!-- SUB PAIRING IN 2ND ITEM OF FIRST PAIRING --> */}
-                <div style={subContainerPairHorizontal}>
-                  <ChallengeAndSize />
-                  <Movement />
-                  <AlignmentTypeSelector />
-                  <MonsterTypeSelector />
-
-                  {/* <!-- second item in inner horizontal pairing --> */}
-                </div>
-                {/* <!-- end inner horizontal poairing --> */}
-                </div>
-              {/* <!-- end first pairing --> */}
+              <div style={subContainerPairHorizontal}>
+                <ChallengeAndSize />
+                <Movement />
+              {/* <!-- second item in inner horizontal pairing --> */}
               </div>
-
-              {/* <!-- ALIGNMENT AND TYPE ROW --> */}
-              <div style={parentContainerPairHorizontal}>
-                <AlignmentTypeSelector />
-                <MonsterTypeSelector />
-              </div>
-              {/* <!--end second pairing--> */}
-
-              {/* <!-- BUTTON ROW --> */}
-              <div style={parentContainerPairHorizontal}>
-                <Link to="/encounterResults">
-                  <button 
-                    style = {resultsButtonContainer}
-                    className="button"
-                    onClick="window.location.href = '/encounterResults;"
-                    title="Encounter Results"
-                  >
-                    Build Encounter
-                  </button>
-                </Link>
-              </div>
-              {/* <!-- end third pairing --> */}
+              {/* <!-- end inner horizontal poairing --> */}
             </div>
+            {/* <!-- end first pairing --> */}
+            
+            {/* <!-- ALIGNMENT AND TYPE ROW --> */}
+            <div style={parentContainerPairHorizontal}>
+              <AlignmentTypeSelector />
+              <MonsterTypeSelector />
+            </div>
+            {/* <!--end second pairing--> */}
+
+            {/* <!-- BUTTON ROW --> */}
+            <div style={parentContainerPairHorizontal}>
+              <Link to="/encounterResults">
+                <button 
+                  style = {resultsButtonContainer}
+                  className="button"
+                  onClick="window.location.href = '/encounterResults;"
+                  title="Encounter Results"
+                >
+                  Build Encounter
+                </button>
+              </Link>
+            </div>
+            {/* <!-- end third pairing --> */}
+          </div>
         </article>
       </React.Fragment>
     );
