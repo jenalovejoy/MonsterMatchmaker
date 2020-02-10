@@ -151,48 +151,50 @@ class EncounterBuilder extends React.Component {
 
               {/* <!-- ITEM 2 IN FIRST PAIRING -->
                   <!-- SUB PAIRING IN 2ND ITEM OF FIRST PAIRING --> */}
-                <div style={subContainerPairHorizontal}>
-                  <ChallengeAndSize />
-                  <Movement
-                speedA={this.state.speedA}
-                onClick={(i) => this.handleClick(i)}/>
-                  <AlignmentTypeSelector
+              <div style={subContainerPairHorizontal}>
+                <ChallengeAndSize />
+                <Movement
+                  speedA={this.state.speedA}
+                  onClick={(i) => this.handleClick(i)}
+                />
+
+
+              {/* <!-- second item in inner horizontal pairing --> */}
+              </div>
+            {/* <!-- end inner horizontal poairing --> */}
+            </div>
+            {/* <!-- end first pairing --> */}
+
+            {/* <!-- ALIGNMENT AND TYPE ROW --> */}
+            <div style={parentContainerPairHorizontal}>
+              <AlignmentTypeSelector
                 onClick={(i) => this.handleClick2(i)}
                 checkboxes={this.state.checkboxes}
                 handleCheckBoxChange={(i) => this.handleCheckBoxChange}
               />
-                  <MonsterTypeSelector onClick={(i) => this.handleClick3(i)}
+              <MonsterTypeSelector 
+                onClick={(i) => this.handleClick3(i)}
                 checkboxes2={this.state.checkboxes2}
                 handleCheckBoxChange={(i) => this.handleCheckBoxChange}
               />
+            </div>
+            {/* <!--end second pairing--> */}
 
-                  {/* <!-- second item in inner horizontal pairing --> */}
-                </div>
-                {/* <!-- end inner horizontal poairing --> */}
-                </div>
-              {/* <!-- end first pairing --> */}
-              </div>
-
-              {/* <!-- ALIGNMENT AND TYPE ROW --> */}
-              <div style={parentContainerPairHorizontal}>
-                
-              </div>
-              {/* <!--end second pairing--> */}
-
-              {/* <!-- BUTTON ROW --> */}
-              <div style={parentContainerPairHorizontal}>
-                <Link to="/encounterResults">
-                  <button 
-                    style = {resultsButtonContainer}
-                    className="button"
-                    onClick="window.location.href = '/encounterResults;"
-                    title="Encounter Results"
-                  >
-                    Build Encounter
-                  </button>
-                </Link>
-              </div>
-              {/* <!-- end third pairing --> */}
+            {/* <!-- BUTTON ROW --> */}
+            <div style={parentContainerPairHorizontal}>
+              <Link to="/encounterResults">
+                <button 
+                  style = {resultsButtonContainer}
+                  className="button"
+                  onClick="window.location.href = '/encounterResults;"
+                  title="Encounter Results"
+                >
+                  Build Encounter
+                </button>
+              </Link>
+            </div>
+            {/* <!-- end third pairing --> */}
+          </div>
         </article>
       </React.Fragment>
     );
