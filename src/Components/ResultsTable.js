@@ -2,6 +2,7 @@ import React from "react";
 import ResultsRow from "./ResultsRow";
 
 class ResultsTable extends React.Component {
+
   render(){
     return (
         <table>
@@ -23,11 +24,13 @@ class ResultsTable extends React.Component {
             <th>Wisdom</th>
             <th>Charisma</th>
             </tr>
+            {this.props.data.map(id=>(<ResultsRow id={id}/>))}
+            {/* <ResultsRow/>
             <ResultsRow/>
-            <ResultsRow/>
-            <ResultsRow/>
+            <ResultsRow/> */}
                 
         </table>
+       
     );
   }
 }

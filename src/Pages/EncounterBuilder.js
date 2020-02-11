@@ -7,8 +7,47 @@ import AlignmentTypeSelector from "../Components/AlignmentTypeSelector";
 import MonsterTypeSelector from "../Components/MonsterTypeSelector";
 import Movement from "../Components/Movement";
 
+const OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", "Neutral Good", "Neutral Neutral", "Neutral Evil", "Chaotic Good", "Chaotic Neutral", "Chaotic Evil"];
+const _OPTIONS2 = [
+  "Aberration",
+  "Beast",
+  "Celestial",
+  "Construct",
+  "Dragon",
+  "Elemental",
+  "Fey",
+  "Fiend",
+  "Giant",
+  "Humanoid",
+  "Monstrosity",
+  "Ooze",
+  "Plant",
+  "Undead"
+];
 
 class EncounterBuilder extends React.Component {
+  constructor(props){
+    super(props);
+    // this.storeDataLocal = this.storeDataLocal.bind(this);
+    this.state = {
+      data: [],
+      speedA: Array(5).fill(false), //holds the movement fields
+      checkboxes: OPTIONS.reduce(
+        (options, option) => ({
+          ...options,
+          [option]: false
+        }),
+        {}
+      ),
+      checkboxes2: _OPTIONS2.reduce(
+        (options, option) => ({
+          ...options,
+          [option]: false
+        }),
+        {}
+      )
+    };
+  }
   render() {
     return (
       <React.Fragment>
@@ -29,8 +68,14 @@ class EncounterBuilder extends React.Component {
                   <!-- SUB PAIRING IN 2ND ITEM OF FIRST PAIRING --> */}
                 <div style={subContainerPairHorizontal}>
                   <ChallengeAndSize />
-                  <Movement />
-                  <AlignmentTypeSelector />
+                  <Movement
+                speedA={this.state.speedA}
+                onClick={(i) => this.handleClick(i)}/>
+              <AlignmentTypeSelector
+                onClick={(i) => this.handleClick2(i)}
+                checkboxes={this.state.checkboxes}
+                handleCheckBoxChange={(i) => this.handleCheckBoxChange}
+              />
                   <MonsterTypeSelector />
 
                   {/* <!-- second item in inner horizontal pairing --> */}

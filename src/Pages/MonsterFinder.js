@@ -168,17 +168,18 @@ class MonsterFinder extends React.Component {
 
               {/* <!-- THIRD PAIRING --> */}
               <div style={parentContainerPairHorizontal}>
-                {/* <Link to="/MonsterResults"> */}
+                <Link to="/MonsterResults">
                   <button
                     style = {resultsButtonContainer}
                     className="button"
                     onClick={() => this.findInDB()}
-                    //onClick="window.location.href = '/monsterResults';"
+                    //Not sure what this is actually for, removal has no effect
+                    // onClick="window.location.href = '/monsterResults';" 
                     title="Monster Results"
                   >
                     Find Monsters
                   </button>
-                {/* </Link> */}
+                </Link>
               </div>
             {/* <!-- end third pairing --> */}
           </div>
