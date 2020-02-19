@@ -1,6 +1,7 @@
 import React from "react";
 import "../CSS/EncounterResults.css";
 import EncounterBuilder from "./EncounterBuilder";
+import ResultsTable from "../Components/ResultsTable";
 
 class EncounterResults extends React.Component {
   render() {
@@ -107,6 +108,9 @@ class EncounterResults extends React.Component {
               class="dungeonMap"
               alt="This is just an example dungeon map that players may or may not use."
             ></img>
+          </div>
+          <div>
+            <ResultsTable/>
           </div>
         </article>
       </React.Fragment>

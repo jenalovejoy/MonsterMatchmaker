@@ -28,22 +28,22 @@ class ResultsRow extends React.Component {
   render(){
     return (
     <tr>
-        <td>{dragon.name}</td>
-        <td>{dragon.challenge_rating}</td>
-        <td>{dragon.size}</td>
-        <td>{dragon.type}</td>
-        <td>{dragon.subtype}</td>
-        <td>{dragon.alignment}</td>
-        <td>{dragon.armor_class}</td>
-        <td>{dragon.hit_points}</td>
-        <td>{dragon.hit_dice}</td>
-        <td>{dragon.speed.walk}, {dragon.speed.fly}, {dragon.speed.swim}</td>
-        <td>{dragon.strength}</td>
-        <td>{dragon.dexterity}</td>
-        <td>{dragon.constitution}</td>
-        <td>{dragon.intelligence}</td>
-        <td>{dragon.wisdom}</td>
-        <td>{dragon.charisma}</td>
+        <td>{this.props.id.name}</td>
+        <td>{this.props.id.challenge_rating}</td>
+        <td>{this.props.id.size}</td>
+        <td>{this.props.id.type}</td>
+        <td>{this.props.id.subtype}</td>
+        <td>{this.props.id.alignment}</td>
+        <td>{this.props.id.armor_class}</td>
+        <td>{this.props.id.hit_points}</td>
+        <td>{this.props.id.hit_dice}</td>
+        <td>{this.props.id.speed.walk} {this.props.id.speed.fly} {this.props.id.speed.swim} {this.props.id.speed.burrow} {this.props.id.speed.climb}</td>
+        <td>{this.props.id.strength}</td>
+        <td>{this.props.id.dexterity}</td>
+        <td>{this.props.id.constitution}</td>
+        <td>{this.props.id.intelligence}</td>
+        <td>{this.props.id.wisdom}</td>
+        <td>{this.props.id.charisma}</td>
     </tr>
     );}
 }
