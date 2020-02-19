@@ -1,5 +1,6 @@
 import React from "react";
 
+// Dummy data
 const dragon = {
 	"name": "Adult Black Dragon",
 	"size": "Huge",
@@ -22,12 +23,6 @@ const dragon = {
 	"wisdom": 13,
 	"charisma": 17,
 }
-
-const categories = ["name", "challenge_rating", "size", "type", "subtype", 
-  "alignment", "armor_class", "hit_points", "hit_dice", "speed", "strength", 
-  "dexterity", "constitution", "intelligence", "wisdom", "charisma"];
-
-const monsters = [dragon];
 
 class ResultsRow extends React.Component {
   render(){

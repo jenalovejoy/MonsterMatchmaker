@@ -1,18 +1,22 @@
 import React from "react";
 
-const Checkbox = ({ label, isSelected, onCheckboxChange }) => (
-  <div className="form-check">
+class Checkbox extends React.Component{
+  render(){
+    return(
+      <div className="form-check">
     <label>
       <input
         type="checkbox"
-        name={label}
-        checked={isSelected}
-        onChange={onCheckboxChange}
+        name={this.props.label}
+        checked={this.props.isSelected}
+        onChange={(e) => this.props.onClick()}
         className="form-check-input"
       />
-      {label}
+      {this.props.label}
     </label>
   </div>
-);
+    );
+  }
+}
 
 export default Checkbox;

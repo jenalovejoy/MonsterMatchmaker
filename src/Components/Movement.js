@@ -1,12 +1,13 @@
 import React from "react";
+import Checkbox from "./Checkbox";
 
-//Child
-class Checkbox extends React.Component {
-  handleInputChange(event) {}
-  render() {
-    return <input type="checkbox" onChange={e => this.props.onClick()} />;
-  }
-}
+const MOVEMENT_OPTIONS = [
+  "Fly",
+  "Walk",
+  "Burrow",
+  "Swim",
+  "Climb"
+];
 
 class Movement extends React.Component {
   // constructor(props) {
@@ -22,31 +23,27 @@ class Movement extends React.Component {
   //   console.log(speedA[i], i);
   // }
 
-  renderSquare(i) {
-    return <Checkbox value={this.props.speedA[i]}
-    onClick={()=>this.props.onClick(i)}/>;
-  }
+  
+  createCheckbox = option => (
+    <Checkbox
+      label={option}
+      onClick={()=>this.props.onClick(option)}
+      key={option}
+    />
+  );
+
+  createCheckboxes = () => MOVEMENT_OPTIONS.map(this.createCheckbox);
+
   render() {
     return (
-      <form id="movement-select">
-        <ul>
-          <label>Fly</label>
-          {this.renderSquare(0)}
-          <br />
-          <label>Walk</label>
-          {this.renderSquare(1)}
-          <br />
-          <label>Burrow</label>
-          {this.renderSquare(2)}
-          <br />
-          <label>Swim</label>
-          {this.renderSquare(3)}
-          <br />
-          <label>Climb</label>
-          {this.renderSquare(4)}
-        </ul>
+      <form  onSubmit={this.handleFormSubmit}>
+        <legend style = {{fontSize: '25px'}}>Movement</legend>
+        <div className="gridFormatAlignment">
+          {this.createCheckboxes()}
+        </div>
       </form>
     );
   }
 }
+
 export default Movement;
