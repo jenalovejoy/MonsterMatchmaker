@@ -1,6 +1,6 @@
 import React from "react";
 
-//creates the dropdowns themselves
+// creates the dropdowns themselves
 class Dropdowns extends React.Component {
   constructor(props) {
     super(props);
@@ -9,7 +9,7 @@ class Dropdowns extends React.Component {
 
       isSizeDropdown: this.props.isSize //boolean value for it it is a size or CR dropdown
     };
-    //requried code
+    // required code
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
