@@ -1,16 +1,14 @@
 import React from "react";
 import axios from 'axios';
-import ChallengeAndSize from "../Components/ChallengeAndSize";
 import "../CSS/FinderStyles.css";
-import { Link } from "react-router-dom";
-import ChallengeAndSize from "../Components/ChallengeAndSize";
-//import styles from "../CSS/FinderStyles.css";
 import MonsterTypeSelector from "../Components/MonsterTypeSelector";
 import AlignmentTypeSelector from "../Components/AlignmentTypeSelector";
 import Movement from "../Components/Movement";
+import ChallengeSelector from "../Components/ChallengeSelector";
+import SizeSelector from "../Components/SizeSelector";
 
-const OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", "Neutral Good", "Neutral Neutral", "Neutral Evil", "Chaotic Good", "Chaotic Neutral", "Chaotic Evil"];
-const _OPTIONS2 = [
+const ALIGNMENT_OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", "Neutral Good", "Neutral Neutral", "Neutral Evil", "Chaotic Good", "Chaotic Neutral", "Chaotic Evil"];
+const TYPE_OPTIONS = [
   "Aberration",
   "Beast",
   "Celestial",
@@ -34,14 +32,14 @@ class MonsterFinder extends React.Component {
     this.state = {
       data: [],
       speedA: Array(5).fill(false), //holds the movement fields
-      checkboxes: OPTIONS.reduce(
+      checkboxes: ALIGNMENT_OPTIONS.reduce(
         (options, option) => ({
           ...options,
           [option]: false
         }),
         {}
       ),
-      checkboxes2: _OPTIONS2.reduce(
+      checkboxes2: TYPE_OPTIONS.reduce(
         (options, option) => ({
           ...options,
           [option]: false
@@ -136,31 +134,42 @@ class MonsterFinder extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h4 style={promptHeader}>
+        <h4 className="promptHeader">
           Enter your monster preferences.
         </h4>
 
-        <article style={filterBody}>
+        <article className="filterBody">
           {/* <!-- css style for the whole page frame --> */}
-          <div style={parentContainerListVertical}>
+          <div className="parentContainerListVertical">
             {/* <!-- FIRST PAIRING --> */}
-            <div style={parentContainerPairHorizontal}>
-              <ChallengeAndSize />
-              <Movement
-                speedA={this.state.speedA}
-                onClick={(i) => this.handleClick(i)}/>
+            <div className="parentContainerPairHorizontal">
+              {/* <!-- ITEM 1 IN FIRST PAIRING --> */}
+              
+              <div className="subContainerPairHorizontal">
+                <ChallengeSelector/>
+              </div>
+              <div className="subContainerPairHorizontal">
+                <SizeSelector/>
+              </div>
+              <div className="subContainerPairHorizontal">
+                <Movement
+                  speedA={this.state.speedA}
+                  onClick={(i) => this.handleClick(i)}
+                />
+              </div>
+            {/* <!-- end inner horizontal poairing --> */}
+            </div>
+            {/* <!-- end first pairing --> */}
+
+            {/* <!-- ALIGNMENT AND TYPE ROW --> */}
+            <div className="parentContainerPairHorizontal">
               <AlignmentTypeSelector
                 onClick={(i) => this.handleClick2(i)}
                 checkboxes={this.state.checkboxes}
                 handleCheckBoxChange={(i) => this.handleCheckBoxChange}
               />
-            </div>
-              {/* <!-- end first pairing --> */}
-
-              {/* <!-- SECOND PAIRING -->
-        <!-- JENA'S .TS GENERATED FIELDS --> */}
-            <div style={parentContainerPairHorizontal}>
-              <MonsterTypeSelector onClick={(i) => this.handleClick3(i)}
+              <MonsterTypeSelector 
+                onClick={(i) => this.handleClick3(i)}
                 checkboxes2={this.state.checkboxes2}
                 handleCheckBoxChange={(i) => this.handleCheckBoxChange}
               />
@@ -168,7 +177,7 @@ class MonsterFinder extends React.Component {
               {/* <!--end second pairing--> */}
 
               {/* <!-- THIRD PAIRING --> */}
-              <div style={parentContainerPairHorizontal}>
+              <div className="parentContainerPairHorizontal">
                 {/* <Link to="/MonsterResults"> */}
                   <button
                     style = {resultsButtonContainer}
@@ -189,36 +198,6 @@ class MonsterFinder extends React.Component {
   }
 }
 export default MonsterFinder;
-
-const promptHeader = { /* The discriptive text at the top of each search page*/
-  paddingTop: '20px',
-  paddingLeft: '50px',
-  paddingRight: '20px'
-}
-
-const filterBody = { /* CSS style for the whole search page */
-  margin: 'auto',
-  width: '95%',
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap'
-}
-
-const parentContainerListVertical = {
-  display: 'flex', /* or inline-flex */
-  flexDirection: 'column', /*order left to right normally*/
-  flexWrap: 'wrap', /*place second item below when small*/
-  justifyContent: 'space-between' /* justifies to far left and right, may not work on Edge */
-}
-
-const parentContainerPairHorizontal = {
-  display: 'flex', /* or inline-flex */
-  flexDirection: 'row', /*order left to right normally*/
-  flexWrap: 'wrap', /*place second item below when small*/
-  justifyContent: 'space-between', /* justifies to far left and right, may not work on Edge */
-  alignItems: 'flex-start',
-  padding: '30px'
-}
 
  const resultsButtonContainer = {
   paddingTop: '30px',
