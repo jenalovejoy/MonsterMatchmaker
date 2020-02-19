@@ -27,7 +27,6 @@ const _OPTIONS2 = [
   "Undead"
 ];
 
-
 class EncounterBuilder extends React.Component {
   constructor(props){
     super(props);
@@ -143,11 +142,13 @@ class EncounterBuilder extends React.Component {
 
         <article className="filterBody">
           {/* <!-- css style for the whole page frame --> */}
+
           <div className="parentContainerListVertical">
             
             {/* <!-- FIRST PAIRING --> */}
             <div className="parentContainerPairHorizontal">
               {/* <!-- ITEM 1 IN FIRST PAIRING --> */}
+
               <div className="subContainerPairHorizontal">
                 <PlayerLevelSelector />
               </div>
