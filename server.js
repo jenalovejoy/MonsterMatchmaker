@@ -64,57 +64,73 @@ router.get('/getData', (req, res) => {
 
 //Second find data method
 router.post('/findData', (req, res) => {
+  const sizes = [
+    "Tiny",
+    "Small",
+    "Medium",
+    "Large",
+    "Huge",
+    "Gargantuan"
+  ];
   var query={};
+  query['$and']=[];
   //var queryA={};
   const { fly,walk,burrow,swim,climb,
     lawfulGood,neutralGood,chaoticGood,lawfulNeutral,neutral,chaoticNeutral,lawfulEvil,neutralEvil,chaoticEvil,
-   aberration,dragon,giant,plant,beast,elemental,humanoid,undead,celestial,fey,monstrosity,construct,fiend,ooze} = req.body;
+   aberration,dragon,giant,plant,beast,elemental,humanoid,undead,celestial,fey,monstrosity,construct,fiend,ooze,
+  minSize, maxSize, minChallenge, maxChallenge} = req.body;
   //console.log(id);
-  console.log(aberration);
+  //console.log(minSize);
   //console.log(walk);
   // if(id!= 0){
   //   query['name']=id;
   // }
   //movement queries
+  if(fly==true||walk==true||burrow==true||swim==true||climb==true){
+    var querytemp={};
+  querytemp['$and']=[];
   if(fly=== true){
-    query['speed.fly']={$exists: true};
+    querytemp['$and'].push({'speed.fly': {$exists:true}});
   }if(walk=== true){
-      query['speed.walk']={$exists: true};
+    querytemp['$and'].push({'speed.walk': {$exists:true}});
   }if(burrow=== true){
-    query['speed.burrow']={$exists: true};
+    querytemp['$and'].push({'speed.burrow': {$exists:true}});
 }if(swim=== true){
-  query['speed.swim']={$exists: true};
+  querytemp['$and'].push({'speed.swim': {$exists:true}});
 }if(climb=== true){
-  query['speed.climb']={$exists: true};
+  querytemp['$and'].push({'speed.climb': {$exists:true}});
 }
+query['$and'].push(querytemp);
+  }
 //alignment queries
 if(lawfulGood===true||neutralGood===true||chaoticGood===true||lawfulNeutral===true||neutral===true||chaoticNeutral===true||lawfulEvil===true||neutralEvil===true||chaoticEvil===true){
-  query['$or']=[];
+  var querytemp={};
+  querytemp['$or']=[];
   if(lawfulGood=== true){
-    query['$or'].push({alignment: {$eq:"lawful good"}});
+    querytemp['$or'].push({alignment: {$eq:"lawful good"}});
   }if(neutralGood=== true){
-    query['$or'].push({alignment: {$eq:"neutral good"}});
+    querytemp['$or'].push({alignment: {$eq:"neutral good"}});
   }if(chaoticGood=== true){
-    query['$or'].push({alignment: {$eq:"chaotic good"}});
+    querytemp['$or'].push({alignment: {$eq:"chaotic good"}});
   }if(lawfulNeutral=== true){
-    query['$or'].push({alignment: {$eq:"lawful neutral"}});
+    querytemp['$or'].push({alignment: {$eq:"lawful neutral"}});
   }if(neutral=== true){
-    query['$or'].push({alignment: {$eq:"neutral"}});
+    querytemp['$or'].push({alignment: {$eq:"neutral"}});
   }if(chaoticNeutral=== true){
-    query['$or'].push({alignment: {$eq:"chaotic neutral"}});
+    querytemp['$or'].push({alignment: {$eq:"chaotic neutral"}});
   }if(lawfulEvil=== true){
-    query['$or'].push({alignment: {$eq:"lawful evil"}});
+    querytemp['$or'].push({alignment: {$eq:"lawful evil"}});
   }if(neutralEvil=== true){
-    query['$or'].push({alignment: {$eq:"neutral evil"}});
+    querytemp['$or'].push({alignment: {$eq:"neutral evil"}});
   }if(chaoticEvil=== true){
-    query['$or'].push({alignment: {$eq:"chaotic evil"}});
+    querytemp['$or'].push({alignment: {$eq:"chaotic evil"}});
   }
+  query['$and'].push(querytemp);
 }
 //for monster types
 if(aberration==true||dragon==true||giant==true||plant==true||beast==true||elemental==true||humanoid==true||undead==true||undead==true||celestial==true||fey==true||monstrosity==true||construct==true||fiend==true||ooze==true){
   var querytemp={};
   querytemp['$or']=[];
-  query['$and']=[];
   if(aberration==true){
     querytemp['$or'].push({type: {$eq:"aberration"}});
   }if(dragon==true){
@@ -146,10 +162,82 @@ if(aberration==true||dragon==true||giant==true||plant==true||beast==true||elemen
   }
   query['$and'].push(querytemp);
 }
+//challenge rating
+if(minChallenge!="" || maxChallenge!=""){
+  var querytemp={};
+  querytemp['$and']=[];
+    if(minChallenge!=""){
+      querytemp['$and'].push({challenge_rating: {$gte:parseInt(minChallenge, 10)}});
+    }if(maxChallenge!=""){
+      querytemp['$and'].push({challenge_rating: {$lte:parseInt(maxChallenge, 10)}});
+    }
+    query['$and'].push(querytemp);
+}
+//Sizes
+if(minSize!="" || maxSize!=""){
+  var querytemp={};
+  querytemp['$or']=[];
+  //query['$and']=[];
+  var use;
+  for(let val of sizes) {
+    if(val==minSize || minSize=="")
+      use=true;
+    if(use==true)
+      querytemp['$or'].push({size: {$eq:val}});
+      console.log(val)
+    if(val==maxSize){
+      break
+    }
+}
+query['$and'].push(querytemp);
+  //min
+    // if(minSize!="Tiny"){
+    //   query['$and'].push({size: {$eq:minSize}});
+    // }
+    // if(minSize!="Small"){
+    //   query['$and'].push({size: {$eq:minSize}});
+    // }
+    // if(minSize!="Medium"){
+    //   query['$and'].push({size: {$eq:minSize}});
+    // }
+    // if(minSize!="Large"){
+    //   query['$and'].push({size: {$eq:minSize}});
+    // }
+    // if(minSize!="Huge"){
+    //   query['$and'].push({size: {$eq:minSize}});
+    // }
+    // if(minSize!="Gargantuan"){
+    //   query['$and'].push({size: {$eq:minSize}});
+    // }
+    // //max
+    // if(maxSize!="Tiny"){
+    //   query['$and'].push({size: {$eq:minSize}});
+    // }
+    // if(maxSize!="Small"){
+    //   query['$and'].push({size: {$eq:minSize}});
+    // }
+    // if(maxSize!="Medium"){
+    //   query['$and'].push({size: {$eq:minSize}});
+    // }
+    // if(maxSize!="Large"){
+    //   query['$and'].push({size: {$eq:minSize}});
+    // }
+    // if(maxSize!="Huge"){
+    //   query['$and'].push({size: {$eq:minSize}});
+    // }
+    // if(maxSize!="Gargantuan"){
+    //   query['$and'].push({size: {$eq:minSize}});
+    // }
+}
+
   
   
   //query['$and'].push({$or:[{type: {$eq:"dragon"}}]});
 
+  //no input provided
+  if(query['$and'].length==0){
+    query={};
+  }
 
   console.log(query);
   Data.find(query, (err, data) => {
