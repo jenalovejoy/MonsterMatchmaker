@@ -6,8 +6,6 @@ class Dropdowns extends React.Component {
     super(props);
     this.state = {
       headerTitle: this.props.title, //takes in title
-
-      isSizeDropdown: this.props.isSize //boolean value for it it is a size or CR dropdown
     };
     // required code
     this.handleChange = this.handleChange.bind(this);
@@ -15,9 +13,10 @@ class Dropdowns extends React.Component {
   }
   //Returns the value selected by the user
   handleChange(event) {
+    this.props.storeData(event.target.value);
     this.setState({ value: event.target.value });
     this.myString = event.target.value;
-    console.log(this.myString);
+    //console.log(this.myString);
     //this.props.value(this.myString);
   }
 
@@ -29,12 +28,7 @@ class Dropdowns extends React.Component {
   //renders dropdowns
   render() {
     let dropdownFill = [];
-
-    if (this.state.isSizeDropdown) {
-      dropdownFill = fillWithSizeCategories();
-    } else {
-      dropdownFill = fillWithChallengeRatings();
-    }
+    dropdownFill = this.props.fillWithData();
     let title = this.state.headerTitle;
 
     //Creates a form that allos for user to interact and submit information
@@ -53,33 +47,6 @@ class Dropdowns extends React.Component {
       </form>
     );
   }
-}
-
-//Fills array with challenge rating options
-function fillWithChallengeRatings() {
-  let array = [];
-  array.push("0");
-  array.push("1/8");
-  array.push("1/4");
-  array.push("1/2");
-  for (let i = 1; i <= 24; i++) {
-    array.push(i.toString(10));
-  }
-  array.push("30");
-  return array;
-}
-//fills array with size category options
-function fillWithSizeCategories() {
-  let array = [];
-  array.push("Dimimutive");
-  array.push("Tiny");
-  array.push("Small");
-  array.push("Medium");
-  array.push("Large");
-  array.push("Huge");
-  array.push("Gargantuan");
-  array.push("Colossal");
-  return array;
 }
 
 export default Dropdowns;
