@@ -9,8 +9,8 @@ class SizeSelector extends React.Component {
         <div>
             <legend style = {{fontSize: '25px'}}>Size</legend>
 
-            <Dropdowns title="Minimum Creature Size" isSize={true} />
-            <Dropdowns title="Maximum Creature Size" isSize={true} />
+            <Dropdowns title="Minimum Creature Size" category="Size" />
+            <Dropdowns title="Maximum Creature Size" category="Size" />
         </div>
     </React.Fragment>
     

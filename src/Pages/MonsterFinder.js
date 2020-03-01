@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import { Link } from "react-router-dom";
 import "../CSS/FinderStyles.css";
 import MonsterTypeSelector from "../Components/MonsterTypeSelector";
 import AlignmentTypeSelector from "../Components/AlignmentTypeSelector";

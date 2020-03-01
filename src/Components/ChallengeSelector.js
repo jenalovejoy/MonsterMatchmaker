@@ -8,8 +8,8 @@ class ChallengeSelector extends React.Component {
         <React.Fragment>
         <div>
             <legend style = {{fontSize: '25px'}}>Challenge Rating</legend>
-            <Dropdowns title="Minimum Challenge Rating" isSize={false} />
-            <Dropdowns title="Maximum Challenge Rating" isSize={false} />
+            <Dropdowns title="Minimum Challenge Rating" category="Challenge"/>
+            <Dropdowns title="Maximum Challenge Rating" category="Challenge"/>
         </div>
     </React.Fragment>
       );
