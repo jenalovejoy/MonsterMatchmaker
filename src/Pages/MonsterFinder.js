@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import "../CSS/FinderStyles.css";
@@ -25,6 +26,13 @@ const TYPE_OPTIONS = [
   "Plant",
   "Undead"
 ];
+const MOVEMENT_OPTIONS = [
+  "Fly",
+  "Walk",
+  "Burrow",
+  "Swim",
+  "Climb"
+];
 
 class MonsterFinder extends React.Component {
   constructor(props){
@@ -33,6 +41,15 @@ class MonsterFinder extends React.Component {
     this.state = {
       data: [],
       speedA: Array(5).fill(false), //holds the movement fields
+      speedA: MOVEMENT_OPTIONS.reduce(
+        (options, option) => ({
+          ...options,
+          [option]: false
+        }),
+        {}
+      ),
+      challengeRatings : Array(2).fill(""),
+      sizes : Array(2).fill(""),
       checkboxes: ALIGNMENT_OPTIONS.reduce(
         (options, option) => ({
           ...options,
@@ -53,11 +70,11 @@ class MonsterFinder extends React.Component {
   findInDB = () => {
     axios.post('http://localhost:3001/api/findData',{
       //movement
-      fly: this.state.speedA[0],
-      walk: this.state.speedA[1],
-      burrow: this.state.speedA[2],
-      swim: this.state.speedA[3],
-      climb: this.state.speedA[4],
+      fly: this.state.speedA["Fly"],
+      walk: this.state.speedA["Walk"],
+      burrow: this.state.speedA["Burrow"],
+      swim: this.state.speedA["Swim"],
+      climb: this.state.speedA["Climb"],
       //alignment
       lawfulGood: this.state.checkboxes["Lawful Good"],
       neutralGood: this.state.checkboxes["Neutral Good"],
@@ -83,6 +100,12 @@ class MonsterFinder extends React.Component {
       construct: this.state.checkboxes2["Construct"],
       fiend: this.state.checkboxes2["Fiend"],
       ooze: this.state.checkboxes2["Ooze"],
+      //size
+      minSize: this.state.sizes[0],
+      maxSize: this.state.sizes[1],
+      //challenge
+      minChallenge: this.state.challengeRatings[0],
+      maxChallenge: this.state.challengeRatings[1],
     })
     .then((response) => {
       this.props.storeData(response.data);
@@ -92,12 +115,86 @@ class MonsterFinder extends React.Component {
     });
   };
 
+  setMinChallenge(i){
+    this.setState(prevState => ({
+      challengeRatings: {
+        ...prevState.challengeRatings,
+        [0]: i
+      },
+    }));
+    console.log(this.state.challengeRatings);
+    Object.keys(this.state.checkboxes)
+      .filter(checkbox => this.state.checkboxes[checkbox])
+      .forEach(checkbox => {
+        console.log(checkbox, "is selected.");
+      });
+  }
+  setMaxChallenge(i){
+    this.setState(prevState => ({
+      challengeRatings: {
+        ...prevState.challengeRatings,
+        [1]: i
+      },
+    }));
+    console.log(this.state.challengeRatings);
+    Object.keys(this.state.checkboxes)
+      .filter(checkbox => this.state.checkboxes[checkbox])
+      .forEach(checkbox => {
+        console.log(checkbox, "is selected.");
+      });
+  }
+
+  setMinSize(i){
+    this.setState(prevState => ({
+      sizes: {
+        ...prevState.sizes,
+        [0]: i
+      },
+    }));
+    console.log(this.state.sizes);
+    Object.keys(this.state.checkboxes)
+      .filter(checkbox => this.state.checkboxes[checkbox])
+      .forEach(checkbox => {
+        console.log(checkbox, "is selected.");
+      });
+  }
+  setMaxSize(i){
+    this.setState(prevState => ({
+      sizes: {
+        ...prevState.sizes,
+        [1]: i
+      },
+    }));
+    console.log(this.state.sizes);
+    Object.keys(this.state.checkboxes)
+      .filter(checkbox => this.state.checkboxes[checkbox])
+      .forEach(checkbox => {
+        console.log(checkbox, "is selected.");
+      });
+  }
+
   //for movement
+  // setMaxChallenge(i) {
+  //   const speedA = this.state.speedA.slice();
+  //   speedA[i] = !speedA[i];
+  //   this.setState({speedA: speedA});
+  //   console.log(speedA[i], i);
+  // }
+
+  // movement
   handleClick(i) {
-    const speedA = this.state.speedA.slice();
-    speedA[i] = !speedA[i];
-    this.setState({speedA: speedA});
-    console.log(speedA[i], i);
+    this.setState(prevState => ({
+      speedA: {
+        ...prevState.speedA,
+        [i]: !prevState.speedA[i]
+      },
+    }));
+    console.log(this.state.speedA);
+    Object.keys(this.state.checkboxes)
+      .filter(checkbox => this.state.checkboxes[checkbox])
+      .forEach(checkbox => {
+        console.log(checkbox, "is selected.");
+      });
   }
 
   // alignment
@@ -147,10 +244,15 @@ class MonsterFinder extends React.Component {
               {/* <!-- ITEM 1 IN FIRST PAIRING --> */}
               
               <div className="subContainerPairHorizontal">
-                <ChallengeSelector/>
+                <ChallengeSelector 
+                setMinChallenge={(i) => this.setMinChallenge(i)}
+                setMaxChallenge={(i) => this.setMaxChallenge(i)}
+                />
               </div>
               <div className="subContainerPairHorizontal">
-                <SizeSelector/>
+                <SizeSelector 
+                setMinSize={(i) => this.setMinSize(i)}
+                setMaxSize={(i) => this.setMaxSize(i)} />
               </div>
               <div className="subContainerPairHorizontal">
                 <Movement

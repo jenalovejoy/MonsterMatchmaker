@@ -11,6 +11,7 @@ class Dropdowns extends React.Component {
     this.state = {
       headerTitle: this.props.title, // String representing dropdown 
       category: this.props.category // String representing category type
+
     };
 
     // required code
@@ -20,9 +21,10 @@ class Dropdowns extends React.Component {
 
   //Returns the value selected by the user
   handleChange(event) {
+    this.props.storeData(event.target.value);
     this.setState({ value: event.target.value });
     this.myString = event.target.value;
-    console.log(this.myString);
+    //console.log(this.myString);
     //this.props.value(this.myString);
   }
 
@@ -34,7 +36,6 @@ class Dropdowns extends React.Component {
   //renders dropdowns
   render() {
     let dropdownFill = [];
-
     if (this.state.category === "Size") {
       dropdownFill = SIZE_CATEGORIES;
 

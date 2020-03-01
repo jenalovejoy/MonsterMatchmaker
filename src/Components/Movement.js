@@ -10,18 +10,18 @@ const MOVEMENT_OPTIONS = [
 ];
 
 class Movement extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     speedA: Array(5).fill(false)
-  //   };
-  // }
-  // handleClick(i) {
-  //   const speedA = this.state.speedA.slice();
-  //   speedA[i] = !speedA[i];
-  //   this.setState({ speedA: speedA });
-  //   console.log(speedA[i], i);
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      speedA: Array(5).fill(false)
+    };
+  }
+  handleClick(i) {
+    const speedA = this.state.speedA.slice();
+    speedA[i] = !speedA[i];
+    this.setState({ speedA: speedA });
+    console.log(speedA[i], i);
+  }
 
   
   createCheckbox = option => (

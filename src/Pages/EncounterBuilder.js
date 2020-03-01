@@ -116,6 +116,7 @@ class EncounterBuilder extends React.Component {
             </div>
             {/* <!-- end third pairing --> */}
           </div>
+          </div>
         </article>
       </React.Fragment>
     );
