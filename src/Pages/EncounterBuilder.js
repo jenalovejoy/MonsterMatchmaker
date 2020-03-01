@@ -5,12 +5,15 @@ import PlayerLevelSelector from "../Components/PlayerLevelSelector";
 import AlignmentTypeSelector from "../Components/AlignmentTypeSelector";
 import MonsterTypeSelector from "../Components/MonsterTypeSelector";
 import Movement from "../Components/Movement";
-import axios from 'axios';
 import ChallengeSelector from "../Components/ChallengeSelector";
 import SizeSelector from "../Components/SizeSelector";
+import EncounterDifficultySelector from "../Components/EncounterDifficultySelector";
 
-const OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", "Neutral Good", "Neutral Neutral", "Neutral Evil", "Chaotic Good", "Chaotic Neutral", "Chaotic Evil"];
-const _OPTIONS2 = [
+const ALIGNMENT_OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", 
+                  "Neutral Good", "Neutral Neutral", "Neutral Evil", 
+                  "Chaotic Good", "Chaotic Neutral", "Chaotic Evil"];
+
+const TYPE_OPTIONS = [
   "Aberration",
   "Beast",
   "Celestial",
@@ -34,16 +37,16 @@ class EncounterBuilder extends React.Component {
     this.state = {
       data: [],
       speedA: Array(5).fill(false), //holds the movement fields
-      checkboxes: OPTIONS.reduce(
-        (options, option) => ({
-          ...options,
+      checkboxes: ALIGNMENT_OPTIONS.reduce(
+        (ALIGNMENT_OPTIONS, option) => ({
+          ...ALIGNMENT_OPTIONS,
           [option]: false
         }),
         {}
       ),
-      checkboxes2: _OPTIONS2.reduce(
-        (options, option) => ({
-          ...options,
+      checkboxes2: TYPE_OPTIONS.reduce(
+        (ALIGNMENT_OPTIONS, option) => ({
+          ...ALIGNMENT_OPTIONS,
           [option]: false
         }),
         {}
@@ -66,9 +69,11 @@ class EncounterBuilder extends React.Component {
             <div className="parentContainerPairHorizontal">
               {/* <!-- ITEM 1 IN FIRST PAIRING --> */}
 
-
               <div className="subContainerPairHorizontal">
                 <PlayerLevelSelector />
+              </div>
+              <div className="subContainerPairHorizontal">
+                <EncounterDifficultySelector />
               </div>
               <div className="subContainerPairHorizontal">
                 <ChallengeSelector/>
@@ -94,7 +99,7 @@ class EncounterBuilder extends React.Component {
                 handleCheckBoxChange={(i) => this.handleCheckBoxChange}
               />
                   <MonsterTypeSelector />
-
+            </div>
 
             {/* <!-- BUTTON ROW --> */}
             <div className="parentContainerPairHorizontal">

@@ -92,7 +92,6 @@ header {
 }
 
 table,
-th,
 td {
   border: 1px solid black;
   padding: 5px;
@@ -101,10 +100,13 @@ td {
   text-align: left;
   overflow-x: auto;
 }
-th {
+
+.resultsTableHeading {
   background: #808080;
   color: white;
   font-size: 15px;
+  border: 1px solid black;
+  text-align: center;
 }
 .dungeonMap {
   width: 250px;

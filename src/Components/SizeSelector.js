@@ -33,6 +33,7 @@ fillWithData() {
             isSize={true} 
             storeData={this.props.setMaxSize}
             fillWithData={this.fillWithData}/>
+
         </div>
     </React.Fragment>
     
