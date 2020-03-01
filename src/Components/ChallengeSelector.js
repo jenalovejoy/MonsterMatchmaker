@@ -28,12 +28,12 @@ fillWithData() {
         <div>
             <legend style = {{fontSize: '25px'}}>Challenge Rating</legend>
             <Dropdowns title="Minimum Challenge Rating" 
-            isSize={false} 
+            category="Challenge"
             storeData={this.props.setMinChallenge}
             fillWithData={this.fillWithData}/>
             {/* fillWithData={()=>this.props.fillWithData(option)}/> */}
             <Dropdowns title="Maximum Challenge Rating" 
-            isSize={false} 
+            category="Challenge"
             storeData={this.props.setMaxChallenge} 
             fillWithData={this.fillWithData} />
         </div>

@@ -38,6 +38,7 @@ class Dropdowns extends React.Component {
     let dropdownFill = [];
     if (this.state.category === "Size") {
       dropdownFill = SIZE_CATEGORIES;
+      
 
     } else if (this.state.category === "Challenge"){
       dropdownFill = fillWithChallengeRatings();
@@ -45,6 +46,7 @@ class Dropdowns extends React.Component {
     } else if (this.state.category === "Difficulty"){
       dropdownFill = DIFFICULT_RATING;
     }
+    console.log(dropdownFill);
 
     let title = this.state.headerTitle;
 
