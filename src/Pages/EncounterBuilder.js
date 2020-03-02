@@ -28,6 +28,8 @@ const MOVEMENT_OPTIONS = [
   "Climb"
 ];
 
+const THE_PARTY=["11","11","11","11","11","11","11","0","0","0"]
+
 const PLAYER_XP_THRESHOLD = {
   "1": {"Easy": 25, "Medium": 50, "Hard": 75, "Deadly": 100},
   "2": {"Easy": 50, "Medium": 100, "Hard": 150, "Deadly": 200},
@@ -169,16 +171,108 @@ class EncounterBuilder extends React.Component {
     });
   };
 
+  CRfromXP(xp){
+    console.log("provided xp "+xp);
+    if(xp<=10){
+      return 0;
+    }if(10<xp && xp<=25){
+      return 1/8;
+    }if(25<xp && xp<=50){
+      return 1/4;
+    }if(50<xp && xp<=100){
+      return 1/2;
+    }if(100<xp && xp<=200){
+      return 1;
+    }if(200<xp  && xp<=450){
+      return 2;
+    }if(450<xp  && xp<=700){
+      return 3;
+    }if(700<xp && xp<=1100){
+      return 4;
+    }if(1100<xp && xp<=1800){
+      return 5;
+    }if(1800<xp && xp<=2300){
+      return 6;
+    }if(2300<xp && xp<=2900){
+      return 7;
+    }if(2900<xp && xp<=3900){
+      return 8;
+    }if(3900<xp && xp<=5000){
+      return 9;
+    }if(5000<xp && xp<=5900){
+      return 10;
+    }if(5900<xp && xp<=7200){
+      return 11;
+    }if(7200<xp && xp<=8400){
+      return 12;
+    }if(8400<xp && xp<=10000){
+      return 13;
+    }if(10000<xp && xp<=11500){
+      return 14;
+    }if(11500<xp && xp<=13000){
+      return 15;
+    }if(13000<xp && xp<=15000){
+      return 16;
+    }if(15000<xp && xp<=18000){
+      return 17;
+    }if(18000<xp && xp<=20000){
+      return 18;
+    }if(20000<xp && xp<=22000){
+      return 19;
+    }if(22000<xp && xp<=25000){
+      return 20;
+    }if(25000<xp && xp<=33000){
+      return 21;
+    }if(33000<xp && xp<=41000){
+      return 22;
+    }if(41000<xp && xp<=50000){
+      return 23;
+    }if(50000<xp && xp<=62000){
+      return 24;
+    }if(62000<xp && xp<=75000){
+      return 25;
+    }if(75000<xp && xp<=90000){
+      return 26;
+    }if(90000<xp && xp<=105000){
+      return 27;
+    }if(105000<xp && xp<=120000){
+      return 28;
+    }if(120000<xp && xp<=135000){
+      return 29;
+    }if(135000<xp && xp<=155000){
+      return 30;
+    }if(xp<=155000){
+      return 31;
+    } 
+  }
+
   partyCRs(){
+    var challenge="Medium";
     var partySize=0;
     var xpMin=0;
     var xpMax=0;
-    for(sfafsad){
-      xpMin=
+    for(let val of THE_PARTY) {
+      if(val!=0){
+        xpMin=xpMin+PLAYER_XP_THRESHOLD[val]["Medium"];
+        xpMax=xpMax+PLAYER_XP_THRESHOLD[val]["Hard"];
+        partySize++;
+      }
     }
+    var CRMin=this.CRfromXP(xpMin/4);
+    var CRMax=this.CRfromXP(xpMax-1);
+    console.log("minimum xp "+xpMin);
+    console.log("maximum xp "+xpMax);
+    console.log("CR Min "+CRMin);
+    console.log("CR Max "+CRMax);
+    console.log("party size "+partySize);
+    //ClickHandlers.setMinChallenge(this, CRMin);
   }
 
+  
+  
+
   render() {
+    this.partyCRs();
     return (
       <React.Fragment>
         <h4 className="promptHeader">
