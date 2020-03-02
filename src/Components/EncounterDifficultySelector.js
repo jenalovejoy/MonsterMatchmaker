@@ -1,5 +1,7 @@
-import React from "react";
 import Dropdowns from "./Dropdowns"
+import React from "react";
+
+const DIFFICULT_RATING = ["Trivial", "Easy", "Medium", "Hard", "Deadly"];
 
 class EncounterDifficultySelector extends React.Component {
   
@@ -8,7 +10,9 @@ class EncounterDifficultySelector extends React.Component {
         <React.Fragment>
         <div>
             <legend style = {{fontSize: '25px'}}>Encounter Difficulty Rating</legend>
-            <Dropdowns title="" category="Difficulty" />
+            <Dropdowns title="Difficulty" 
+              storeData={this.props.setMaxChallenge} 
+              dropdownData={DIFFICULT_RATING} />
         </div>
     </React.Fragment>
       );

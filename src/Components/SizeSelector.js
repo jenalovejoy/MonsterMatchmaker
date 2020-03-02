@@ -1,23 +1,14 @@
-import React from "react";
 import Dropdowns from "./Dropdowns"
+import React from "react";
+
+const SIZE_CATEGORIES = ["Dimimutive", "Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"];
 
 class SizeSelector extends React.Component {
   constructor(props){
     super(props);
   }
 
-  //fills array with size category options
-fillWithData() {
-  let array = [];
-  array.push("");
-  array.push("Tiny");
-  array.push("Small");
-  array.push("Medium");
-  array.push("Large");
-  array.push("Huge");
-  array.push("Gargantuan");
-  return array;
-}
+
   
     render() {
       return (
@@ -28,11 +19,11 @@ fillWithData() {
             <Dropdowns title="Minimum Creature Size" 
               category="Size" 
               storeData={this.props.setMinSize}
-              fillWithData={this.fillWithData}/>
+              dropdownData={SIZE_CATEGORIES}/>
             <Dropdowns title="Maximum Creature Size" 
               category="Size" 
               storeData={this.props.setMaxSize}
-              fillWithData={this.fillWithData}/>
+              dropdownData={SIZE_CATEGORIES}/>
 
         </div>
     </React.Fragment>

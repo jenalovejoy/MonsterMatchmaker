@@ -1,15 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import axios from 'axios';
-
-import styles from "../CSS/FinderStyles.css";
-import PlayerLevelSelector from "../Components/PlayerLevelSelector";
 import AlignmentTypeSelector from "../Components/AlignmentTypeSelector";
+import axios from 'axios';
+import * as ClickHandlers from "./ClickHandlers";
+import EncounterDifficultySelector from "../Components/EncounterDifficultySelector";
+import { Link } from "react-router-dom";
 import MonsterTypeSelector from "../Components/MonsterTypeSelector";
 import Movement from "../Components/Movement";
+import PlayerLevelSelector from "../Components/PlayerLevelSelector";
+import React from "react";
 import SizeSelector from "../Components/SizeSelector";
-import EncounterDifficultySelector from "../Components/EncounterDifficultySelector";
-import * as ClickHandlers from "./ClickHandlers";
+import styles from "../CSS/FinderStyles.css";
 
 
 const ALIGNMENT_OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", 

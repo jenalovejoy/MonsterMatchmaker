@@ -1,6 +1,6 @@
-import React from 'react';
-import Checkbox from './Checkbox';
 import "../CSS/FinderStyles.css";
+import Checkbox from './Checkbox';
+import React from 'react';
 
 const ALIGNMENT_OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", 
   "Neutral Good", "Neutral Neutral", "Neutral Evil", 
