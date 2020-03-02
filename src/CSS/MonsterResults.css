@@ -8,6 +8,15 @@ td {
   overflow-x: auto;
 }
 
+#monsterResultsTable {
+  border: none;
+  padding: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
+  color: black;
+  overflow-x: auto;
+}
+
 th {
   background: #808080;
   color: white;
@@ -51,6 +60,7 @@ header {
   padding-left: 50px;
   padding-right: 20px;
 }
+
 #filter-body {
   margin: 50px;
   width: 95%;
@@ -67,9 +77,13 @@ header {
 #results-table {
   display: flex;
   justify-content: center;
-  margin: 20px;
+  margin: 30px;
+  padding: 30px;
 }
 
 #resultsTitle {
-  margin: 20px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 0px;
+  padding: 30px;
 }

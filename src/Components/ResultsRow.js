@@ -1,29 +1,5 @@
 import React from "react";
 
-// Dummy data
-const dragon = {
-	"name": "Adult Black Dragon",
-	"size": "Huge",
-	"type": "dragon",
-	"subtype": null,
-	"alignment": "chaotic evil",
-	"armor_class": 19,
-	"hit_points": 195,
-	"hit_dice": "17d12",
-	"speed": {
-		"walk": "40 ft.",
-		"fly": "80 ft.",
-		"swim": "40 ft."
-  },
-  "challenge_rating": 14,
-	"strength": 23,
-	"dexterity": 14,
-	"constitution": 21,
-	"intelligence": 14,
-	"wisdom": 13,
-	"charisma": 17,
-}
-
 class ResultsRow extends React.Component {
   render(){
     return (

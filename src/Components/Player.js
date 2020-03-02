@@ -23,7 +23,7 @@ class Player extends React.Component {
   render() {
     let level = range(30);
     return (
-      <ul><label>
+      <ul class="playerLevelItem"><label>
         Player Level
         <select value={this.state.value} onChange={this.handleChange}>
           {level.map(level => (

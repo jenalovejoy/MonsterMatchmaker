@@ -21,28 +21,7 @@ class EncounterResults extends React.Component {
           <div class="filter-component">
             <h5 title="Monsters">Monsters</h5>
 
-            <table>
-              <tr>
-                <th>Monster Name</th>
-                <th>Challenge Rating</th>
-                <th>Type</th>
-                <th>Subtype</th>
-                <th>Alignment</th>
-                <th>Armor Class</th>
-                <th>Hit Points</th>
-                <th>Hit Dice</th>
-              </tr>
-              <tr>
-                <td>Aboleth</td>
-                <td>10</td>
-                <td>Abberation</td>
-                <td></td>
-                <td>Lawful Evil</td>
-                <td>17</td>
-                <td>135</td>
-                <td>18d10 + 36</td>
-              </tr>
-            </table>
+            <ResultsTable data={this.props.data}/>
           </div>
           <div class="filter-component">
             <h5 title="Dungeon traps">Dungeon Traps</h5>
@@ -109,9 +88,7 @@ class EncounterResults extends React.Component {
               alt="This is just an example dungeon map that players may or may not use."
             ></img>
           </div>
-          <div>
-            <ResultsTable/>
-          </div>
+          
         </article>
       </React.Fragment>
     );

@@ -26,13 +26,14 @@ fillWithData() {
             <legend style = {{fontSize: '25px'}}>Size</legend>
 
             <Dropdowns title="Minimum Creature Size" 
-            isSize={true} 
-            storeData={this.props.setMinSize}
-            fillWithData={this.fillWithData}/>
+              category="Size" 
+              storeData={this.props.setMinSize}
+              fillWithData={this.fillWithData}/>
             <Dropdowns title="Maximum Creature Size" 
-            isSize={true} 
-            storeData={this.props.setMaxSize}
-            fillWithData={this.fillWithData}/>
+              category="Size" 
+              storeData={this.props.setMaxSize}
+              fillWithData={this.fillWithData}/>
+
         </div>
     </React.Fragment>
     
