@@ -1,13 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import axios from 'axios';
-import "../CSS/FinderStyles.css";
-import MonsterTypeSelector from "../Components/MonsterTypeSelector";
 import AlignmentTypeSelector from "../Components/AlignmentTypeSelector";
-import Movement from "../Components/Movement";
+import axios from 'axios';
 import ChallengeSelector from "../Components/ChallengeSelector";
-import SizeSelector from "../Components/SizeSelector";
 import * as ClickHandlers from "./ClickHandlers";
+import "../CSS/FinderStyles.css";
+import { Link } from "react-router-dom";
+import MonsterTypeSelector from "../Components/MonsterTypeSelector";
+import Movement from "../Components/Movement";
+import React from "react";
+import SizeSelector from "../Components/SizeSelector";
 
 
 const ALIGNMENT_OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", 

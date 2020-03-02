@@ -1,18 +1,18 @@
-import React from "react";
 import "../CSS/MonsterResults.css";
+import React from "react";
 import ResultsTable from "../Components/ResultsTable";
 
 class MonsterResults extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div id="filter-component">
+        <div id="filter-results-title">
           <h3 class="text-light text-center" id="resultsTitle">
             I have found some monsters for you
           </h3>
         </div>
-        <div>
-          <ResultsTable data={this.props.data}/>
+        <div class="results-table">
+          <ResultsTable id="monster-results" data={this.props.data}/>
         </div>
         
       </React.Fragment>

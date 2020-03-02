@@ -23,14 +23,14 @@ const TABLE_HEADINGS = [
 class ResultsTable extends React.Component {
 
   createTableHeader = heading => (
-    <th class="resultsTableHeading">{heading}</th>
+    <th class="results-table-header">{heading}</th>
   );
 
   createTableHeadings = () => TABLE_HEADINGS.map(this.createTableHeader);
 
   render(){
     return (
-        <table id="monsterResultsTable">
+        <table id={this.props.id}>
             <tr>
               {this.createTableHeadings(TABLE_HEADINGS)}
             </tr>

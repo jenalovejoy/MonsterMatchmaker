@@ -1,5 +1,5 @@
-import React from "react";
 import Checkbox from "./Checkbox";
+import React from "react";
 
 const TYPE_OPTIONS = [
   "Aberration",
