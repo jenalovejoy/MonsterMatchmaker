@@ -1,0 +1,45 @@
+body {
+    background-color:#707070;
+    color: white; 
+}
+
+header {
+    background-color: #303030;
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    align-items: center;
+}
+
+.nav-link {
+    color: white;
+}
+
+.promptHeader { /* The descriptive text at the top of each search page*/
+    padding: 30px;
+    margin: 30px;
+    font-size: 25px;
+  }
+
+.parent-container-pair-horizontal {
+   
+    display: flex; /* or inline-flex */
+    flex-direction: row; /*order left to right normally*/
+    flex-wrap: wrap; /*place second item below when small*/
+    justify-content: space-evenly; /* justifies to far left and right, may not work on Edge */
+    align-items:flex-start;
+    margin-top: 100px;
+}
+
+.homescreen-button {
+    background-color: white;
+    border: none;
+    color: dimgrey;
+    padding: 20px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
