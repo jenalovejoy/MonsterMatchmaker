@@ -1,4 +1,4 @@
-
+// Handling user selection for minimum challenge
 export function setMinChallenge(context, i){
     context.setState(prevState => ({
         challengeRatings: {
@@ -13,6 +13,8 @@ export function setMinChallenge(context, i){
         console.log(checkbox, "is selected.");
         });
 }
+
+// Handling user selection for maximum challenge
 export function setMaxChallenge(context, i){
     context.setState(prevState => ({
         challengeRatings: {
@@ -28,6 +30,7 @@ export function setMaxChallenge(context, i){
         });
 }
 
+// Handling user selection for minimum monster size
 export function setMinSize(context, i){
     context.setState(prevState => ({
         sizes: {
@@ -42,6 +45,8 @@ export function setMinSize(context, i){
         console.log(checkbox, "is selected.");
       });
   }
+
+// Handling user selection for maximum monster size
 export function setMaxSize(context, i){
     context.setState(prevState => ({
       sizes: {
@@ -58,7 +63,7 @@ export function setMaxSize(context, i){
   }
 
 
-// Handles movement selection
+// Handling user selection for monster movement types
 export function handleMovementClick(context, i) {
     context.setState(prevState => ({
       movementCheckboxes: {
@@ -74,7 +79,7 @@ export function handleMovementClick(context, i) {
       });
   }
 
-  // Handles alignment selection
+  // Handling user selection for monster alignment
   export function handleAlignmentClick(context, i) {
     context.setState(prevState => ({
       alignmentCheckboxes: {
@@ -90,7 +95,7 @@ export function handleMovementClick(context, i) {
       });
   }
 
-  // Handles monster type selection
+  // Handling user selection for monster type
   export function handleMonsterTypeClick(context, i) {
     context.setState(prevState => ({
       typeCheckboxes: {
