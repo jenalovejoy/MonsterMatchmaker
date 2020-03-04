@@ -1,7 +1,7 @@
 import Dropdowns from "./Dropdowns"
 import React from "react";
 
-const SIZE_CATEGORIES = ["Dimimutive", "Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"];
+const SIZE_CATEGORIES = ["Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"];
 
 class SizeSelector extends React.Component {
   constructor(props){
@@ -17,7 +17,7 @@ class SizeSelector extends React.Component {
             <legend style = {{fontSize: '25px'}}>Size</legend>
 
             <Dropdowns title="Minimum Creature Size" 
-              category="Size" 
+              category="Size"  
               storeData={this.props.setMinSize}
               dropdownData={SIZE_CATEGORIES}/>
             <Dropdowns title="Maximum Creature Size" 

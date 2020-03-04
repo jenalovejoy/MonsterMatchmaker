@@ -3,7 +3,7 @@ export function setMinChallenge(context, i){
     context.setState(prevState => ({
         challengeRatings: {
         ...prevState.challengeRatings,
-        [0]: i
+        min: i
         },
     }));
     console.log(context.state.challengeRatings);
@@ -19,7 +19,7 @@ export function setMaxChallenge(context, i){
     context.setState(prevState => ({
         challengeRatings: {
         ...prevState.challengeRatings,
-        [1]: i
+        max: i
         },
     }));
     console.log(context.state.challengeRatings);
@@ -35,7 +35,7 @@ export function setMinSize(context, i){
     context.setState(prevState => ({
         sizes: {
             ...prevState.sizes,
-            [0]: i
+            min: i
         },
         }));
     console.log(context.state.sizes);
@@ -51,7 +51,7 @@ export function setMaxSize(context, i){
     context.setState(prevState => ({
       sizes: {
         ...prevState.sizes,
-        [1]: i
+        max: i
       },
     }));
     console.log(context.state.sizes);
@@ -95,18 +95,35 @@ export function handleMovementClick(context, i) {
       });
   }
 
-  // Handling user selection for monster type
-  export function handleMonsterTypeClick(context, i) {
-    context.setState(prevState => ({
-      typeCheckboxes: {
-        ...prevState.typeCheckboxes,
-        [i]: !prevState.typeCheckboxes[i]
-      },
-    }));
-    console.log(context.state.typeCheckboxes);
-    Object.keys(context.state.alignmentCheckboxes)
-      .filter(checkbox => context.state.alignmentCheckboxes[checkbox])
-      .forEach(checkbox => {
-        console.log(checkbox, "is selected.");
-      });
-  }
+// Handling user selection for monster type
+export function handleMonsterTypeClick(context, i) {
+  context.setState(prevState => ({
+    typeCheckboxes: {
+      ...prevState.typeCheckboxes,
+      [i]: !prevState.typeCheckboxes[i]
+    },
+  }));
+  console.log(context.state.typeCheckboxes);
+  Object.keys(context.state.alignmentCheckboxes)
+    .filter(checkbox => context.state.alignmentCheckboxes[checkbox])
+    .forEach(checkbox => {
+      console.log(checkbox, "is selected.");
+    });
+}
+
+export function setEncounterDifficulty(context, i){
+  context.setState(prevState => ({
+    ...prevState.encounterDifficulty,
+    encounterDifficulty: i,
+  }));
+}
+
+export function setPlayerLevel(context, level, playerNumber){
+  let playerLevels = context.state.playerLevels;
+
+  playerLevels[playerNumber] = level;
+  
+  context.setState(prevState => ({
+    playerLevels,
+  }));
+}

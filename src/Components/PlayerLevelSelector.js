@@ -5,8 +5,7 @@ class PlayerLevelSelector extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      numberOfPlayers: 4,
-      numberOfLevels: 30
+      playerLevels: this.props.playerLevels
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,28 +20,30 @@ class PlayerLevelSelector extends React.Component {
     event.preventDefault();
   }
 
+  newPlayer() {
+    let n = this.state.numberOfPlayers;
+    this.setState({numberOfPlayers: n + 1});
+  }
+
+
   render() {
-    let players = range(4);
 
     return (
-      
-      <form id="player-level-select" onSubmit={this.handleSubmit}>
-        <legend style = {{fontSize: '25px'}}>Players</legend>
+      <div>
+        <form id="player-level-select" onSubmit={this.handleSubmit}>
+          <legend style = {{fontSize: '25px'}}>Player ({this.state.numberOfPlayers}) Levels</legend>
 
-        {players.map(player => (
-          <Player />
-        ))}
-      </form>
+          {this.state.playerLevels.map((level, i) => (
+            <Player 
+              playerNumber={i} 
+              selectedLevel={level}
+              setPlayerLevel={this.props.setPlayerLevel}/>
+          ))}
+        </form>
+      </div>
     );
   }
 }
 
-function range(max) {
-  let array = [];
-  for (let i = 1; i <= max; i++) {
-    array.push(i);
-  }
-  return array;
-}
 
 export default PlayerLevelSelector;

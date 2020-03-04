@@ -113,12 +113,28 @@ header {
   background: #c0c0c0;
 }
 
-#resultsTitle {
+#title-header {
   margin-left: 30px;
   margin-right: 30px;
   margin-bottom: 0px;
   padding: 30px;
   font-size: 25px;
+}
+
+#plot-hook-header {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 0px; 
+    padding: 30px;
+    font-size: 25px;
+}
+
+.encounter-title {
+    margin-left: 30px;
+    margin-bottom: 0px;
+    padding-left: 30px;
+    font-size: 25px;
+
 }
 
 #encounter-results {
@@ -129,7 +145,21 @@ header {
   color: black;
   overflow-x: auto;
   text-align: center;
-  max-height: 750px;
-  overflow-y: scroll;
-  display: block;
+}
+
+#alert-icon {
+    width: 75px;
+    height: 50px;
+    margin-left: 30px;
+    margin-bottom: 0px;
+    padding-left: 30px;
+}
+
+.error-message {
+    font-size: 25px;
+    padding: 5px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
