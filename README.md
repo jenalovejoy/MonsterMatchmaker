@@ -1,21 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Once you've downloaded all of our files, run the following commands:
-
-To set up the server:
-`npm init`
-`npm i -S mongoose express body-parser morgan cors`
-
-To set up the project itself:
-`npm install node`
-`npm install –save react-router-dom`
-`npm i -S axios`
-`npm install –save @emotion/core`
-`npm install –save @emotion/styled`
-
-To run the server, in a terminal window run `node server.js`
-To run the page from local, in a terminal window run `npm start`
-
 ## Available Scripts
 
 In the project directory, you can run:

@@ -15,11 +15,11 @@ header {
     color: white;
 }
 
-.promptHeader { /* The descriptive text at the top of each search page*/
-    padding: 30px;
-    margin: 30px;
-    font-size: 25px;
-  }
+#promptHeader {
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-right: 20px;
+}
 
 .parent-container-pair-horizontal {
    

@@ -1,7 +1,6 @@
-import Checkbox from "./Checkbox";
 import React from "react";
 
-const TYPE_OPTIONS = [
+const _OPTIONS = [
   "Aberration",
   "Beast",
   "Celestial",
@@ -18,22 +17,47 @@ const TYPE_OPTIONS = [
   "Undead"
 ];
 
+// CSS styling to arange check boxes
+const gridFormat = {
+  display: "grid",
+  gridTemplateColumns: "125px 125px 125px 125px"
+};
+
+class Checkbox2 extends React.Component{
+  render(){
+    return(
+      <div className="form-check">
+    <label>
+      <input
+        type="checkbox"
+        name={this.props.label}
+        checked={this.props.isSelected}
+        onChange={(e) => this.props.onClick()}
+        className="form-check-input"
+      />
+      {this.props.label}
+    </label>
+  </div>
+    );
+  }
+}
+
 class MonsterTypeSelector extends React.Component {
   createCheckbox = option => (
-    <Checkbox
+    <Checkbox2
       label={option}
       onClick={()=>this.props.onClick(option)}
       key={option}
     />
   );
 
-  createCheckboxes = () => TYPE_OPTIONS.map(this.createCheckbox);
+  createCheckboxes = () => _OPTIONS.map(this.createCheckbox);
 
   render() {
     return (
       <form  onSubmit={this.handleFormSubmit}>
         <legend style = {{fontSize: '25px'}}>Type</legend>
-        <div className="gridFormatAlignment">
+        <div style={gridFormat}>
           {this.createCheckboxes()}
         </div>
       </form>

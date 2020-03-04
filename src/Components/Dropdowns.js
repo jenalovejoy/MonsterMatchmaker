@@ -1,27 +1,23 @@
 import React from "react";
 
-
-// creates the dropdowns themselves
+//creates the dropdowns themselves
 class Dropdowns extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      headerTitle: this.props.title, // String representing dropdown 
-      category: this.props.category, // String representing category type
-      dropdownData: this.props.dropdownData
-    };
+      headerTitle: this.props.title, //takes in title
 
-    // required code
+      isSizeDropdown: this.props.isSize //boolean value for it it is a size or CR dropdown
+    };
+    //requried code
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   //Returns the value selected by the user
   handleChange(event) {
-    this.props.storeData(event.target.value);
     this.setState({ value: event.target.value });
     this.myString = event.target.value;
-    //console.log(this.myString);
+    console.log(this.myString);
     //this.props.value(this.myString);
   }
 
@@ -32,8 +28,13 @@ class Dropdowns extends React.Component {
 
   //renders dropdowns
   render() {
-    console.log(this.state.dropdownData);
+    let dropdownFill = [];
 
+    if (this.state.isSizeDropdown) {
+      dropdownFill = fillWithSizeCategories();
+    } else {
+      dropdownFill = fillWithChallengeRatings();
+    }
     let title = this.state.headerTitle;
 
     //Creates a form that allos for user to interact and submit information
@@ -43,9 +44,9 @@ class Dropdowns extends React.Component {
         <label>{title}</label>
         <div></div>
         <select value={this.state.value} onChange={this.handleChange}>
-          {this.state.dropdownData.map(data => (
-            <option value={data} key={data}>
-              {data}
+          {dropdownFill.map(dropdownFill => (
+            <option value={dropdownFill} key={dropdownFill}>
+              {dropdownFill}
             </option>
           ))}
         </select>
@@ -54,5 +55,31 @@ class Dropdowns extends React.Component {
   }
 }
 
+//Fills array with challenge rating options
+function fillWithChallengeRatings() {
+  let array = [];
+  array.push("0");
+  array.push("1/8");
+  array.push("1/4");
+  array.push("1/2");
+  for (let i = 1; i <= 24; i++) {
+    array.push(i.toString(10));
+  }
+  array.push("30");
+  return array;
+}
+//fills array with size category options
+function fillWithSizeCategories() {
+  let array = [];
+  array.push("Dimimutive");
+  array.push("Tiny");
+  array.push("Small");
+  array.push("Medium");
+  array.push("Large");
+  array.push("Huge");
+  array.push("Gargantuan");
+  array.push("Colossal");
+  return array;
+}
 
 export default Dropdowns;
