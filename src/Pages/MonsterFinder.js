@@ -1,29 +1,30 @@
-import React from "react";
+import AlignmentTypeSelector from "../Components/AlignmentTypeSelector";
 import axios from 'axios';
-import ChallengeAndSize from "../Components/ChallengeAndSize";
+import ChallengeSelector from "../Components/ChallengeSelector";
+import * as ClickHandlers from "./ClickHandlers";
 import "../CSS/FinderStyles.css";
 import { Link } from "react-router-dom";
-//import styles from "../CSS/FinderStyles.css";
 import MonsterTypeSelector from "../Components/MonsterTypeSelector";
-import AlignmentTypeSelector from "../Components/AlignmentTypeSelector";
 import Movement from "../Components/Movement";
+import React from "react";
+import SizeSelector from "../Components/SizeSelector";
 
-const OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", "Neutral Good", "Neutral Neutral", "Neutral Evil", "Chaotic Good", "Chaotic Neutral", "Chaotic Evil"];
-const _OPTIONS2 = [
-  "Aberration",
-  "Beast",
-  "Celestial",
-  "Construct",
-  "Dragon",
-  "Elemental",
-  "Fey",
-  "Fiend",
-  "Giant",
-  "Humanoid",
-  "Monstrosity",
-  "Ooze",
-  "Plant",
-  "Undead"
+
+const ALIGNMENT_OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", 
+                  "Neutral Good", "Neutral Neutral", "Neutral Evil", 
+                  "Chaotic Good", "Chaotic Neutral", "Chaotic Evil"];
+
+const TYPE_OPTIONS = [
+  "Aberration", "Beast", "Celestial", "Construct", "Dragon", "Elemental",
+  "Fey", "Fiend", "Giant", "Humanoid", "Monstrosity", "Ooze", "Plant", "Undead"
+];
+
+const MOVEMENT_OPTIONS = [
+  "Fly",
+  "Walk",
+  "Burrow",
+  "Swim",
+  "Climb"
 ];
 
 class MonsterFinder extends React.Component {
@@ -32,15 +33,24 @@ class MonsterFinder extends React.Component {
     // this.storeDataLocal = this.storeDataLocal.bind(this);
     this.state = {
       data: [],
-      speedA: Array(5).fill(false), //holds the movement fields
-      checkboxes: OPTIONS.reduce(
+      // movementCheckboxes: Array(5).fill(false), //holds the movement fields
+      movementCheckboxes: MOVEMENT_OPTIONS.reduce(
         (options, option) => ({
           ...options,
           [option]: false
         }),
         {}
       ),
-      checkboxes2: _OPTIONS2.reduce(
+      challengeRatings: Array(2).fill(""),
+      sizes: Array(2).fill(""),
+      alignmentCheckboxes: ALIGNMENT_OPTIONS.reduce(
+        (options, option) => ({
+          ...options,
+          [option]: false
+        }),
+        {}
+      ),
+      typeCheckboxes: TYPE_OPTIONS.reduce(
         (options, option) => ({
           ...options,
           [option]: false
@@ -53,36 +63,42 @@ class MonsterFinder extends React.Component {
   findInDB = () => {
     axios.post('http://localhost:3001/api/findData',{
       //movement
-      fly: this.state.speedA[0],
-      walk: this.state.speedA[1],
-      burrow: this.state.speedA[2],
-      swim: this.state.speedA[3],
-      climb: this.state.speedA[4],
+      fly: this.state.movementCheckboxes["Fly"],
+      walk: this.state.movementCheckboxes["Walk"],
+      burrow: this.state.movementCheckboxes["Burrow"],
+      swim: this.state.movementCheckboxes["Swim"],
+      climb: this.state.movementCheckboxes["Climb"],
       //alignment
-      lawfulGood: this.state.checkboxes["Lawful Good"],
-      neutralGood: this.state.checkboxes["Neutral Good"],
-      chaoticGood: this.state.checkboxes["Chaotic Good"],
-      lawfulNeutral: this.state.checkboxes["Lawful Neutral"],
-      neutral: this.state.checkboxes["Neutral Neutral"],
-      chaoticNeutral: this.state.checkboxes["Chaotic Neutral"],
-      lawfulEvil: this.state.checkboxes["Lawful Evil"],
-      neutralEvil: this.state.checkboxes["Neutral Evil"],
-      chaoticEvil: this.state.checkboxes["Chaotic Evil"],
+      lawfulGood: this.state.alignmentCheckboxes["Lawful Good"],
+      neutralGood: this.state.alignmentCheckboxes["Neutral Good"],
+      chaoticGood: this.state.alignmentCheckboxes["Chaotic Good"],
+      lawfulNeutral: this.state.alignmentCheckboxes["Lawful Neutral"],
+      neutral: this.state.alignmentCheckboxes["Neutral Neutral"],
+      chaoticNeutral: this.state.alignmentCheckboxes["Chaotic Neutral"],
+      lawfulEvil: this.state.alignmentCheckboxes["Lawful Evil"],
+      neutralEvil: this.state.alignmentCheckboxes["Neutral Evil"],
+      chaoticEvil: this.state.alignmentCheckboxes["Chaotic Evil"],
       //monster type
-      aberration: this.state.checkboxes2["Aberration"],
-      dragon: this.state.checkboxes2["Dragon"],
-      giant: this.state.checkboxes2["Giant"],
-      plant: this.state.checkboxes2["Plant"],
-      beast: this.state.checkboxes2["Beast"],
-      elemental: this.state.checkboxes2["Elemental"],
-      humanoid: this.state.checkboxes2["Humanoid"],
-      undead: this.state.checkboxes2["Undead"],
-      celestial: this.state.checkboxes2["Celestial"],
-      fey: this.state.checkboxes2["Fey"],
-      monstrosity: this.state.checkboxes2["Monstrosity"],
-      construct: this.state.checkboxes2["Construct"],
-      fiend: this.state.checkboxes2["Fiend"],
-      ooze: this.state.checkboxes2["Ooze"],
+      aberration: this.state.typeCheckboxes["Aberration"],
+      dragon: this.state.typeCheckboxes["Dragon"],
+      giant: this.state.typeCheckboxes["Giant"],
+      plant: this.state.typeCheckboxes["Plant"],
+      beast: this.state.typeCheckboxes["Beast"],
+      elemental: this.state.typeCheckboxes["Elemental"],
+      humanoid: this.state.typeCheckboxes["Humanoid"],
+      undead: this.state.typeCheckboxes["Undead"],
+      celestial: this.state.typeCheckboxes["Celestial"],
+      fey: this.state.typeCheckboxes["Fey"],
+      monstrosity: this.state.typeCheckboxes["Monstrosity"],
+      construct: this.state.typeCheckboxes["Construct"],
+      fiend: this.state.typeCheckboxes["Fiend"],
+      ooze: this.state.typeCheckboxes["Ooze"],
+      //size
+      minSize: this.state.sizes[0],
+      maxSize: this.state.sizes[1],
+      //challenge
+      minChallenge: this.state.challengeRatings[0],
+      maxChallenge: this.state.challengeRatings[1],
     })
     .then((response) => {
       this.props.storeData(response.data);
@@ -92,82 +108,59 @@ class MonsterFinder extends React.Component {
     });
   };
 
-  //for movement
-  handleClick(i) {
-    const speedA = this.state.speedA.slice();
-    speedA[i] = !speedA[i];
-    this.setState({speedA: speedA});
-    console.log(speedA[i], i);
-  }
-
-  // alignment
-  handleClick2(i) {
-    this.setState(prevState => ({
-      checkboxes: {
-        ...prevState.checkboxes,
-        [i]: !prevState.checkboxes[i]
-      },
-    }));
-    console.log(this.state.checkboxes);
-    Object.keys(this.state.checkboxes)
-      .filter(checkbox => this.state.checkboxes[checkbox])
-      .forEach(checkbox => {
-        console.log(checkbox, "is selected.");
-      });
-  }
-
-  //monster type
-  handleClick3(i) {
-    this.setState(prevState => ({
-      checkboxes2: {
-        ...prevState.checkboxes2,
-        [i]: !prevState.checkboxes2[i]
-      },
-    }));
-    console.log(this.state.checkboxes2);
-    Object.keys(this.state.checkboxes)
-      .filter(checkbox => this.state.checkboxes[checkbox])
-      .forEach(checkbox => {
-        console.log(checkbox, "is selected.");
-      });
-  }
 
   render() {
     return (
       <React.Fragment>
-        <h4 style={promptHeader}>
+        <h4 className="promptHeader">
           Enter your monster preferences.
         </h4>
 
-        <article style={filterBody}>
+        <article className="filterBody">
           {/* <!-- css style for the whole page frame --> */}
-          <div style={parentContainerListVertical}>
+          <div className="parentContainerListVertical">
             {/* <!-- FIRST PAIRING --> */}
-            <div style={parentContainerPairHorizontal}>
-              <ChallengeAndSize />
-              <Movement
-                speedA={this.state.speedA}
-                onClick={(i) => this.handleClick(i)}/>
+            <div className="parentContainerPairHorizontal">
+              {/* <!-- ITEM 1 IN FIRST PAIRING --> */}
+              
+              <div className="subContainerPairHorizontal">
+                <ChallengeSelector 
+                  setMinChallenge={(i) => ClickHandlers.setMinChallenge(this, i)}
+                  setMaxChallenge={(i) => ClickHandlers.setMaxChallenge(this, i)}
+                />
+              </div>
+              <div className="subContainerPairHorizontal">
+                <SizeSelector 
+                  setMinSize={(i) => ClickHandlers.setMinSize(this, i)}
+                  setMaxSize={(i) => ClickHandlers.setMaxSize(this, i)} />
+              </div>
+              <div className="subContainerPairHorizontal">
+                <Movement
+                  movementCheckboxes={this.state.movementCheckboxes}
+                  onClick={(i) => ClickHandlers.handleMovementClick(this, i)}
+                />
+              </div>
+            {/* <!-- end inner horizontal pairing --> */}
+            </div>
+            {/* <!-- end first pairing --> */}
+
+            {/* <!-- ALIGNMENT AND TYPE ROW --> */}
+            <div className="parentContainerPairHorizontal">
               <AlignmentTypeSelector
-                onClick={(i) => this.handleClick2(i)}
-                checkboxes={this.state.checkboxes}
+                onClick={(i) => ClickHandlers.handleAlignmentClick(this, i)}
+                alignmentCheckboxes={this.state.alignmentCheckboxes}
                 handleCheckBoxChange={(i) => this.handleCheckBoxChange}
               />
-            </div>
-              {/* <!-- end first pairing --> */}
-
-              {/* <!-- SECOND PAIRING -->
-        <!-- JENA'S .TS GENERATED FIELDS --> */}
-            <div style={parentContainerPairHorizontal}>
-              <MonsterTypeSelector onClick={(i) => this.handleClick3(i)}
-                checkboxes2={this.state.checkboxes2}
+              <MonsterTypeSelector 
+                onClick={(i) => ClickHandlers.handleMonsterTypeClick(this, i)}
+                typeCheckboxes={this.state.typeCheckboxes}
                 handleCheckBoxChange={(i) => this.handleCheckBoxChange}
               />
             </div>
               {/* <!--end second pairing--> */}
 
               {/* <!-- THIRD PAIRING --> */}
-              <div style={parentContainerPairHorizontal}>
+              <div className="parentContainerPairHorizontal">
                 <Link to="/MonsterResults">
                   <button
                     style = {resultsButtonContainer}
@@ -189,36 +182,6 @@ class MonsterFinder extends React.Component {
   }
 }
 export default MonsterFinder;
-
-const promptHeader = { /* The discriptive text at the top of each search page*/
-  paddingTop: '20px',
-  paddingLeft: '50px',
-  paddingRight: '20px'
-}
-
-const filterBody = { /* CSS style for the whole search page */
-  margin: 'auto',
-  width: '95%',
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap'
-}
-
-const parentContainerListVertical = {
-  display: 'flex', /* or inline-flex */
-  flexDirection: 'column', /*order left to right normally*/
-  flexWrap: 'wrap', /*place second item below when small*/
-  justifyContent: 'space-between' /* justifies to far left and right, may not work on Edge */
-}
-
-const parentContainerPairHorizontal = {
-  display: 'flex', /* or inline-flex */
-  flexDirection: 'row', /*order left to right normally*/
-  flexWrap: 'wrap', /*place second item below when small*/
-  justifyContent: 'space-between', /* justifies to far left and right, may not work on Edge */
-  alignItems: 'flex-start',
-  padding: '30px'
-}
 
  const resultsButtonContainer = {
   paddingTop: '30px',

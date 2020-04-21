@@ -29,6 +29,7 @@
   flex-wrap: wrap; /*place second item below when small*/
   justify-content: space-between; /* justifies to far left and right, may not work on Edge */
   align-items: flex-start;
+  padding: 30px
 }
 
 .subContainerPairHorizontal {
@@ -97,10 +98,11 @@ header {
   color: white;
 }
 
-.promptHeader { /* The discriptive text at the top of each search page*/
-  padding-top: 20px;
-  padding-left: 50px;
-  padding-right: 20px;
+.promptHeader { /* The descriptive text at the top of each search page*/
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 0px;
+  padding: 30px;
 }
 
 #resultsButtonContainer {
@@ -123,4 +125,24 @@ ul.movementCheckbox {
 
 ul.movementCheckbox li input {
   margin-right: 0.25em; /* adjusts the margin between the checkbox and the label */
+}
+
+.filter-component {
+  font-weight: bold;
+}
+
+.promptHeader {
+  padding-top: '20px';
+  padding-left: '50px';
+  padding-right: '20px';
+}
+
+.gridFormatAlignment {
+  display: grid;
+  grid-template-columns: 160px 175px 150px;
+}
+
+.playerLevelItem {
+  list-style-type: none;
+  padding: 2px;
 }

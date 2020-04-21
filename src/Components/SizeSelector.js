@@ -1,7 +1,7 @@
 import Dropdowns from "./Dropdowns"
 import React from "react";
 
-const SIZE_CATEGORIES = ["Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"];
+const SIZE_CATEGORIES = ["Dimimutive", "Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"];
 
 class SizeSelector extends React.Component {
   constructor(props){

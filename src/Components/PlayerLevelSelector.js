@@ -1,5 +1,5 @@
-import React from "react";
 import Player from "./Player";
+import React from "react";
 
 class PlayerLevelSelector extends React.Component {
   constructor(props) {
@@ -26,7 +26,10 @@ class PlayerLevelSelector extends React.Component {
     let players = range(4);
 
     return (
+      
       <form id="player-level-select" onSubmit={this.handleSubmit}>
+        <legend style = {{fontSize: '25px'}}>Players</legend>
+
         {players.map(player => (
           <Player />
         ))}

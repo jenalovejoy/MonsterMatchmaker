@@ -1,32 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
-//import styles from "../CSS/FinderStyles.css";
-import PlayerLevelSelector from "../Components/PlayerLevelSelector";
-import ChallengeAndSize from "../Components/ChallengeAndSize";
 import AlignmentTypeSelector from "../Components/AlignmentTypeSelector";
+import axios from 'axios';
+import * as ClickHandlers from "./ClickHandlers";
+import EncounterDifficultySelector from "../Components/EncounterDifficultySelector";
+import { Link } from "react-router-dom";
 import MonsterTypeSelector from "../Components/MonsterTypeSelector";
 import Movement from "../Components/Movement";
+import PlayerLevelSelector from "../Components/PlayerLevelSelector";
+import React from "react";
+import SizeSelector from "../Components/SizeSelector";
+import styles from "../CSS/FinderStyles.css";
 
-<<<<<<< Updated upstream
-const OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", "Neutral Good", "Neutral Neutral", "Neutral Evil", "Chaotic Good", "Chaotic Neutral", "Chaotic Evil"];
-const _OPTIONS2 = [
-  "Aberration",
-  "Beast",
-  "Celestial",
-  "Construct",
-  "Dragon",
-  "Elemental",
-  "Fey",
-  "Fiend",
-  "Giant",
-  "Humanoid",
-  "Monstrosity",
-  "Ooze",
-  "Plant",
-  "Undead"
-];
-
-=======
 const THE_PARTY=["11","11","11","11","0","0","0","0","0","0"]
 
 const ALIGNMENT_OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", 
@@ -182,17 +165,12 @@ const EXP_BY_CHALLENGE_RATING = {
   "30": 155000, 
 }
 
->>>>>>> Stashed changes
 class EncounterBuilder extends React.Component {
   constructor(props){
     super(props);
     // this.storeDataLocal = this.storeDataLocal.bind(this);
-    this.state = {
+    this.state = {      
       data: [],
-<<<<<<< Updated upstream
-      speedA: Array(5).fill(false), //holds the movement fields
-      checkboxes: OPTIONS.reduce(
-=======
       // movementCheckboxes: Array(5).fill(false), //holds the movement fields
       movementCheckboxes: MOVEMENT_OPTIONS.reduce(
         (options, option) => ({
@@ -201,19 +179,18 @@ class EncounterBuilder extends React.Component {
         }),
         {}
       ),
-      challengeRatings: Array(2).fill(""),
+      challengeRatings: Array(), //Array(2).fill(""),
       encounterDifficulty: Array(1).fill(""),
       partyDifficulties: Array(5).fill(0),
       sizes: Array(2).fill(""),
       alignmentCheckboxes: ALIGNMENT_OPTIONS.reduce(
->>>>>>> Stashed changes
         (options, option) => ({
           ...options,
           [option]: false
         }),
         {}
       ),
-      checkboxes2: _OPTIONS2.reduce(
+      typeCheckboxes: TYPE_OPTIONS.reduce(
         (options, option) => ({
           ...options,
           [option]: false
@@ -222,8 +199,6 @@ class EncounterBuilder extends React.Component {
       )
     };
   }
-<<<<<<< Updated upstream
-=======
 
   //Calculates allowed Challenge Ratings from Encounter Difficulty
   partyCRs(){
@@ -231,6 +206,7 @@ class EncounterBuilder extends React.Component {
     var hasMax=true;
     var challenge=this.state.encounterDifficulty[0];
     var challenge2="";
+    //Determines upper bounds
     if(challenge.localeCompare("Trivial")==0){
       challenge2="Easy";
       hasMin=false;
@@ -246,6 +222,7 @@ class EncounterBuilder extends React.Component {
     var partySize=0;
     var xpMin=0;
     var xpMax=0;
+    //Gets the partys xp thresholds
     for(let val of THE_PARTY) {
       if(val!=0){
           xpMin=xpMin+PLAYER_XP_THRESHOLD[val][challenge];
@@ -253,40 +230,53 @@ class EncounterBuilder extends React.Component {
         partySize++;
       }
     }
-    var minChallenge="";
-    var hasMinCR=false;
-    var maxChallenge="";
-    var x=0;
-    for(let val of experience){
-      if(val>=xpMin && hasMinCR==false){
-        minChallenge=challengeRatings[x];
-        hasMinCR=true;
-      }
-      if(val<xpMax){
-        maxChallenge=challengeRatings[x];
-      }
-      x=x+1;
-    }
 
-    // var CRMin=this.CRfromXPMin(xpMin);
-    // var CRMax=this.CRfromXPMax(xpMax-1);
+    if(hasMax==false)
+      xpMax=155001;
+    if(hasMin==false)
+      xpMin=0;
+    
+    var i;
+    for(i=1; i<16; i++){ //for different numbers of monsters
+      //console.log(i);
+      var multiplier=1;
+      if(i==2)
+        multiplier=1.5;
+      if(i>2 && i<7)
+        multiplier=2;
+      if(i>6 && i<11)
+        multiplier=2.5;
+      if(i>10 && i<15)
+        multiplier=3
+      if(i>14)
+        multiplier=4
+
+      var minChallenge="";
+      var hasMinCR=false;
+      var maxChallenge="";
+      var x=0;
+      for(let val of experience){
+        if(val>=xpMin/(i*multiplier) && val<xpMax/(i*multiplier)){
+          if(!this.state.challengeRatings.includes(challengeRatings[x]))
+            this.state.challengeRatings.push(challengeRatings[x]);
+        }
+        x=x+1;
+      }
+      var position=0;
+      position=position+1;
+    }
     console.log("minimum xp "+xpMin);
     console.log("maximum xp "+xpMax);
-    console.log("CR Min "+minChallenge);
-    console.log("CR Max "+maxChallenge);
+    console.log(this.state.challengeRatings);
+    
     // console.log("party size "+partySize);
-    if(hasMin==true){
-      this.state.challengeRatings[0]=minChallenge;
-    }
-    if(hasMax=true){
-      this.state.challengeRatings[1]=maxChallenge;
-    }
+    
   }
 
   //for searching the database
   findInDB = () => {
     this.partyCRs();
-    axios.post('http://localhost:3001/api/findData',{
+    axios.post('http://localhost:3001/api/findMonsters',{
       //movement
       fly: this.state.movementCheckboxes["Fly"],
       walk: this.state.movementCheckboxes["Walk"],
@@ -324,6 +314,7 @@ class EncounterBuilder extends React.Component {
       //challenge
       minChallenge: this.state.challengeRatings[0],
       maxChallenge: this.state.challengeRatings[1],
+      challengeRatings: this.state.challengeRatings
     })
     .then((response) => {
       this.props.storeData(response.data);
@@ -333,32 +324,22 @@ class EncounterBuilder extends React.Component {
     });
   };
 
->>>>>>> Stashed changes
   render() {
     return (
       <React.Fragment>
-        <h4 style={promptHeader}>
+        <h4 className="promptHeader">
           Enter your party information and encounter preferences
         </h4>
 
-        <article style={filterBody}>
+        <article className="filterBody">
           {/* <!-- css style for the whole page frame --> */}
-          <div style={parentContainerListVertical}>
+
+          <div className="parentContainerListVertical">
             
             {/* <!-- FIRST PAIRING --> */}
-            <div style={parentContainerPairHorizontal}>
+            <div className="parentContainerPairHorizontal">
               {/* <!-- ITEM 1 IN FIRST PAIRING --> */}
-              <PlayerLevelSelector />
 
-<<<<<<< Updated upstream
-              {/* <!-- ITEM 2 IN FIRST PAIRING -->
-                  <!-- SUB PAIRING IN 2ND ITEM OF FIRST PAIRING --> */}
-                <div style={subContainerPairHorizontal}>
-                  <ChallengeAndSize />
-                  <Movement
-                speedA={this.state.speedA}
-                onClick={(i) => this.handleClick(i)}/>
-=======
               <div className="subContainerPairHorizontal">
                 <PlayerLevelSelector />
               </div>
@@ -384,42 +365,34 @@ class EncounterBuilder extends React.Component {
 
             {/* <!-- ALIGNMENT AND TYPE ROW --> */}
             <div className="parentContainerPairHorizontal">
->>>>>>> Stashed changes
               <AlignmentTypeSelector
-                onClick={(i) => this.handleClick2(i)}
-                checkboxes={this.state.checkboxes}
+                onClick={(i) => ClickHandlers.handleAlignmentClick(this, i)}
+                alignmentCheckboxes={this.state.alignmentCheckboxes}
                 handleCheckBoxChange={(i) => this.handleCheckBoxChange}
               />
-                  <MonsterTypeSelector />
+              <MonsterTypeSelector 
+                onClick={(i) => ClickHandlers.handleMonsterTypeClick(this, i)}
+                typeCheckboxes={this.state.typeCheckboxes}
+                handleCheckBoxChange={(i) => this.handleCheckBoxChange}
+              />
+            </div>
 
-                  {/* <!-- second item in inner horizontal pairing --> */}
-                </div>
-                {/* <!-- end inner horizontal poairing --> */}
-                </div>
-              {/* <!-- end first pairing --> */}
-              </div>
-
-              {/* <!-- ALIGNMENT AND TYPE ROW --> */}
-              <div style={parentContainerPairHorizontal}>
-                <AlignmentTypeSelector />
-                <MonsterTypeSelector />
-              </div>
-              {/* <!--end second pairing--> */}
-
-              {/* <!-- BUTTON ROW --> */}
-              <div style={parentContainerPairHorizontal}>
-                <Link to="/encounterResults">
-                  <button 
-                    style = {resultsButtonContainer}
-                    className="button"
-                    onClick="window.location.href = '/encounterResults;"
-                    title="Encounter Results"
-                  >
-                    Build Encounter
-                  </button>
-                </Link>
-              </div>
-              {/* <!-- end third pairing --> */}
+            {/* <!-- BUTTON ROW --> */}
+            <div className="parentContainerPairHorizontal">
+              <Link to="/encounterResults">
+                <button 
+                  style = {styles.resultsButtonContainer}
+                  className="button"
+                  // onClick="window.location.href = '/encounterResults;"
+                  onClick={() => this.findInDB()}
+                  title="Encounter Results"
+                >
+                  Build Encounter
+                </button>
+              </Link>
+            </div>
+            {/* <!-- end third pairing --> */}
+          </div>
         </article>
       </React.Fragment>
     );
@@ -427,48 +400,3 @@ class EncounterBuilder extends React.Component {
 }
 
 export default EncounterBuilder;
-
-const promptHeader = { /* The discriptive text at the top of each search page*/
-  paddingTop: '20px',
-  paddingLeft: '50px',
-  paddingRight: '20px'
-}
-
-const filterBody = { /* CSS style for the whole search page */
-  margin: 'auto',
-  width: '95%',
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap'
-}
-
-const parentContainerListVertical = {
-  display: 'flex', /* or inline-flex */
-  flexDirection: 'column', /*order left to right normally*/
-  flexWrap: 'wrap', /*place second item below when small*/
-  justifyContent: 'space-between' /* justifies to far left and right, may not work on Edge */
-}
-
-const parentContainerPairHorizontal = {
-  display: 'flex', /* or inline-flex */
-  flexDirection: 'row', /*order left to right normally*/
-  flexWrap: 'wrap', /*place second item below when small*/
-  justifyContent: 'space-between', /* justifies to far left and right, may not work on Edge */
-  alignItems: 'flex-start',
-  padding: '30px'
-}
-
-const subContainerPairHorizontal = {
-  display: 'flex', /* or inline-flex */
-  flexDirection: 'row', /*order left to right normally*/
-  flexWrap: 'wrap', /*place second item below when small*/
-  justifyContent: 'space-between', /* justifies to far left and right, may not work on Edge */
-  alignItems: 'flex-start',
-  paddingRight: '50px',
-}
-
- const resultsButtonContainer = {
-  paddingTop: '30px',
-  display: 'flex',
-  justifyContent: 'center'
-}

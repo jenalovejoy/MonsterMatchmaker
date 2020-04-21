@@ -1,34 +1,40 @@
 import React from "react";
 import ResultsRow from "./ResultsRow";
 
+const TABLE_HEADINGS = [
+  "Monster Name",
+  "Challenge Rating",
+  "Size",
+  "Type",
+  "Subtype",
+  "Alignment",
+  "Armor Class",
+  "Hit Points",
+  "Hit Dice",
+  "Speed (walk, fly, swim)",
+  "Strength",
+  "Dexterity",
+  "Constitution",
+  "Intelligence",
+  "Wisdom",
+  "Charisma",
+];
+
 class ResultsTable extends React.Component {
+
+  createTableHeader = heading => (
+    <th class="results-table-header">{heading}</th>
+  );
+
+  createTableHeadings = () => TABLE_HEADINGS.map(this.createTableHeader);
 
   render(){
     return (
-        <table>
+        <table id={this.props.id}>
             <tr>
-            <th>Monster Name</th>
-            <th>Challenge Rating</th>
-            <th>Size</th>
-            <th>Type</th>
-            <th>Subtype</th>
-            <th>Alignment</th>
-            <th>Armor Class</th>
-            <th>Hit Points</th>
-            <th>Hit Dice</th>
-            <th>Speed (walk, fly, swim)</th>
-            <th>Strength</th>
-            <th>Dexterity</th>
-            <th>Constitution</th>
-            <th>Intelligence</th>
-            <th>Wisdom</th>
-            <th>Charisma</th>
+              {this.createTableHeadings(TABLE_HEADINGS)}
             </tr>
-            {this.props.data.map(id=>(<ResultsRow id={id}/>))}
-            {/* <ResultsRow/>
-            <ResultsRow/>
-            <ResultsRow/> */}
-                
+            {this.props.data.map(id=>(<ResultsRow id={id}/>))}    
         </table>
        
     );

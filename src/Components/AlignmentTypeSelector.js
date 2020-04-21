@@ -1,54 +1,33 @@
+import "../CSS/FinderStyles.css";
+import Checkbox from './Checkbox';
 import React from 'react';
 
-const OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", "Neutral Good", "Neutral Neutral", "Neutral Evil", "Chaotic Good", "Chaotic Neutral", "Chaotic Evil"];
+const ALIGNMENT_OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", 
+  "Neutral Good", "Neutral Neutral", "Neutral Evil", 
+  "Chaotic Good", "Chaotic Neutral", "Chaotic Evil"];
 
-// CSS styling to arange check boxes
-const gridFormatAlignment = {
-    display: 'grid',
-    gridTemplateColumns: '160px 175px 150px'
-  }
+class AlignmentTypeSelector extends React.Component {
 
-  class Checkbox2 extends React.Component{
-    render(){
-      return(
-        <div className="form-check">
-      <label>
-        <input
-          type="checkbox"
-          name={this.props.label}
-          checked={this.props.isSelected}
-          onChange={(e) => this.props.onClick()}
-          className="form-check-input"
-        />
-        {this.props.label}
-      </label>
-    </div>
-      );
-    }
-  }
+  createCheckbox = option => (
+    <Checkbox
+      label={option}
+      onClick={()=>this.props.onClick(option)}
+      key={option}
+    />
+  );
 
-  class AlignmentTypeSelector extends React.Component {
-  
-    createCheckbox = option => (
-      <Checkbox2
-        label={option}
-        onClick={()=>this.props.onClick(option)}
-        key={option}
-      />
+  createCheckboxes = () => ALIGNMENT_OPTIONS.map(this.createCheckbox);
+
+  render() {
+    return (
+      <form  onSubmit={this.handleFormSubmit}>
+        <legend style = {{fontSize: '25px'}}>Alignment</legend>
+        <div className="gridFormatAlignment">
+          {this.createCheckboxes()}
+        </div>
+      </form>
     );
-  
-    createCheckboxes = () => OPTIONS.map(this.createCheckbox);
-  
-    render() {
-      return (
-        <form  onSubmit={this.handleFormSubmit}>
-          <legend style = {{fontSize: '25px'}}>Alignment</legend>
-          <div style={gridFormatAlignment}>
-            {this.createCheckboxes()}
-          </div>
-        </form>
-      );
-    }
   }
+}
 
-  export default AlignmentTypeSelector;
+export default AlignmentTypeSelector;
