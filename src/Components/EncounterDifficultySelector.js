@@ -4,7 +4,10 @@ import React from "react";
 const DIFFICULT_RATING = ["Trivial", "Easy", "Medium", "Hard", "Deadly"];
 
 class EncounterDifficultySelector extends React.Component {
-  
+  constructor(props){
+    super(props);
+  }
+
     render() {
       return (
         <React.Fragment>

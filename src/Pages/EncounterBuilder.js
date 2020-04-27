@@ -10,6 +10,7 @@ import React from "react";
 import SizeSelector from "../Components/SizeSelector";
 import styles from "../CSS/FinderStyles.css";
 
+const THE_PARTY=["11","11","11","11","0","0","0","0","0","0"]
 
 const ALIGNMENT_OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", 
                   "Neutral Good", "Neutral Neutral", "Neutral Evil", 
@@ -50,6 +51,82 @@ const PLAYER_XP_THRESHOLD = {
   "19": {"Easy": 2400, "Medium": 2900, "Hard": 7300, "Deadly": 10900},
   "20": {"Easy": 2800, "Medium": 5700, "Hard": 8500, "Deadly": 12700}
 }
+
+const experience = [
+  0,
+  10,
+  25,
+  50,
+  100,
+  200,
+  450,
+  700,
+  1100,
+  1800,
+  2300,
+  2900,
+  3900,
+  5000,
+  5900,
+  7200,
+  8400,
+  10000,
+  11500,
+  13000,
+  15000,
+  18000,
+  20000,
+  22000,
+  25000,
+  33000,
+  41000,
+  50000,
+  62000,
+  75000,
+  90000,
+  105000,
+  120000,
+  135000,
+  155000, 
+]
+
+const challengeRatings = [
+  0,
+  0,
+  1/8,
+  1/4,
+  1/2,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30, 
+]
 
 const EXP_BY_CHALLENGE_RATING = {
   "0": 0 | 10,
@@ -102,7 +179,9 @@ class EncounterBuilder extends React.Component {
         }),
         {}
       ),
-      challengeRatings: Array(2).fill(""),
+      challengeRatings: Array(), //Array(2).fill(""),
+      encounterDifficulty: Array(1).fill(""),
+      partyDifficulties: Array(5).fill(0),
       sizes: Array(2).fill(""),
       alignmentCheckboxes: ALIGNMENT_OPTIONS.reduce(
         (options, option) => ({
@@ -120,9 +199,84 @@ class EncounterBuilder extends React.Component {
       )
     };
   }
+
+  //Calculates allowed Challenge Ratings from Encounter Difficulty
+  partyCRs(){
+    var hasMin=true;
+    var hasMax=true;
+    var challenge=this.state.encounterDifficulty[0];
+    var challenge2="";
+    //Determines upper bounds
+    if(challenge.localeCompare("Trivial")==0){
+      challenge2="Easy";
+      hasMin=false;
+    }if(challenge.localeCompare("Easy")==0){
+      challenge2="Medium";
+    }if(challenge.localeCompare("Medium")==0){
+      challenge2="Hard";
+    }if(challenge.localeCompare("Hard")==0){
+      challenge2="Deadly";
+    }if(challenge.localeCompare("Deadly")==0){
+      hasMax=false;
+    }
+    var partySize=0;
+    var xpMin=0;
+    var xpMax=0;
+    //Gets the partys xp thresholds
+    for(let val of THE_PARTY) {
+      if(val!=0){
+          xpMin=xpMin+PLAYER_XP_THRESHOLD[val][challenge];
+          xpMax=xpMax+PLAYER_XP_THRESHOLD[val][challenge2];
+        partySize++;
+      }
+    }
+
+    if(hasMax==false)
+      xpMax=155001;
+    if(hasMin==false)
+      xpMin=0;
+    
+    var i;
+    for(i=1; i<16; i++){ //for different numbers of monsters
+      //console.log(i);
+      var multiplier=1;
+      if(i==2)
+        multiplier=1.5;
+      if(i>2 && i<7)
+        multiplier=2;
+      if(i>6 && i<11)
+        multiplier=2.5;
+      if(i>10 && i<15)
+        multiplier=3
+      if(i>14)
+        multiplier=4
+
+      var minChallenge="";
+      var hasMinCR=false;
+      var maxChallenge="";
+      var x=0;
+      for(let val of experience){
+        if(val>=xpMin/(i*multiplier) && val<xpMax/(i*multiplier)){
+          if(!this.state.challengeRatings.includes(challengeRatings[x]))
+            this.state.challengeRatings.push(challengeRatings[x]);
+        }
+        x=x+1;
+      }
+      var position=0;
+      position=position+1;
+    }
+    console.log("minimum xp "+xpMin);
+    console.log("maximum xp "+xpMax);
+    console.log(this.state.challengeRatings);
+    
+    // console.log("party size "+partySize);
+    
+  }
+
   //for searching the database
   findInDB = () => {
-    axios.post('http://localhost:3001/api/findData',{
+    this.partyCRs();
+    axios.post('http://localhost:3001/api/findMonsters',{
       //movement
       fly: this.state.movementCheckboxes["Fly"],
       walk: this.state.movementCheckboxes["Walk"],
@@ -160,6 +314,7 @@ class EncounterBuilder extends React.Component {
       //challenge
       minChallenge: this.state.challengeRatings[0],
       maxChallenge: this.state.challengeRatings[1],
+      challengeRatings: this.state.challengeRatings
     })
     .then((response) => {
       this.props.storeData(response.data);
@@ -189,7 +344,9 @@ class EncounterBuilder extends React.Component {
                 <PlayerLevelSelector />
               </div>
               <div className="subContainerPairHorizontal">
-                <EncounterDifficultySelector />
+                <EncounterDifficultySelector
+               setMaxChallenge={(i) => ClickHandlers.setEncounterDifficulty(this, i)}
+               />
               </div>
               <div className="subContainerPairHorizontal">
                 <SizeSelector 

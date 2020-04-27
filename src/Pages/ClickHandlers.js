@@ -110,3 +110,19 @@ export function handleMovementClick(context, i) {
         console.log(checkbox, "is selected.");
       });
   }
+
+  // Handling user selection for encounter Difficulty
+export function setEncounterDifficulty(context, i){
+  context.setState(prevState => ({
+    encounterDifficulty: {
+      ...prevState.encounterDifficulty,
+      [0]: i
+      },
+  }));
+  console.log(context.state.encounterDifficulty[0]);
+  // Object.keys(context.state.alignmentCheckboxes)
+  //     .filter(checkbox => context.state.alignmentCheckboxes[checkbox])
+  //     .forEach(checkbox => {
+  //     console.log(checkbox, "is selected.");
+  //     });
+}
