@@ -326,7 +326,7 @@ router.post('/findData', (req, res) => {
     });
 });
 
-router.post('/monsters', async (req, res) => {
+router.post('/monsters', (req, res) => {
     const sizes = [
       "Tiny",
       "Small",
@@ -509,16 +509,16 @@ router.post('/monsters', async (req, res) => {
       Data.find(query, (err, data) => {
           if (err) return res.json({ success: false, error: err });
           //console.log(data);
-          console.log(data);
-      });
+          return res.json( data );
+        });
 
       // CURRENT ISSUE: this function needs to wait for results before running 
-      await findEncounter(results, playerLevels, encounterDifficulty);
+      findEncounter(results, playerLevels, encounterDifficulty);
 
       return results;
 });
 
-async function findEncounter(data, playerLevels, encounterDifficulty){
+function findEncounter(data, playerLevels, encounterDifficulty){
     const partyXP = getPartyXP(playerLevels, encounterDifficulty);
     const monstersByXP = findMonstersByXP(data, partyXP);
     // Will be array of multiple encounter options
@@ -542,7 +542,7 @@ function selectMonsters(monsterLevels, partyXP){
 
 }
 
-async function findMonstersByXP(data, partyXP){
+function findMonstersByXP(data, partyXP){
     console.log(data.length);
     // object holding level
     let monstersByXP = {
@@ -575,7 +575,7 @@ async function findMonstersByXP(data, partyXP){
     return monstersByXP;
 }  
 
-async function getPartyXP(playerLevels, encounterDifficulty){
+function getPartyXP(playerLevels, encounterDifficulty){
 
     let partySum = 0;
     for (let level of playerLevels){

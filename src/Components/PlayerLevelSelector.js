@@ -31,7 +31,7 @@ class PlayerLevelSelector extends React.Component {
     return (
       <div>
         <form id="player-level-select" onSubmit={this.handleSubmit}>
-          <legend style = {{fontSize: '25px'}}>Player ({this.state.numberOfPlayers}) Levels</legend>
+          <legend style = {{fontSize: '25px'}}>Player Levels</legend>
 
           {this.state.playerLevels.map((level, i) => (
             <Player 
