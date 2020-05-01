@@ -326,7 +326,11 @@ router.post('/findData', (req, res) => {
     });
 });
 
+<<<<<<< HEAD
 router.post('/monsters', async (req, res) => {
+=======
+router.post('/monsters', (req, res) => {
+>>>>>>> jena
     const sizes = [
       "Tiny",
       "Small",
@@ -509,16 +513,28 @@ router.post('/monsters', async (req, res) => {
       Data.find(query, (err, data) => {
           if (err) return res.json({ success: false, error: err });
           //console.log(data);
+<<<<<<< HEAD
           console.log(data);
       });
 
       // CURRENT ISSUE: this function needs to wait for results before running 
       await findEncounter(results, playerLevels, encounterDifficulty);
+=======
+          return res.json( data );
+        });
+
+      // CURRENT ISSUE: this function needs to wait for results before running 
+      findEncounter(results, playerLevels, encounterDifficulty);
+>>>>>>> jena
 
       return results;
 });
 
+<<<<<<< HEAD
 async function findEncounter(data, playerLevels, encounterDifficulty){
+=======
+function findEncounter(data, playerLevels, encounterDifficulty){
+>>>>>>> jena
     const partyXP = getPartyXP(playerLevels, encounterDifficulty);
     const monstersByXP = findMonstersByXP(data, partyXP);
     // Will be array of multiple encounter options
@@ -542,7 +558,11 @@ function selectMonsters(monsterLevels, partyXP){
 
 }
 
+<<<<<<< HEAD
 async function findMonstersByXP(data, partyXP){
+=======
+function findMonstersByXP(data, partyXP){
+>>>>>>> jena
     console.log(data.length);
     // object holding level
     let monstersByXP = {
@@ -575,7 +595,11 @@ async function findMonstersByXP(data, partyXP){
     return monstersByXP;
 }  
 
+<<<<<<< HEAD
 async function getPartyXP(playerLevels, encounterDifficulty){
+=======
+function getPartyXP(playerLevels, encounterDifficulty){
+>>>>>>> jena
 
     let partySum = 0;
     for (let level of playerLevels){

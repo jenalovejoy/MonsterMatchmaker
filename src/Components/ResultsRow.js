@@ -13,7 +13,11 @@ class ResultsRow extends React.Component {
         <td class="results-table-item">{this.props.id.armor_class}</td>
         <td class="results-table-item">{this.props.id.hit_points}</td>
         <td class="results-table-item">{this.props.id.hit_dice}</td>
-        <td class="results-table-item">{this.props.id.speed.walk} {this.props.id.speed.fly} {this.props.id.speed.swim} {this.props.id.speed.burrow} {this.props.id.speed.climb}</td>
+        <td class="results-table-item">{this.props.id.speed.walk}</td>
+        <td class="results-table-item">{this.props.id.speed.fly}</td>
+        <td class="results-table-item">{this.props.id.speed.swim}</td>
+        <td class="results-table-item">{this.props.id.speed.burrow}</td>
+        <td class="results-table-item">{this.props.id.speed.climb}</td>
         <td class="results-table-item">{this.props.id.strength}</td>
         <td class="results-table-item">{this.props.id.dexterity}</td>
         <td class="results-table-item">{this.props.id.constitution}</td>

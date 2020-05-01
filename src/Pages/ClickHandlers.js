@@ -3,7 +3,7 @@ export function setMinChallenge(context, i){
     context.setState(prevState => ({
         challengeRatings: {
         ...prevState.challengeRatings,
-        [0]: i
+        min: i
         },
     }));
     console.log(context.state.challengeRatings);
@@ -19,7 +19,7 @@ export function setMaxChallenge(context, i){
     context.setState(prevState => ({
         challengeRatings: {
         ...prevState.challengeRatings,
-        [1]: i
+        max: i
         },
     }));
     console.log(context.state.challengeRatings);
@@ -35,7 +35,7 @@ export function setMinSize(context, i){
     context.setState(prevState => ({
         sizes: {
             ...prevState.sizes,
-            [0]: i
+            min: i
         },
         }));
     console.log(context.state.sizes);
@@ -51,7 +51,7 @@ export function setMaxSize(context, i){
     context.setState(prevState => ({
       sizes: {
         ...prevState.sizes,
-        [1]: i
+        max: i
       },
     }));
     console.log(context.state.sizes);

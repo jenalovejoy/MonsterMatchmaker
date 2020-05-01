@@ -41,8 +41,10 @@ class MonsterFinder extends React.Component {
         }),
         {}
       ),
-      challengeRatings: Array(2).fill(""),
-      sizes: Array(2).fill(""),
+      challengeRatings: {min: "",
+                        max: ""},
+      sizes: {min: "",
+              max: ""},
       alignmentCheckboxes: ALIGNMENT_OPTIONS.reduce(
         (options, option) => ({
           ...options,
@@ -94,11 +96,11 @@ class MonsterFinder extends React.Component {
       fiend: this.state.typeCheckboxes["Fiend"],
       ooze: this.state.typeCheckboxes["Ooze"],
       //size
-      minSize: this.state.sizes[0],
-      maxSize: this.state.sizes[1],
+      minSize: this.state.sizes.min,
+      maxSize: this.state.sizes.max,
       //challenge
-      minChallenge: this.state.challengeRatings[0],
-      maxChallenge: this.state.challengeRatings[1],
+      minChallenge: this.state.challengeRatings.min,
+      maxChallenge: this.state.challengeRatings.max,
     })
     .then((response) => {
       this.props.storeData(response.data);
@@ -112,9 +114,9 @@ class MonsterFinder extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h4 className="promptHeader">
+        <h3 id="title-header">
           Enter your monster preferences.
-        </h4>
+        </h3>
 
         <article className="filterBody">
           {/* <!-- css style for the whole page frame --> */}

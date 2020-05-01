@@ -5,7 +5,7 @@ import React from "react";
 const Header = props => {
 
   return (
-    <header>
+    <header class="header">
       <menu>
         <Link to="/" className="headerLink">Monster Matchmaker</Link>
       </menu>
