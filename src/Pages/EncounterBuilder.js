@@ -181,6 +181,7 @@ class EncounterBuilder extends React.Component {
         }),
         {}
       ),
+      numberOfPlayers: 4,
       playerLevels: [1, 1, 1, 1],
       challengeRatings: {min: 0,
                         max: 30},
@@ -202,6 +203,14 @@ class EncounterBuilder extends React.Component {
         {}
       )
     };
+  }
+
+  initPlayerLevels(numberOfPlayers){
+    let playerLevels =  new Array(numberOfPlayers);
+
+    for (let i = 0; i < numberOfPlayers; i++){
+        playerLevels[i] = 1;
+    }
   }
 
   //Calculates allowed Challenge Ratings from Encounter Difficulty
