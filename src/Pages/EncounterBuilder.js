@@ -276,7 +276,7 @@ class EncounterBuilder extends React.Component {
   //for searching the database
   findInDB = () => {
     this.partyCRs();
-    axios.post('http://localhost:3001/api/findMonsters',{
+    axios.post('http://13.58.12.74:3001/api/findMonsters',{
       //movement
       fly: this.state.movementCheckboxes["Fly"],
       walk: this.state.movementCheckboxes["Walk"],
