@@ -5,8 +5,8 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className="container">
-        <h1 className="display-1 text-light text-center">Welcome!</h1>
-        <h3 className="text-light text-center">
+        <h1 className="display-1 text-light text-center" id="title-header">Welcome!</h1>
+        <h3 className="text-light text-center" id="title-header">
           Please select a method of building your encounter
         </h3>
         <div className="parent-container-pair-horizontal">

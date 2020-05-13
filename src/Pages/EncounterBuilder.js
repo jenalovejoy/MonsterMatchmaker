@@ -2,6 +2,7 @@ import AlignmentTypeSelector from "../Components/AlignmentTypeSelector";
 import axios from 'axios';
 import * as ClickHandlers from "./ClickHandlers";
 import EncounterDifficultySelector from "../Components/EncounterDifficultySelector";
+import * as FilterBuilder from "./FilterBuilder"
 import { Link } from "react-router-dom";
 import MonsterTypeSelector from "../Components/MonsterTypeSelector";
 import Movement from "../Components/Movement";
@@ -179,10 +180,12 @@ class EncounterBuilder extends React.Component {
         }),
         {}
       ),
-      challengeRatings: Array(), //Array(2).fill(""),
+      challengeRatings: Array(),
       encounterDifficulty: Array(1).fill(""),
-      partyDifficulties: Array(5).fill(0),
-      sizes: Array(2).fill(""),
+
+      playerLevels: [1,1,1,1],
+      sizes: {min: "",max: ""},
+
       alignmentCheckboxes: ALIGNMENT_OPTIONS.reduce(
         (options, option) => ({
           ...options,
@@ -223,10 +226,12 @@ class EncounterBuilder extends React.Component {
     var xpMin=0;
     var xpMax=0;
     //Gets the partys xp thresholds
-    for(let val of THE_PARTY) {
-      if(val!=0){
-          xpMin=xpMin+PLAYER_XP_THRESHOLD[val][challenge];
-          xpMax=xpMax+PLAYER_XP_THRESHOLD[val][challenge2];
+    var d;
+    for(d=0; d<4; d++) {
+      if(this.state.playerLevels[d]!=0){
+        console.log(this.state.playerLevels[d]);
+          xpMin=xpMin+PLAYER_XP_THRESHOLD[this.state.playerLevels[d]][challenge];
+          xpMax=xpMax+PLAYER_XP_THRESHOLD[this.state.playerLevels[d]][challenge2];
         partySize++;
       }
     }
@@ -278,42 +283,14 @@ class EncounterBuilder extends React.Component {
     this.partyCRs();
     axios.post('http://13.58.12.74:3001/api/findMonsters',{
       //movement
-      fly: this.state.movementCheckboxes["Fly"],
-      walk: this.state.movementCheckboxes["Walk"],
-      burrow: this.state.movementCheckboxes["Burrow"],
-      swim: this.state.movementCheckboxes["Swim"],
-      climb: this.state.movementCheckboxes["Climb"],
+      movements: this.state.movementCheckboxes,
       //alignment
-      lawfulGood: this.state.alignmentCheckboxes["Lawful Good"],
-      neutralGood: this.state.alignmentCheckboxes["Neutral Good"],
-      chaoticGood: this.state.alignmentCheckboxes["Chaotic Good"],
-      lawfulNeutral: this.state.alignmentCheckboxes["Lawful Neutral"],
-      neutral: this.state.alignmentCheckboxes["Neutral Neutral"],
-      chaoticNeutral: this.state.alignmentCheckboxes["Chaotic Neutral"],
-      lawfulEvil: this.state.alignmentCheckboxes["Lawful Evil"],
-      neutralEvil: this.state.alignmentCheckboxes["Neutral Evil"],
-      chaoticEvil: this.state.alignmentCheckboxes["Chaotic Evil"],
+      alignments: this.state.alignmentCheckboxes,
       //monster type
-      aberration: this.state.typeCheckboxes["Aberration"],
-      dragon: this.state.typeCheckboxes["Dragon"],
-      giant: this.state.typeCheckboxes["Giant"],
-      plant: this.state.typeCheckboxes["Plant"],
-      beast: this.state.typeCheckboxes["Beast"],
-      elemental: this.state.typeCheckboxes["Elemental"],
-      humanoid: this.state.typeCheckboxes["Humanoid"],
-      undead: this.state.typeCheckboxes["Undead"],
-      celestial: this.state.typeCheckboxes["Celestial"],
-      fey: this.state.typeCheckboxes["Fey"],
-      monstrosity: this.state.typeCheckboxes["Monstrosity"],
-      construct: this.state.typeCheckboxes["Construct"],
-      fiend: this.state.typeCheckboxes["Fiend"],
-      ooze: this.state.typeCheckboxes["Ooze"],
+      types: this.state.typeCheckboxes,
       //size
-      minSize: this.state.sizes[0],
-      maxSize: this.state.sizes[1],
+      sizesGiven: this.state.sizes,
       //challenge
-      minChallenge: this.state.challengeRatings[0],
-      maxChallenge: this.state.challengeRatings[1],
       challengeRatings: this.state.challengeRatings
     })
     .then((response) => {
@@ -341,7 +318,9 @@ class EncounterBuilder extends React.Component {
               {/* <!-- ITEM 1 IN FIRST PAIRING --> */}
 
               <div className="subContainerPairHorizontal">
-                <PlayerLevelSelector />
+              <PlayerLevelSelector 
+                  playerLevels={this.state.playerLevels}
+                  setPlayerLevel={(level, playerNumber) => ClickHandlers.setPlayerLevel(this, level, playerNumber)}/>
               </div>
               <div className="subContainerPairHorizontal">
                 <EncounterDifficultySelector

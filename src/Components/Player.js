@@ -1,11 +1,12 @@
 import React from "react";
+import Dropdowns from "./Dropdowns";
 
 class Player extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playerNumber: 1,
-      numberOfLevels: super.numberOfLevels
+      playerNumber: this.props.playerNumber,
+      selectedLevel: this.props.selectedLevel
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,17 +22,16 @@ class Player extends React.Component {
   }
 
   render() {
-    let level = range(30);
+    let allLevels = range(20);
+
+    const setPlayerLevel = (newLevel) => {
+      this.props.setPlayerLevel(newLevel, this.state.playerNumber);
+    }
     return (
       <ul class="playerLevelItem"><label>
-        Player Level
-        <select value={this.state.value} onChange={this.handleChange}>
-          {level.map(level => (
-            <option value={level} key={level}>
-              {level}
-            </option>
-          ))}
-        </select>
+         <Dropdowns title="Player Level" 
+          dropdownData={allLevels}
+          storeData={setPlayerLevel} />
       </label></ul>
     );
   }

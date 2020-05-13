@@ -32,8 +32,6 @@ class Dropdowns extends React.Component {
 
   //renders dropdowns
   render() {
-    console.log(this.state.dropdownData);
-
     let title = this.state.headerTitle;
 
     //Creates a form that allos for user to interact and submit information

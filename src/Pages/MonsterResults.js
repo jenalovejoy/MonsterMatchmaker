@@ -7,7 +7,7 @@ class MonsterResults extends React.Component {
     return (
       <React.Fragment>
         <div id="filter-results-title">
-          <h3 class="text-light text-center" id="resultsTitle">
+        <h3 class="text-light text-center" id="title-header">
             I have found some monsters for you
           </h3>
         </div>

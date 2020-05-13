@@ -3,7 +3,7 @@ import Checkbox from './Checkbox';
 import React from 'react';
 
 const ALIGNMENT_OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", 
-  "Neutral Good", "Neutral Neutral", "Neutral Evil", 
+  "Neutral Good", "Neutral", "Neutral Evil", 
   "Chaotic Good", "Chaotic Neutral", "Chaotic Evil"];
 
 class AlignmentTypeSelector extends React.Component {

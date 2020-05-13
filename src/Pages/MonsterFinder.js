@@ -41,8 +41,8 @@ class MonsterFinder extends React.Component {
         }),
         {}
       ),
-      challengeRatings: Array(2).fill(""),
-      sizes: Array(2).fill(""),
+      challengeRatings: {min: "",max: ""},
+      sizes: {min: "",max: ""},
       alignmentCheckboxes: ALIGNMENT_OPTIONS.reduce(
         (options, option) => ({
           ...options,
@@ -63,42 +63,15 @@ class MonsterFinder extends React.Component {
   findInDB = () => {
     axios.post('http://13.58.12.74:3001/api/findData',{
       //movement
-      fly: this.state.movementCheckboxes["Fly"],
-      walk: this.state.movementCheckboxes["Walk"],
-      burrow: this.state.movementCheckboxes["Burrow"],
-      swim: this.state.movementCheckboxes["Swim"],
-      climb: this.state.movementCheckboxes["Climb"],
+      movements: this.state.movementCheckboxes,
       //alignment
-      lawfulGood: this.state.alignmentCheckboxes["Lawful Good"],
-      neutralGood: this.state.alignmentCheckboxes["Neutral Good"],
-      chaoticGood: this.state.alignmentCheckboxes["Chaotic Good"],
-      lawfulNeutral: this.state.alignmentCheckboxes["Lawful Neutral"],
-      neutral: this.state.alignmentCheckboxes["Neutral Neutral"],
-      chaoticNeutral: this.state.alignmentCheckboxes["Chaotic Neutral"],
-      lawfulEvil: this.state.alignmentCheckboxes["Lawful Evil"],
-      neutralEvil: this.state.alignmentCheckboxes["Neutral Evil"],
-      chaoticEvil: this.state.alignmentCheckboxes["Chaotic Evil"],
+      alignments: this.state.alignmentCheckboxes,
       //monster type
-      aberration: this.state.typeCheckboxes["Aberration"],
-      dragon: this.state.typeCheckboxes["Dragon"],
-      giant: this.state.typeCheckboxes["Giant"],
-      plant: this.state.typeCheckboxes["Plant"],
-      beast: this.state.typeCheckboxes["Beast"],
-      elemental: this.state.typeCheckboxes["Elemental"],
-      humanoid: this.state.typeCheckboxes["Humanoid"],
-      undead: this.state.typeCheckboxes["Undead"],
-      celestial: this.state.typeCheckboxes["Celestial"],
-      fey: this.state.typeCheckboxes["Fey"],
-      monstrosity: this.state.typeCheckboxes["Monstrosity"],
-      construct: this.state.typeCheckboxes["Construct"],
-      fiend: this.state.typeCheckboxes["Fiend"],
-      ooze: this.state.typeCheckboxes["Ooze"],
+      types: this.state.typeCheckboxes,
       //size
-      minSize: this.state.sizes[0],
-      maxSize: this.state.sizes[1],
+      sizesGiven: this.state.sizes,
       //challenge
-      minChallenge: this.state.challengeRatings[0],
-      maxChallenge: this.state.challengeRatings[1],
+      challengeRatings: this.state.challengeRatings
     })
     .then((response) => {
       this.props.storeData(response.data);
@@ -112,9 +85,9 @@ class MonsterFinder extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h4 className="promptHeader">
+        <h3 id="title-header">
           Enter your monster preferences.
-        </h4>
+        </h3>
 
         <article className="filterBody">
           {/* <!-- css style for the whole page frame --> */}

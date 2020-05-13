@@ -1,8 +1,9 @@
 /* Style the header with a grey background and some padding */
 .header {
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: #303030;
   padding: 20px 10px;
+  width: 100%;
 }
 
 /* Style the header links */
@@ -51,3 +52,11 @@
     float: none;
   }
 }
+
+#title-header {
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 0px;
+  padding: 30px;
+  font-size: 25px;
+} 
