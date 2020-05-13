@@ -12,18 +12,18 @@ class EncounterResults extends React.Component {
           <h3 class="text-light text-center" id="title-header">
             I have made some encounters for you
           </h3>
-        </div>
+          </div>
         <div id="plot-hook-header">
             <h5 title="Plot Hook Title">Players will be searching for:</h5>
             <h6 title="Plot Hook">A lost amulet that has magic powers</h6>
         </div>
             
-            <h5 title="Monsters" class="encounter-title">Monsters</h5>
+        <h5 title="Monsters" class="encounter-title">Monsters</h5>
             <div class="results-table">
               <ResultsTable id="encounter-results" data={this.props.data}/>
             </div>
           <div class="results-table">
-            <h5 title="Dungeon traps" class="encounter-title">Dungeon Traps</h5>
+          <h5 title="Dungeon traps" class="encounter-title">Dungeon Traps</h5>
 
             <table id="encounter-results">
               <tr>
@@ -56,9 +56,9 @@ class EncounterResults extends React.Component {
             </table>
           </div>
           <div class="results-table">
-            <h5 title="Rewards" class="encounter-title">Rewards</h5>
+          <h5 title="Rewards" class="encounter-title">Rewards</h5>
 
-            <table id="encounter-results">
+          <table id="encounter-results">
               <tr>
                 <th class="results-table-header">Name</th>
                 <th class="results-table-header">Total Value</th>
@@ -68,7 +68,7 @@ class EncounterResults extends React.Component {
                 <td class="results-table-item">Wand of Mirror Image</td>
                 <td class="results-table-item">3600 GP</td>
                 <td class="results-table-item">
-                  Inscription provides clue to function -- 40 to 50 charges
+                Inscription provides clue to function -- 40 to 50 charges
                 </td>
               </tr>
               <tr>
@@ -82,10 +82,10 @@ class EncounterResults extends React.Component {
             <h5 title="Dungeon Map" class="encounter-title">Dungeon Map</h5>
 
             <img
-                id="encounter-results"
-                src={map}
-                class="dungeonMap"
-                alt="This is just an example dungeon map that players may or may not use."
+              id="encounter-results"
+              src={map}
+              class="dungeonMap"
+              alt="This is just an example dungeon map that players may or may not use."
             ></img>
           </div>
           

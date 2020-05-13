@@ -120,9 +120,15 @@ export function setEncounterDifficulty(context, i){
       },
   }));
   console.log(context.state.encounterDifficulty[0]);
-  // Object.keys(context.state.alignmentCheckboxes)
-  //     .filter(checkbox => context.state.alignmentCheckboxes[checkbox])
-  //     .forEach(checkbox => {
-  //     console.log(checkbox, "is selected.");
-  //     });
 }
+
+  // Handling user selection for encounter Difficulty
+  export function setPlayerLevel(context, level, playerNumber){
+    context.setState(prevState => ({
+      playerLevels: {
+        ...prevState.playerLevels,
+        [playerNumber]: level
+        },
+    }));
+    console.log(context.state.playerLevels);
+  }

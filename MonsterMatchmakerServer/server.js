@@ -12,7 +12,6 @@ const router = express.Router();
 
 // this is our MongoDB database
 const dbRoute ="mongodb+srv://Dawson:Char1zard%21@capstonecluster-amhqv.mongodb.net/DnDDatabase?retryWrites=true&w=majority";
- // 'mongodb://Dawson:Char1zard@ds249583.mlab.com:49583/DnD';
 
 // connects our back end code with the database
 mongoose.connect(dbRoute, { useNewUrlParser: true });
@@ -30,38 +29,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger('dev'));
 
-// this is our get method
-// this method fetches all available data in our database
-router.get('/getData', (req, res) => {
-  Data.find({name: 'Adult Red Dragon'},(err, data) => {
-    if (err) return res.json({ success: false, error: err });
-    console.log(data);
-    return res.json({ success: true, data: data });
-  });
-});
-
-//The find data method
-// router.post('/findData', (req, res) => {
-//   const { id } = req.body;
-//   console.log(id);
-//   Data.find({name: id}, (err, data) => {
-//     if (err) return res.json({ success: false, error: err });
-//     console.log(data);
-//     return res.json( data );
-//   });
-// });
-
-//The find data method
-// router.post('/findData', (req, res) => {
-//   const { id } = req.body;
-//   console.log(id);
-//   Data.find({'speed.fly':{ $exists: true }}, (err, data) => {
-//     if (err) return res.json({ success: false, error: err });
-//     console.log(data);
-//     return res.json( data );
-//   });
-// });
-
 //Second find data method
 router.post('/findData', (req, res) => {
   const sizes = [
@@ -74,119 +41,115 @@ router.post('/findData', (req, res) => {
   ];
   var query={};
   query['$and']=[];
-  //var queryA={};
-  const { fly,walk,burrow,swim,climb,
-    lawfulGood,neutralGood,chaoticGood,lawfulNeutral,neutral,chaoticNeutral,lawfulEvil,neutralEvil,chaoticEvil,
-   aberration,dragon,giant,plant,beast,elemental,humanoid,undead,celestial,fey,monstrosity,construct,fiend,ooze,
-  minSize, maxSize, minChallenge, maxChallenge} = req.body;
+  const {movements, alignments, types, sizesGiven, challengeRatings} = req.body;
+  
   //movement queries
-  if(fly==true||walk==true||burrow==true||swim==true||climb==true){
     var querytemp={};
   querytemp['$and']=[];
-  if(fly=== true){
+  if(movements["Fly"]=== true){
     querytemp['$and'].push({'speed.fly': {$exists:true}});
-  }if(walk=== true){
+  }if(movements["Walk"]=== true){
     querytemp['$and'].push({'speed.walk': {$exists:true}});
-  }if(burrow=== true){
+  }if(movements["Burrow"]=== true){
     querytemp['$and'].push({'speed.burrow': {$exists:true}});
-}if(swim=== true){
+}if(movements["Swim"]=== true){
   querytemp['$and'].push({'speed.swim': {$exists:true}});
-}if(climb=== true){
+}if(movements["Climb"]=== true){
   querytemp['$and'].push({'speed.climb': {$exists:true}});
 }
-query['$and'].push(querytemp);
-  }
+if(querytemp['$and'].length!=0){
+  query['$and'].push(querytemp);
+}
+
 //alignment queries
-if(lawfulGood===true||neutralGood===true||chaoticGood===true||lawfulNeutral===true||neutral===true||chaoticNeutral===true||lawfulEvil===true||neutralEvil===true||chaoticEvil===true){
-  var querytemp={};
+ var querytemp={};
   querytemp['$or']=[];
-  if(lawfulGood=== true){
+  if(alignments["Lawful Good"]=== true){
     querytemp['$or'].push({alignment: {$eq:"lawful good"}});
-  }if(neutralGood=== true){
+  }if(alignments["Neutral Good"]=== true){
     querytemp['$or'].push({alignment: {$eq:"neutral good"}});
-  }if(chaoticGood=== true){
+  }if(alignments["Chaotic Good"]=== true){
     querytemp['$or'].push({alignment: {$eq:"chaotic good"}});
-  }if(lawfulNeutral=== true){
+  }if(alignments["Lawful Neutral"]=== true){
     querytemp['$or'].push({alignment: {$eq:"lawful neutral"}});
-  }if(neutral=== true){
+  }if(alignments["Neutral"]=== true){
     querytemp['$or'].push({alignment: {$eq:"neutral"}});
-  }if(chaoticNeutral=== true){
+  }if(alignments["Chaotic Neutral"]=== true){
     querytemp['$or'].push({alignment: {$eq:"chaotic neutral"}});
-  }if(lawfulEvil=== true){
+  }if(alignments["Lawful Evil"]=== true){
     querytemp['$or'].push({alignment: {$eq:"lawful evil"}});
-  }if(neutralEvil=== true){
+  }if(alignments["Neutral Evil"]=== true){
     querytemp['$or'].push({alignment: {$eq:"neutral evil"}});
-  }if(chaoticEvil=== true){
+  }if(alignments["Chaotic Evil"]=== true){
     querytemp['$or'].push({alignment: {$eq:"chaotic evil"}});
   }
-  query['$and'].push(querytemp);
-}
+  if(querytemp['$or'].length!=0){
+    query['$and'].push(querytemp);
+  }
+
 //for monster types
-if(aberration==true||dragon==true||giant==true||plant==true||beast==true||elemental==true||humanoid==true||undead==true||undead==true||celestial==true||fey==true||monstrosity==true||construct==true||fiend==true||ooze==true){
   var querytemp={};
   querytemp['$or']=[];
-  if(aberration==true){
+  if(types["Aberration"]==true){
     querytemp['$or'].push({type: {$eq:"aberration"}});
-  }if(dragon==true){
+  }if(types["Dragon"]==true){
     querytemp['$or'].push({type: {$eq:"dragon"}});
-  }if(giant==true){
+  }if(types["Giant"]==true){
     querytemp['$or'].push({type: {$eq:"giant"}});
-  }if(plant==true){
+  }if(types["Plant"]==true){
     querytemp['$or'].push({type: {$eq:"plant"}});
-  }if(beast==true){
+  }if(types["Beast"]==true){
     querytemp['$or'].push({type: {$eq:"beast"}});
-  }if(elemental==true){
+  }if(types["Elemental"]==true){
     querytemp['$or'].push({type: {$eq:"elemental"}});
-  }if(humanoid==true){
+  }if(types["Humanoid"]==true){
     querytemp['$or'].push({type: {$eq:"humanoid"}});
-  }if(undead==true){
+  }if(types["Undead"]==true){
     querytemp['$or'].push({type: {$eq:"undead"}});
-  }if(celestial==true){
+  }if(types["Celestial"]==true){
     querytemp['$or'].push({type: {$eq:"celestial"}});
-  }if(fey==true){
+  }if(types["Fey"]==true){
     querytemp['$or'].push({type: {$eq:"fey"}});
-  }if(monstrosity==true){
+  }if(types["Monstrosity"]==true){
     querytemp['$or'].push({type: {$eq:"monstrosity"}});
-  }if(construct==true){
+  }if(types["Construct"]==true){
     querytemp['$or'].push({type: {$eq:"construct"}});
-  }if(fiend==true){
+  }if(types["Fiend"]==true){
     querytemp['$or'].push({type: {$eq:"fiend"}});
-  }if(ooze==true){
+  }if(types["Ooze"]==true){
     querytemp['$or'].push({type: {$eq:"ooze"}});
   }
-  query['$and'].push(querytemp);
-}
+  if(querytemp['$or'].length!=0){
+    query['$and'].push(querytemp);
+  }
+
 //challenge rating
-if(minChallenge!="" || maxChallenge!=""){
   var querytemp={};
   querytemp['$and']=[];
-    if(minChallenge!=""){
-      querytemp['$and'].push({challenge_rating: {$gte:parseInt(minChallenge, 10)}});
-    }if(maxChallenge!=""){
-      querytemp['$and'].push({challenge_rating: {$lte:parseInt(maxChallenge, 10)}});
+    if(challengeRatings.min!=""){
+      querytemp['$and'].push({challenge_rating: {$gte:parseInt(challengeRatings.min, 10)}});
+    }if(challengeRatings.max!=""){
+      querytemp['$and'].push({challenge_rating: {$lte:parseInt(challengeRatings.max, 10)}});
     }
-    query['$and'].push(querytemp);
-}
+    if(querytemp['$and'].length!=0){
+      query['$and'].push(querytemp);
+    }
 //Sizes
-if(minSize!="" || maxSize!=""){
   var querytemp={};
   querytemp['$or']=[];
-  //query['$and']=[];
   var use;
   for(let val of sizes) {
-    if(val==minSize || minSize=="")
+    if(val==sizesGiven.min || sizesGiven.max=="")
       use=true;
     if(use==true)
       querytemp['$or'].push({size: {$eq:val}});
-      console.log(val)
-    if(val==maxSize){
+    if(val==sizesGiven.max){
       break
     }
+  }
+if(querytemp['$or'].length!=0){
+  query['$and'].push(querytemp);
 }
-
-query['$and'].push(querytemp);
-}
-
 
   //no input provided
   if(query['$and'].length==0){
@@ -196,214 +159,143 @@ query['$and'].push(querytemp);
   console.log(query);
   Data.find(query, (err, data) => {
     if (err) return res.json({ success: false, error: err });
-    //console.log(data);
     return res.json( data );
   });
 });
 
-//Second find data method
-router.post('/createEncounter', (req, res) => {
-  const sizes = [
-    "Tiny",
-    "Small",
-    "Medium",
-    "Large",
-    "Huge",
-    "Gargantuan"
-  ];
-  var query={};
-  query['$and']=[];
-  //var queryA={};
-  const { fly,walk,burrow,swim,climb,
-    lawfulGood,neutralGood,chaoticGood,lawfulNeutral,neutral,chaoticNeutral,lawfulEvil,neutralEvil,chaoticEvil,
-   aberration,dragon,giant,plant,beast,elemental,humanoid,undead,celestial,fey,monstrosity,construct,fiend,ooze,
-  minSize, maxSize, minChallenge, maxChallenge} = req.body;
+//encounter builder method
+router.post('/findMonsters', (req, res) => {
+    const sizes = [
+      "Tiny",
+      "Small",
+      "Medium",
+      "Large",
+      "Huge",
+      "Gargantuan"
+    ];
+    var query={};
+    query['$and']=[];
+    //var queryA={};
+    const {movements, alignments, types, sizesGiven, challengeRatings} = req.body;
+  
   //movement queries
-  if(fly==true||walk==true||burrow==true||swim==true||climb==true){
     var querytemp={};
   querytemp['$and']=[];
-  if(fly=== true){
+  if(movements["Fly"]=== true){
     querytemp['$and'].push({'speed.fly': {$exists:true}});
-  }if(walk=== true){
+  }if(movements["Walk"]=== true){
     querytemp['$and'].push({'speed.walk': {$exists:true}});
-  }if(burrow=== true){
+  }if(movements["Burrow"]=== true){
     querytemp['$and'].push({'speed.burrow': {$exists:true}});
-}if(swim=== true){
+}if(movements["Swim"]=== true){
   querytemp['$and'].push({'speed.swim': {$exists:true}});
-}if(climb=== true){
+}if(movements["Climb"]=== true){
   querytemp['$and'].push({'speed.climb': {$exists:true}});
 }
-query['$and'].push(querytemp);
-  }
+if(querytemp['$and'].length!=0){
+  query['$and'].push(querytemp);
+}
+
 //alignment queries
-if(lawfulGood===true||neutralGood===true||chaoticGood===true||lawfulNeutral===true||neutral===true||chaoticNeutral===true||lawfulEvil===true||neutralEvil===true||chaoticEvil===true){
-  var querytemp={};
+ var querytemp={};
   querytemp['$or']=[];
-  if(lawfulGood=== true){
+  if(alignments["Lawful Good"]=== true){
     querytemp['$or'].push({alignment: {$eq:"lawful good"}});
-  }if(neutralGood=== true){
+  }if(alignments["Neutral Good"]=== true){
     querytemp['$or'].push({alignment: {$eq:"neutral good"}});
-  }if(chaoticGood=== true){
+  }if(alignments["Chaotic Good"]=== true){
     querytemp['$or'].push({alignment: {$eq:"chaotic good"}});
-  }if(lawfulNeutral=== true){
+  }if(alignments["Lawful Neutral"]=== true){
     querytemp['$or'].push({alignment: {$eq:"lawful neutral"}});
-  }if(neutral=== true){
+  }if(alignments["Neutral"]=== true){
     querytemp['$or'].push({alignment: {$eq:"neutral"}});
-  }if(chaoticNeutral=== true){
+  }if(alignments["Chaotic Neutral"]=== true){
     querytemp['$or'].push({alignment: {$eq:"chaotic neutral"}});
-  }if(lawfulEvil=== true){
+  }if(alignments["Lawful Evil"]=== true){
     querytemp['$or'].push({alignment: {$eq:"lawful evil"}});
-  }if(neutralEvil=== true){
+  }if(alignments["Neutral Evil"]=== true){
     querytemp['$or'].push({alignment: {$eq:"neutral evil"}});
-  }if(chaoticEvil=== true){
+  }if(alignments["Chaotic Evil"]=== true){
     querytemp['$or'].push({alignment: {$eq:"chaotic evil"}});
   }
-  query['$and'].push(querytemp);
-}
+  if(querytemp['$or'].length!=0){
+    query['$and'].push(querytemp);
+  }
+
 //for monster types
-if(aberration==true||dragon==true||giant==true||plant==true||beast==true||elemental==true||humanoid==true||undead==true||undead==true||celestial==true||fey==true||monstrosity==true||construct==true||fiend==true||ooze==true){
   var querytemp={};
   querytemp['$or']=[];
-  if(aberration==true){
+  if(types["Aberration"]==true){
     querytemp['$or'].push({type: {$eq:"aberration"}});
-  }if(dragon==true){
+  }if(types["Dragon"]==true){
     querytemp['$or'].push({type: {$eq:"dragon"}});
-  }if(giant==true){
+  }if(types["Giant"]==true){
     querytemp['$or'].push({type: {$eq:"giant"}});
-  }if(plant==true){
+  }if(types["Plant"]==true){
     querytemp['$or'].push({type: {$eq:"plant"}});
-  }if(beast==true){
+  }if(types["Beast"]==true){
     querytemp['$or'].push({type: {$eq:"beast"}});
-  }if(elemental==true){
+  }if(types["Elemental"]==true){
     querytemp['$or'].push({type: {$eq:"elemental"}});
-  }if(humanoid==true){
+  }if(types["Humanoid"]==true){
     querytemp['$or'].push({type: {$eq:"humanoid"}});
-  }if(undead==true){
+  }if(types["Undead"]==true){
     querytemp['$or'].push({type: {$eq:"undead"}});
-  }if(celestial==true){
+  }if(types["Celestial"]==true){
     querytemp['$or'].push({type: {$eq:"celestial"}});
-  }if(fey==true){
+  }if(types["Fey"]==true){
     querytemp['$or'].push({type: {$eq:"fey"}});
-  }if(monstrosity==true){
+  }if(types["Monstrosity"]==true){
     querytemp['$or'].push({type: {$eq:"monstrosity"}});
-  }if(construct==true){
+  }if(types["Construct"]==true){
     querytemp['$or'].push({type: {$eq:"construct"}});
-  }if(fiend==true){
+  }if(types["Fiend"]==true){
     querytemp['$or'].push({type: {$eq:"fiend"}});
-  }if(ooze==true){
+  }if(types["Ooze"]==true){
     querytemp['$or'].push({type: {$eq:"ooze"}});
   }
-  query['$and'].push(querytemp);
-}
-//challenge rating
-if(minChallenge!="" || maxChallenge!=""){
-  var querytemp={};
-  querytemp['$and']=[];
-    if(minChallenge!=""){
-      querytemp['$and'].push({challenge_rating: {$gte:parseInt(minChallenge, 10)}});
-    }if(maxChallenge!=""){
-      querytemp['$and'].push({challenge_rating: {$lte:parseInt(maxChallenge, 10)}});
-    }
+  if(querytemp['$or'].length!=0){
     query['$and'].push(querytemp);
-}
-//Sizes
-if(minSize!="" || maxSize!=""){
+  }
+
+  //Challenge Ratings
+  if(challengeRatings.length!=0){
+      var querytemp={};
+      querytemp['$or']=[];
+      for(let val of challengeRatings){
+          querytemp['$or'].push({challenge_rating: {$eq:parseInt(val, 10)}});
+      }
+      query['$and'].push(querytemp);
+  }
+
+  //Sizes
   var querytemp={};
   querytemp['$or']=[];
-  //query['$and']=[];
   var use;
   for(let val of sizes) {
-    if(val==minSize || minSize=="")
+    if(val==sizesGiven.min || sizesGiven.max=="")
       use=true;
     if(use==true)
       querytemp['$or'].push({size: {$eq:val}});
-      console.log(val)
-    if(val==maxSize){
+    if(val==sizesGiven.max){
       break
     }
-}
-
-query['$and'].push(querytemp);
-}
-
-
-  //no input provided
-  if(query['$and'].length==0){
-    query={};
   }
-
-  console.log(query);
-  Data.find(query, (err, data) => {
-    if (err) return res.json({ success: false, error: err });
-    //console.log(data);
-    return res.json( data );
+if(querytemp['$or'].length!=0){
+  query['$and'].push(querytemp);
+}
+  
+    //no input provided
+    if(query['$and'].length==0){
+      query={};
+    }
+  
+    console.log(query);
+    Data.find(query, (err, data) => {
+      if (err) return res.json({ success: false, error: err });
+      return res.json( data );
+    });
   });
-});
-
-// router.get('/getSpecificData', (req, res) => {
-//     console.log(req);
-//     const { id } = req.body;
-//     var query = {};
-//     if( id !== "" ) {
-//         query["index"] = id;
-//     }
-//     // if( your_second_variable !== "" ) {
-//     //     query["some_other_key"] = your_second_variable;
-//     // }
-//     Data.find(query, function(err, data) {
-//         if (err) return res.json({ success: false, error: err });
-//         return res.json({ success: true, data: data });
-//     });
-//     // Data.where({name: 'Adult Red Dragon'},(err, data) => {
-//     //   if (err) return res.json({ success: false, error: err });
-//     //   console.log(data);
-//     //   return res.json({ success: true, data: data });
-//     // });
-//   });
-
-
-
-// this is our update method
-// this method overwrites existing data in our database
-// router.post('/updateData', (req, res) => {
-//   const { id, update } = req.body;
-//   Data.findByIdAndUpdate(id, update, (err) => {
-//     if (err) return res.json({ success: false, error: err });
-//     return res.json({ success: true });
-//   });
-// });
-
-
-// this is our delete method
-// this method removes existing data in our database
-// router.delete('/deleteData', (req, res) => {
-//   const { id } = req.body;
-//   Data.findByIdAndRemove(id, (err) => {
-//     if (err) return res.send(err);
-//     return res.json({ success: true });
-//   });
-// });
-
-// this is our create methid
-// this method adds new data in our database
-// router.post('/putData', (req, res) => {
-//   let data = new Data();
-
-//   const { id, message } = req.body;
-
-//   if ((!id && id !== 0) || !message) {
-//     return res.json({
-//       success: false,
-//       error: 'INVALID INPUTS',
-//     });
-//   }
-//   data.message = message;
-//   data.id = id;
-//   data.save((err) => {
-//     if (err) return res.json({ success: false, error: err });
-//     return res.json({ success: true });
-//   });
-// });
 
 // append /api for our http requests
 app.use('/api', router);

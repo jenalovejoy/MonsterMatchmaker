@@ -22,15 +22,14 @@ class Player extends React.Component {
   }
 
   render() {
-    let allLevels = range(30);
+    let allLevels = range(20);
 
     const setPlayerLevel = (newLevel) => {
       this.props.setPlayerLevel(newLevel, this.state.playerNumber);
     }
-
     return (
       <ul class="playerLevelItem"><label>
-        <Dropdowns title="Player Level" 
+         <Dropdowns title="Player Level" 
           dropdownData={allLevels}
           storeData={setPlayerLevel} />
       </label></ul>

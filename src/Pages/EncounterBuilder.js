@@ -181,12 +181,12 @@ class EncounterBuilder extends React.Component {
         }),
         {}
       ),
-      playerLevels: [1, 1, 1, 1],
-      challengeRatings: {min: 0,
-                        max: 30},
-      sizes: {min: "",
-              max: ""},
-      encounterDifficulty: "Easy", // ENCOUNTER DIFFICULTY DROPDOWN
+      challengeRatings: Array(),
+      encounterDifficulty: Array(1).fill(""),
+
+      playerLevels: [1,1,1,1],
+      sizes: {min: "",max: ""},
+
       alignmentCheckboxes: ALIGNMENT_OPTIONS.reduce(
         (options, option) => ({
           ...options,
@@ -227,10 +227,12 @@ class EncounterBuilder extends React.Component {
     var xpMin=0;
     var xpMax=0;
     //Gets the partys xp thresholds
-    for(let val of THE_PARTY) {
-      if(val!=0){
-          xpMin=xpMin+PLAYER_XP_THRESHOLD[val][challenge];
-          xpMax=xpMax+PLAYER_XP_THRESHOLD[val][challenge2];
+    var d;
+    for(d=0; d<4; d++) {
+      if(this.state.playerLevels[d]!=0){
+        console.log(this.state.playerLevels[d]);
+          xpMin=xpMin+PLAYER_XP_THRESHOLD[this.state.playerLevels[d]][challenge];
+          xpMax=xpMax+PLAYER_XP_THRESHOLD[this.state.playerLevels[d]][challenge2];
         partySize++;
       }
     }
@@ -279,52 +281,19 @@ class EncounterBuilder extends React.Component {
 
   //for searching the database
   findInDB = () => {
-    axios.post('http://localhost:3001/api/monsters',
-      {  
-        // filter: FilterBuilder.getFilters(this)
-        //movement
-        fly: this.state.movementCheckboxes["Fly"],
-        walk: this.state.movementCheckboxes["Walk"],
-        burrow: this.state.movementCheckboxes["Burrow"],
-        swim: this.state.movementCheckboxes["Swim"],
-        climb: this.state.movementCheckboxes["Climb"],
-        //alignment
-        lawfulGood: this.state.alignmentCheckboxes["Lawful Good"],
-        neutralGood: this.state.alignmentCheckboxes["Neutral Good"],
-        chaoticGood: this.state.alignmentCheckboxes["Chaotic Good"],
-        lawfulNeutral: this.state.alignmentCheckboxes["Lawful Neutral"],
-        neutral: this.state.alignmentCheckboxes["Neutral Neutral"],
-        chaoticNeutral: this.state.alignmentCheckboxes["Chaotic Neutral"],
-        lawfulEvil: this.state.alignmentCheckboxes["Lawful Evil"],
-        neutralEvil: this.state.alignmentCheckboxes["Neutral Evil"],
-        chaoticEvil: this.state.alignmentCheckboxes["Chaotic Evil"],
-        //monster type
-        aberration: this.state.typeCheckboxes["Aberration"],
-        dragon: this.state.typeCheckboxes["Dragon"],
-        giant: this.state.typeCheckboxes["Giant"],
-        plant: this.state.typeCheckboxes["Plant"],
-        beast: this.state.typeCheckboxes["Beast"],
-        elemental: this.state.typeCheckboxes["Elemental"],
-        humanoid: this.state.typeCheckboxes["Humanoid"],
-        undead: this.state.typeCheckboxes["Undead"],
-        celestial: this.state.typeCheckboxes["Celestial"],
-        fey: this.state.typeCheckboxes["Fey"],
-        monstrosity: this.state.typeCheckboxes["Monstrosity"],
-        construct: this.state.typeCheckboxes["Construct"],
-        fiend: this.state.typeCheckboxes["Fiend"],
-        ooze: this.state.typeCheckboxes["Ooze"],
-        //size
-        minSize: this.state.sizes.min,
-        maxSize: this.state.sizes.max,
-        //challenge
-        minChallenge: this.state.challengeRatings.min,
-        maxChallenge: this.state.challengeRatings.max,
-
-        // Encounter Data
-        playerLevels: this.state.playerLevels,
-        encounterDifficulty: this.state.encounterDifficulty
-      }
-    )
+    this.partyCRs();
+    axios.post('http://13.58.12.74:3001/api/findMonsters',{
+      //movement
+      movements: this.state.movementCheckboxes,
+      //alignment
+      alignments: this.state.alignmentCheckboxes,
+      //monster type
+      types: this.state.typeCheckboxes,
+      //size
+      sizesGiven: this.state.sizes,
+      //challenge
+      challengeRatings: this.state.challengeRatings
+    })
     .then((response) => {
       console.log(response.data);
       this.props.storeData(response.data);
@@ -349,7 +318,7 @@ class EncounterBuilder extends React.Component {
               {/* <!-- ITEM 1 IN FIRST PAIRING --> */}
 
               <div className="subContainerPairHorizontal">
-                <PlayerLevelSelector 
+              <PlayerLevelSelector 
                   playerLevels={this.state.playerLevels}
                   setPlayerLevel={(level, playerNumber) => ClickHandlers.setPlayerLevel(this, level, playerNumber)}/>
               </div>

@@ -26,25 +26,23 @@ class PlayerLevelSelector extends React.Component {
     this.setState({numberOfPlayers: n + 1});
   }
 
-
   render() {
 
     return (
       <div>
-        <form id="player-level-select" onSubmit={this.handleSubmit}>
-          <legend style = {{fontSize: '25px'}}>Player Levels</legend>
+      <form id="player-level-select" onSubmit={this.handleSubmit}>
+        <legend style = {{fontSize: '25px'}}>Player Levels</legend>
 
-          {this.state.playerLevels.map((level, i) => (
-            <Player 
-              playerNumber={i} 
-              selectedLevel={level}
-              setPlayerLevel={this.props.setPlayerLevel}/>
-          ))}
-        </form>
-      </div>
+        {this.state.playerLevels.map((level, i) => (
+          <Player 
+            playerNumber={i} 
+            selectedLevel={level}
+            setPlayerLevel={this.props.setPlayerLevel}/>
+        ))}
+      </form>
+    </div>
     );
   }
 }
-
 
 export default PlayerLevelSelector;
