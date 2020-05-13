@@ -34,7 +34,6 @@ class ResultsTable extends React.Component {
   createTableHeadings = () => TABLE_HEADINGS.map(this.createTableHeader);
 
   render(){
-
     let render;
     // if there are results, show the table
     if (this.props.data.length !== 0){

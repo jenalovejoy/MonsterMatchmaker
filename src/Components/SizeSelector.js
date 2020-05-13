@@ -17,7 +17,7 @@ class SizeSelector extends React.Component {
             <legend style = {{fontSize: '25px'}}>Size</legend>
 
             <Dropdowns title="Minimum Creature Size" 
-              category="Size" 
+              category="Size"  
               storeData={this.props.setMinSize}
               dropdownData={SIZE_CATEGORIES}/>
             <Dropdowns title="Maximum Creature Size" 
