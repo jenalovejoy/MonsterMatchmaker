@@ -1,11 +1,13 @@
 import Player from "./Player";
 import React from "react";
+import * as ClickHandlers from "../Pages/ClickHandlers";
 
 class PlayerLevelSelector extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playerLevels: this.props.playerLevels
+      playerLevels: this.props.playerLevels,
+      numberOfPlayers: this.props.numberOfPlayers
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -37,9 +39,12 @@ class PlayerLevelSelector extends React.Component {
           <Player 
             playerNumber={i} 
             selectedLevel={level}
-            setPlayerLevel={this.props.setPlayerLevel}/>
-        ))}
+            setPlayerLevel={this.props.setPlayerLevel}
+              // action={ClickHandlers.removePlayer(this, this.state.playerNumber)}
+              />))}
       </form>
+      <button class="addPlayerButton" 
+            onClick={(i) => ClickHandlers.addPlayer(this)}>+</button>
     </div>
     );
   }

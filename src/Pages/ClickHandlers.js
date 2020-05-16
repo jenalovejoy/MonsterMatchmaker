@@ -123,12 +123,54 @@ export function setEncounterDifficulty(context, i){
 }
 
   // Handling user selection for encounter Difficulty
+  // export function setPlayerLevel(context, level, playerNumber){
+  //   context.setState(prevState => ({
+  //     playerLevels: {
+  //       ...prevState.playerLevels,
+  //       [playerNumber]: level
+  //       },
+  //   }));
+  //   console.log(context.state.playerLevels);
+  // }
+
   export function setPlayerLevel(context, level, playerNumber){
+    let playerLevels = context.state.playerLevels;
+
+    playerLevels[playerNumber] = level;
+
     context.setState(prevState => ({
-      playerLevels: {
-        ...prevState.playerLevels,
-        [playerNumber]: level
-        },
+      playerLevels,
     }));
+}
+
+export function addPlayer(context){
+    console.log(context.state.numberOfPlayers)
+    let numberOfPlayers = context.state.numberOfPlayers;
+
+    numberOfPlayers += 1;
+
+    let playerLevels = context.state.playerLevels;
+
+    playerLevels.push(1);
+
+
+    context.setState(prevState => ({numberOfPlayers, playerLevels}));
+    console.log(context.state.numberOfPlayers);
     console.log(context.state.playerLevels);
-  }
+
+}
+
+export function removePlayer(context, i){
+    console.log(context.props.playerLevels)
+    let numberOfPlayers = context.state.numberOfPlayers;
+
+    numberOfPlayers -= 1;
+
+    let playerLevels = context.state.playerLevels;
+
+    playerLevels.splice(i, 1);
+
+    context.setState(prevState => ({numberOfPlayers, playerLevels}));
+    console.log(context.state.numberOfPlayers);
+    console.log(context.state.playerLevels);
+}
