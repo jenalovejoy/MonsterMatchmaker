@@ -102,8 +102,16 @@ header {
   width: 250px;
   height: 250px;
 }
-.results-table-item:hover {
-  background-color: pink;
+.encounter-details {
+    border: none;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 30px;
+    padding-left: 30px;
+    color: black;
+    overflow-x: auto;
+    text-align: center;
+
 }
 
 .results-table-item:nth-child(even) {

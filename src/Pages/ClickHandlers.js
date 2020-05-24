@@ -120,20 +120,6 @@ export function setEncounterDifficulty(context, i){
       },
   }));
   console.log(context.state.encounterDifficulty[0]);
-<<<<<<< HEAD
-}
-
-  // Handling user selection for encounter Difficulty
-  export function setPlayerLevel(context, level, playerNumber){
-    context.setState(prevState => ({
-      playerLevels: {
-        ...prevState.playerLevels,
-        [playerNumber]: level
-        },
-    }));
-    console.log(context.state.playerLevels);
-  }
-=======
   // Object.keys(context.state.alignmentCheckboxes)
   //     .filter(checkbox => context.state.alignmentCheckboxes[checkbox])
   //     .forEach(checkbox => {
@@ -182,4 +168,3 @@ export function removePlayer(context, i){
     console.log(context.state.numberOfPlayers);
     console.log(context.state.playerLevels);
 }
->>>>>>> 9657925dc75d9e10082cfbd96db2a62b91d2f445
