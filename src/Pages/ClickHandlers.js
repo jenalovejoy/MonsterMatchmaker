@@ -144,33 +144,23 @@ export function setEncounterDifficulty(context, i){
 }
 
 export function addPlayer(context){
-    console.log(context.state.numberOfPlayers)
-    let numberOfPlayers = context.state.numberOfPlayers;
-
-    numberOfPlayers += 1;
-
     let playerLevels = context.state.playerLevels;
 
     playerLevels.push(1);
 
-
-    context.setState(prevState => ({numberOfPlayers, playerLevels}));
-    console.log(context.state.numberOfPlayers);
+    context.setState(prevState => ({ playerLevels}));
     console.log(context.state.playerLevels);
+    console.log(context.state.playerLevels.length);
 
 }
 
 export function removePlayer(context, i){
-    console.log(context.props.playerLevels)
-    let numberOfPlayers = context.state.numberOfPlayers;
-
-    numberOfPlayers -= 1;
 
     let playerLevels = context.state.playerLevels;
 
     playerLevels.splice(i, 1);
 
-    context.setState(prevState => ({numberOfPlayers, playerLevels}));
+    context.setState(prevState => ({ playerLevels}));
     console.log(context.state.numberOfPlayers);
     console.log(context.state.playerLevels);
 }
