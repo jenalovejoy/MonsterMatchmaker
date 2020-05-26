@@ -1,5 +1,6 @@
 import React from "react";
 import Dropdowns from "./Dropdowns";
+import * as ClickHandlers from "../Pages/ClickHandlers";
 
 class Player extends React.Component {
   constructor(props) {
@@ -32,7 +33,9 @@ class Player extends React.Component {
          <Dropdowns title="Player Level" 
           dropdownData={allLevels}
           storeData={setPlayerLevel} />
-      </label></ul>
+      </label>
+      {/* <button class="removePlayerButton" onClick={this.props.action}>-</button> */}
+      </ul>
     );
   }
 }
