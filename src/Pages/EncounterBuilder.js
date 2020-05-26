@@ -236,10 +236,8 @@ class EncounterBuilder extends React.Component {
     var xpMax=0;
     //Gets the partys xp thresholds
     var d;
-    for(d=0; d<this.state.numberOfPlayers; d++) {
+    for(d=0; d<this.state.playerLevels.length; d++) {
       if(this.state.playerLevels[d]!=0){
-        //console.log(this.state.playerLevels[d]);
-        console.log(this.state.numberOfPlayers);
           xpMin=xpMin+PLAYER_XP_THRESHOLD[this.state.playerLevels[d]][challenge];
           xpMax=xpMax+PLAYER_XP_THRESHOLD[this.state.playerLevels[d]][challenge2];
         partySize++;
@@ -255,16 +253,46 @@ class EncounterBuilder extends React.Component {
     for(i=1; i<16; i++){ //for different numbers of monsters
       //console.log(i);
       var multiplier=1;
-      if(i==2)
+      //one monster
+      if(i==1 && partySize<4)
         multiplier=1.5;
-      if(i>2 && i<7)
+      if(i==1 && partySize>5)
+        multiplier=0.5;
+        //two monsters
+      if(i==2 && partySize<4)
         multiplier=2;
-      if(i>6 && i<11)
+      if(i==2 && partySize>5)
+        multiplier=1;
+      if(i==2 && partySize>3 && partySize<6)
+        multiplier=1.5;
+      //three to six monsters
+      if(i>2 && i<7 && partySize<4)
         multiplier=2.5;
-      if(i>10 && i<15)
-        multiplier=3
-      if(i>14)
-        multiplier=4
+      if(i>2 && i<7 && partySize>5)
+        multiplier=1.5;
+      if(i>2 && i<7 && partySize>3 && partySize<6)
+        multiplier=2;
+      //seven to 10 
+      if(i>6 && i<11 && partySize<4)
+        multiplier=3;
+      if(i>6 && i<11 && partySize>5)
+        multiplier=2;
+      if(i>2 && i<7 && partySize>3 && partySize<6)
+        multiplier=2.5;
+      //11 to 14 
+      if(i>10 && i<15 && partySize<4)
+        multiplier=4;
+      if(i>10 && i<15 && partySize>5)
+        multiplier=2.5;
+      if(i>10 && i<15 && partySize>3 && partySize<6)
+        multiplier=3;
+      //15 or more
+      if(i>14 && partySize<4)
+        multiplier=3;
+      if(i>14 && partySize>5)
+        multiplier=5;
+      if(i>14 && partySize>3 && partySize<6)
+        multiplier=4;
 
       var minChallenge="";
       var hasMinCR=false;
@@ -291,7 +319,7 @@ class EncounterBuilder extends React.Component {
   //for searching the database
   findInDB = () => {
     this.partyCRs(); //13.58.12.74
-    axios.post('http://13.58.12.74:3001/api/findMonsters',{
+    axios.post('http://13.58.12.74:443/api/findMonsters',{
       //movement
       movements: this.state.movementCheckboxes,
       //alignment

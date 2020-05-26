@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const Data = require('./data');
 
-const API_PORT = 3001;
+const API_PORT = 443;
 const app = express();
 app.use(cors());
 const router = express.Router();
@@ -31,6 +31,7 @@ app.use(logger('dev'));
 
 //Second find data method
 router.post('/findData', (req, res) => {
+  console.log(req);
   const sizes = [
     "Tiny",
     "Small",

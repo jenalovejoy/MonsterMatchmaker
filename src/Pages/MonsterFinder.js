@@ -61,7 +61,8 @@ class MonsterFinder extends React.Component {
   }
   //for searching the database
   findInDB = () => { //13.58.12.74
-    axios.post('https://localhost:3001/api/findData',{
+
+    axios.post('http://13.58.12.74:443/api/findData',{
       //movement
       movements: this.state.movementCheckboxes,
       //alignment
