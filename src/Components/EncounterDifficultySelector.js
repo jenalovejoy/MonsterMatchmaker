@@ -14,6 +14,7 @@ class EncounterDifficultySelector extends React.Component {
         <div>
             <legend style = {{fontSize: '25px'}}>Encounter Difficulty Rating</legend>
             <Dropdowns title="Difficulty" 
+              storeData={this.props.setMaxChallenge} 
               dropdownData={DIFFICULT_RATING} />
         </div>
     </React.Fragment>
