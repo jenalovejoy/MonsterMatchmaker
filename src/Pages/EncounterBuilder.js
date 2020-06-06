@@ -318,9 +318,12 @@ class EncounterBuilder extends React.Component {
 
   //for searching the database
   findInDB = () => {
-    this.partyCRs(); //13.58.12.74
-    axios.post('http://13.58.12.74:443/api/findMonsters',{
-      //movement
+    this.partyCRs();
+    // axios.post('http://13.58.12.74:3001/api/findMonsters',{
+    axios.post('http://localhost:3001/api/findMonsters',{
+
+    //movement
+
       movements: this.state.movementCheckboxes,
       //alignment
       alignments: this.state.alignmentCheckboxes,
