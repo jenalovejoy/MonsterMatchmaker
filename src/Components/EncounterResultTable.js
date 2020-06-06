@@ -1,43 +1,19 @@
 import React from "react";
-import ResultsRow from "./ResultsRow";
+import ResultsTable from "./ResultsTable";
+import EncounterDetails from "./EncounterDetails"
 
-const TABLE_HEADINGS = [
-  "Monster Name",
-  "Challenge Rating",
-  "Size",
-  "Type",
-  "Subtype",
-  "Alignment",
-  "Armor Class",
-  "Hit Points",
-  "Hit Dice",
-  "Speed (walk, fly, swim)",
-  "Strength",
-  "Dexterity",
-  "Constitution",
-  "Intelligence",
-  "Wisdom",
-  "Charisma",
-];
-
-class ResultsTable extends React.Component {
-
-  createTableHeader = heading => (
-    <th class="resultsTableHeading">{heading}</th>
-  );
-
-  createTableHeadings = () => TABLE_HEADINGS.map(this.createTableHeader);
+class EncounterResultTable extends React.Component {
 
   render(){
     return (
-      <table id="monsterResultsTable">
-      <tr>
-        {this.createTableHeadings(TABLE_HEADINGS)}
-      </tr>
-      {this.props.data.map(id=>(<ResultsRow id={id}/>))}    
-  </table>
+
+        <React.Fragment>
+            <EncounterDetails details={this.props.details}/>
+            {console.log(this.props.result)}
+            <ResultsTable id="encounter-results" data={this.props.result}/>
+        </React.Fragment>
     );
   }
 }
 
-export default ResultsTable;
+export default EncounterResultTable;

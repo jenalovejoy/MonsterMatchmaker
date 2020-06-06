@@ -3,7 +3,7 @@ import React from "react";
 class ResultsRow extends React.Component {
   render(){
     return (
-    <tr>
+    <tr key={this.props.id.index}>
         <td class="results-table-item">{this.props.id.name}</td>
         <td class="results-table-item">{this.props.id.challenge_rating}</td>
         <td class="results-table-item">{this.props.id.size}</td>

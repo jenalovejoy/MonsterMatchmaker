@@ -60,10 +60,11 @@ class MonsterFinder extends React.Component {
     };
   }
   //for searching the database
-  findInDB = () => { //13.58.12.74
-
+  findInDB = () => {
+   
     axios.post('https://6f2fso95cd.execute-api.us-east-2.amazonaws.com/api/FindMonsters',{
       //movement
+
       movements: this.state.movementCheckboxes,
       //alignment
       alignments: this.state.alignmentCheckboxes,

@@ -18,7 +18,7 @@ class Dropdowns extends React.Component {
 
   //Returns the value selected by the user
   handleChange(event) {
-    this.props.storeData(event.target.value);
+    // this.props.storeData(event.target.value);
     this.setState({ value: event.target.value });
     this.myString = event.target.value;
     //console.log(this.myString);
