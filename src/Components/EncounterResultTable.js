@@ -6,6 +6,7 @@ class EncounterResultTable extends React.Component {
 
   render(){
     return (
+
         <React.Fragment>
             <EncounterDetails details={this.props.details}/>
             {console.log(this.props.result)}

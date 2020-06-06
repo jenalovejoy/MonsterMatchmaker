@@ -152,4 +152,5 @@ export function removePlayer(context, i){
     context.setState(prevState => ({ playerLevels}));
     console.log(context.state.numberOfPlayers);
     console.log(context.state.playerLevels);
+
 }
