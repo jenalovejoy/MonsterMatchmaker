@@ -30,13 +30,12 @@ class ResultsTable extends React.Component {
 
   render(){
     return (
-        <table id="monsterResultsTable">
-            <tr>
-              {this.createTableHeadings(TABLE_HEADINGS)}
-            </tr>
-            {this.props.data.map(id=>(<ResultsRow id={id}/>))}    
-        </table>
-       
+      <table id="monsterResultsTable">
+      <tr>
+        {this.createTableHeadings(TABLE_HEADINGS)}
+      </tr>
+      {this.props.data.map(id=>(<ResultsRow id={id}/>))}    
+  </table>
     );
   }
 }

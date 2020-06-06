@@ -120,7 +120,6 @@ export function setEncounterDifficulty(context, i){
       },
   }));
   console.log(context.state.encounterDifficulty[0]);
-
 }
 
   // Handling user selection for encounter Difficulty
@@ -165,4 +164,3 @@ export function removePlayer(context, i){
     console.log(context.state.numberOfPlayers);
     console.log(context.state.playerLevels);
 }
-  }

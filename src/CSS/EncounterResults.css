@@ -102,9 +102,9 @@ header {
   width: 250px;
   height: 250px;
 }
+
 .results-table-item:hover {
   background-color: pink;
-}
 
 .results-table-item:nth-child(even) {
   background: #e8e8e8;
