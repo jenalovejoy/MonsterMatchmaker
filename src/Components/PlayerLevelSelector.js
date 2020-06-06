@@ -39,9 +39,14 @@ class PlayerLevelSelector extends React.Component {
           <Player 
             playerNumber={i} 
             selectedLevel={level}
-            setPlayerLevel={this.props.setPlayerLevel}/>
-        ))}
+            setPlayerLevel={this.props.setPlayerLevel}
+              // action={ClickHandlers.removePlayer(this, this.state.playerNumber)}
+              />))}
       </form>
+      <button class="addPlayerButton" 
+            onClick={(i) => ClickHandlers.addPlayer(this)}>+</button>
+      <button class="removePlayerButton" 
+            onClick={(i) => ClickHandlers.removePlayer(this)}>-</button>
     </div>
     );
   }
