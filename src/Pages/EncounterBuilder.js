@@ -184,7 +184,7 @@ class EncounterBuilder extends React.Component {
       encounterDifficulty: Array(1).fill(""),
 
       numberOfPlayers: 4,
-      playerLevels: [1,1,1,1],
+      playerLevels: [10,10,10,10],
       sizes: {min: "",max: ""},
 
       alignmentCheckboxes: ALIGNMENT_OPTIONS.reduce(

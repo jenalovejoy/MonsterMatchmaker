@@ -33,26 +33,30 @@ class ResultsTable extends React.Component {
 
   createTableHeadings = () => TABLE_HEADINGS.map(this.createTableHeader);
 
-  render(){
+  render() {
 
     let render;
     // if there are results, show the table
-    if (this.props.data.length !== 0){
-        render = 
-            (<table id={this.props.id}>
-                <tr>
-                {this.createTableHeadings(TABLE_HEADINGS)}
-                </tr>
-                {this.props.data.map(id=>(<ResultsRow id={id}/>))}    
-            </table>);
+    if (this.props.data.length !== 0) {
+      render =
+        (<table id={this.props.id}>
+          <thead>
+            <tr>
+              {this.createTableHeadings(TABLE_HEADINGS)}
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.data.map(id => (<ResultsRow key={Math.random().toString(36).substr(2, 9)} id={id} />))}
+          </tbody>
+        </table>);
 
     } else {
-        render = <ErrorAlert errorMessage="No results for this query"/>
+      render = <ErrorAlert errorMessage="No results for this query" />
     }
 
     return (
-        render
-       
+      render
+
     );
   }
 }
