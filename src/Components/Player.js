@@ -26,6 +26,7 @@ class Player extends React.Component {
     let allLevels = range(20);
 
     const setPlayerLevel = (newLevel) => {
+      console.log("new level: " + newLevel)  
       this.props.setPlayerLevel(newLevel, this.state.playerNumber);
     }
     return (

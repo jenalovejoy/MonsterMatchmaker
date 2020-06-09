@@ -8,12 +8,12 @@ class EncounterResults extends React.Component {
     constructor(props){
         super(props);
         this.state = {      
-          data: [],
+          data: []
           
-            encounterParams: {
-                minXP: this.props.encounterParams.minXP,
-                maxXP: this.props.encounterParams.maxXP
-            }
+            // encounterParams: {
+            //     minXP: this.props.encounterParams.minXP,
+            //     maxXP: this.props.encounterParams.maxXP
+            // }
         };
     }
 
@@ -56,10 +56,17 @@ class EncounterResults extends React.Component {
 
 // this.props.monsters is all potential monsters that could work
     bundleResults(monsters){
-        console.log("data " + this.props.data)
+        console.log("data " + monsters)
         // let monsters = this.props.monsters;
         let minXP = this.props.encounterParams.minXP; 
-        let maxXP = this.props.encounterParams.maxXP; 
+        let maxXP = this.props.encounterParams.maxXP;
+        
+        
+        // let minXP = 0; //Annick Brandae
+        // let maxXP = 10000; //Annick Brandae
+
+        console.log("this object: " + this.toString); //Annick
+        console.log("super object" + super.toString); //Annick
 
         console.log("minxp " + minXP + " maxxp "+ maxXP)
         // Add XP to each monster
@@ -237,6 +244,7 @@ class EncounterResults extends React.Component {
         <h5 title="Monsters" class="encounter-title">Monsters</h5>
             <div class="results-table">
               {/* <ResultsTable id="encounter-results" data={this.bundleResults(this.props.data)}/> */}
+              {console.log("Encounter Results rendering data: " + this.props.data)}
               {this.bundleResults(this.props.data).map(encounterResult=>(<EncounterResultTable id="encounter-results" result={encounterResult.result} details={encounterResult.details}/>))} 
             </div>
           <div class="results-table">

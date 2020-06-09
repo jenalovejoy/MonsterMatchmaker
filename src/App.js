@@ -58,7 +58,7 @@ class App extends React.Component {
             <Route path="/encounterBuilder" render={props => <EncounterBuilder storeData={this.storeData} saveEncounterParams={this.saveEncounterParams}/>} />
             <Route path="/monsterFinder" render={props => <MonsterFinder storeData={this.storeData}/>} />
             <Route path="/monsterResults" render={props => <MonsterResults data={this.state.data}/>} />
-            <Route path="/encounterResults" render={props => <EncounterResults data={this.state.data} saveEncounterParams={this.state.encounterParams}/>} />
+            <Route path="/encounterResults" render={props => <EncounterResults data={this.state.data} encounterParams={this.state.encounterParams}/>} />
           </Switch>
         </Router>
       </div>

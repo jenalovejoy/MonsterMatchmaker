@@ -2,7 +2,6 @@ import AlignmentTypeSelector from "../Components/AlignmentTypeSelector";
 import axios from 'axios';
 import * as ClickHandlers from "./ClickHandlers";
 import EncounterDifficultySelector from "../Components/EncounterDifficultySelector";
-import * as FilterBuilder from "./FilterBuilder"
 import { Link } from "react-router-dom";
 import MonsterTypeSelector from "../Components/MonsterTypeSelector";
 import Movement from "../Components/Movement";
@@ -250,6 +249,7 @@ class EncounterBuilder extends React.Component {
         console.log("calculating xp min/max");
     
       if(this.state.playerLevels[d]!=0){
+          console.log("playerLevel: " + this.state.playerLevels[d])
           xpMin=xpMin+PLAYER_XP_THRESHOLD[this.state.playerLevels[d]][challenge];
           xpMax=xpMax+PLAYER_XP_THRESHOLD[this.state.playerLevels[d]][challenge2];
           console.log("xpMin " + xpMin + " type " + typeof(xpMin) )
@@ -268,33 +268,30 @@ class EncounterBuilder extends React.Component {
     console.log("before save state: mixxp " + xpMin + " maxxp "+ xpMax)
 
 
+    console.log(this.props.encounterParams)
 
     this.props.saveEncounterParams(xpMin, xpMax);
-    console.log(this.props.encounterParams)
-    let minXP = this.props.encounterParams.minXP; 
-    let maxXP = this.props.encounterParams.maxXP; 
-
-    console.log("mixxp " + minXP + " maxxp "+ maxXP)
-        
+    // console.log(this.props.encounterParams)
+    // let minXP = this.props.encounterParams.minXP; 
+    // let maxXP = this.props.encounterParams.maxXP;         
 
       
-    console.log(this.props.encounterParams.minXP + " / " + this.props.encounterParams.maxXP)
-    console.log("encounter diff EBuilder" + this.state.encounterDifficulty)
+    // console.log(this.props.encounterParams.minXP + " / " + this.props.encounterParams.maxXP)
     var i;
     for(i=1; i<16; i++){ //for different numbers of monsters
       //console.log(i);
       var multiplier=1;
       //one monster
-      if(i==1 && partySize<4)
+      if(i===1 && partySize<4)
         multiplier=1.5;
-      if(i==1 && partySize>5)
+      if(i===1 && partySize>5)
         multiplier=0.5;
         //two monsters
-      if(i==2 && partySize<4)
+      if(i===2 && partySize<4)
         multiplier=2;
-      if(i==2 && partySize>5)
+      if(i===2 && partySize>5)
         multiplier=1;
-      if(i==2 && partySize>3 && partySize<6)
+      if(i===2 && partySize>3 && partySize<6)
         multiplier=1.5;
       //three to six monsters
       if(i>2 && i<7 && partySize<4)
@@ -432,11 +429,7 @@ class EncounterBuilder extends React.Component {
 
             {/* <!-- BUTTON ROW --> */}
             <div className="parentContainerPairHorizontal">
-              <Link to={{pathname:"/encounterResults",
-                state: {minXP: this.props.minXP,
-                        maxXP: this.props.maxXP,
-                        encounterDifficulty: this.props.encounterDifficulty}
-                    }}
+              <Link to="/encounterResults"
                 >
                 <button 
                   style = {styles.resultsButtonContainer}
