@@ -171,7 +171,7 @@ class EncounterBuilder extends React.Component {
     super(props);
     // this.storeDataLocal = this.storeDataLocal.bind(this);
     this.state = {      
-      data: [],
+      //data: [],
       // movementCheckboxes: Array(5).fill(false), //holds the movement fields
       movementCheckboxes: MOVEMENT_OPTIONS.reduce(
         (options, option) => ({
@@ -248,6 +248,9 @@ class EncounterBuilder extends React.Component {
       xpMax=155001;
     if(hasMin==false)
       xpMin=0;
+
+
+      this.props.saveEncounterParams(xpMin, xpMax);
     
     var i;
     for(i=1; i<16; i++){ //for different numbers of monsters
