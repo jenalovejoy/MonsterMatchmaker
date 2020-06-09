@@ -5,6 +5,18 @@ import map from "./example_dungeon_map.png"
 
 class EncounterResults extends React.Component {
 
+    constructor(props){
+        super(props);
+        this.state = {      
+          data: [],
+          
+            encounterParams: {
+                minXP: this.props.encounterParams.minXP,
+                maxXP: this.props.encounterParams.maxXP
+            }
+        };
+    }
+
     EXP_BY_CHALLENGE_RATING = {
         "0": 0 | 10,
         "1/8": 25,
@@ -44,10 +56,12 @@ class EncounterResults extends React.Component {
 
 // this.props.monsters is all potential monsters that could work
     bundleResults(monsters){
+        console.log("data " + this.props.data)
         // let monsters = this.props.monsters;
-        let minXP = 10000; // dummy monsters for user parameters
-        let maxXP = 25000; // would be "this.props.minXP", "this.props.maxXP"
+        let minXP = this.props.encounterParams.minXP; 
+        let maxXP = this.props.encounterParams.maxXP; 
 
+        console.log("minxp " + minXP + " maxxp "+ maxXP)
         // Add XP to each monster
         monsters.map(monsters => { monsters.XP = this.EXP_BY_CHALLENGE_RATING[monsters.challenge_rating]; return monsters;});
         
@@ -88,7 +102,6 @@ class EncounterResults extends React.Component {
                                     "Number of Monsters": encounter.result.length, 
                                     "XP Total": XPTotal, 
                                     "Percent of Threshold": XPTotal / XPThresholdMax * 100 + "%"};
-                                console.log("encounter: " + encounter)
                                 encounters.push(encounter);
                             } 
                             
@@ -110,13 +123,11 @@ class EncounterResults extends React.Component {
                                     XPLeft = XPThresholdMax - XPTotal;
                                   }
                                   if (!this.checkIncludes(encounters, encounter) && this.testEncounter(encounter.result, minXP, maxXP)){
-                                    console.log("successful temp")
                                     temp["details"] = {
                                         "Number of Monsters": encounter.result.length, 
                                         "XP Total": XPTotal, 
                                         "Percent of Threshold": XPTotal / XPThresholdMax * 100 + "%"};
                                     encounters.push(temp);
-                                    console.log("temp: " + temp.details)
                                   } 
                                   temp["result"] = [];
 
@@ -136,8 +147,6 @@ class EncounterResults extends React.Component {
         let correct = 0;
         let accuracy = 0;
         for (let i = 0; i < encounters.length; i++){
-            console.log(encounters[i]);
-            console.log("type: " + typeof(encounters[i].result))
           let test = this.testEncounter(encounters[i].result, minXP, maxXP)
           if (test)
             correct++
@@ -146,7 +155,7 @@ class EncounterResults extends React.Component {
         accuracy = correct / encounters.length;
 
         console.log(accuracy * 100 + "%")
-
+        console.log("bundled");
         return encounters;
 
     }

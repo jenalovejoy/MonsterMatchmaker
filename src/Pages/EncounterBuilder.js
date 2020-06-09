@@ -10,6 +10,7 @@ import PlayerLevelSelector from "../Components/PlayerLevelSelector";
 import React from "react";
 import SizeSelector from "../Components/SizeSelector";
 import styles from "../CSS/FinderStyles.css";
+import {withRouter} from "react-router";
 
 const THE_PARTY=["11","11","11","11","0","0","0","0","0","0"]
 
@@ -31,26 +32,26 @@ const MOVEMENT_OPTIONS = [
 ];
 
 const PLAYER_XP_THRESHOLD = {
-  "1": {"Easy": 25, "Medium": 50, "Hard": 75, "Deadly": 100},
-  "2": {"Easy": 50, "Medium": 100, "Hard": 150, "Deadly": 200},
-  "3": {"Easy": 75, "Medium": 150, "Hard": 225, "Deadly": 400},
-  "4": {"Easy": 125, "Medium": 250, "Hard": 375, "Deadly": 500},
-  "5": {"Easy": 250, "Medium": 500, "Hard": 750, "Deadly": 1100},
-  "6": {"Easy": 300, "Medium": 600, "Hard": 900, "Deadly": 1400},
-  "7": {"Easy": 350, "Medium": 750, "Hard": 1100, "Deadly": 1700},
-  "8": {"Easy": 450, "Medium": 900, "Hard": 1400, "Deadly": 2100},
-  "9": {"Easy": 550, "Medium": 1100, "Hard": 1600, "Deadly": 2400},
-  "10": {"Easy": 600, "Medium": 1200, "Hard": 1900, "Deadly": 2800},
-  "11": {"Easy": 800, "Medium": 1600, "Hard": 2400, "Deadly": 3600},
-  "12": {"Easy": 1000, "Medium": 2000, "Hard": 3000, "Deadly": 4500},
-  "13": {"Easy": 1100, "Medium": 2200, "Hard": 3400, "Deadly": 5100},
-  "14": {"Easy": 1250, "Medium": 2500, "Hard": 3800, "Deadly": 5700},
-  "15": {"Easy": 1400, "Medium": 2800, "Hard": 4300, "Deadly": 6400},
-  "16": {"Easy": 1600, "Medium": 3200, "Hard": 4800, "Deadly": 7200},
-  "17": {"Easy": 2000, "Medium": 3900, "Hard": 5900, "Deadly": 8800},
-  "18": {"Easy": 2100, "Medium": 4200, "Hard": 6300, "Deadly": 9500},
-  "19": {"Easy": 2400, "Medium": 2900, "Hard": 7300, "Deadly": 10900},
-  "20": {"Easy": 2800, "Medium": 5700, "Hard": 8500, "Deadly": 12700}
+  1: {"Easy": 25, "Medium": 50, "Hard": 75, "Deadly": 100},
+  2: {"Easy": 50, "Medium": 100, "Hard": 150, "Deadly": 200},
+  3: {"Easy": 75, "Medium": 150, "Hard": 225, "Deadly": 400},
+  4: {"Easy": 125, "Medium": 250, "Hard": 375, "Deadly": 500},
+  5: {"Easy": 250, "Medium": 500, "Hard": 750, "Deadly": 1100},
+  6: {"Easy": 300, "Medium": 600, "Hard": 900, "Deadly": 1400},
+  7: {"Easy": 350, "Medium": 750, "Hard": 1100, "Deadly": 1700},
+  8: {"Easy": 450, "Medium": 900, "Hard": 1400, "Deadly": 2100},
+  9: {"Easy": 550, "Medium": 1100, "Hard": 1600, "Deadly": 2400},
+  10: {"Easy": 600, "Medium": 1200, "Hard": 1900, "Deadly": 2800},
+  11: {"Easy": 800, "Medium": 1600, "Hard": 2400, "Deadly": 3600},
+  12: {"Easy": 1000, "Medium": 2000, "Hard": 3000, "Deadly": 4500},
+  13: {"Easy": 1100, "Medium": 2200, "Hard": 3400, "Deadly": 5100},
+  14: {"Easy": 1250, "Medium": 2500, "Hard": 3800, "Deadly": 5700},
+  15: {"Easy": 1400, "Medium": 2800, "Hard": 4300, "Deadly": 6400},
+  16: {"Easy": 1600, "Medium": 3200, "Hard": 4800, "Deadly": 7200},
+  17: {"Easy": 2000, "Medium": 3900, "Hard": 5900, "Deadly": 8800},
+  18: {"Easy": 2100, "Medium": 4200, "Hard": 6300, "Deadly": 9500},
+  19: {"Easy": 2400, "Medium": 2900, "Hard": 7300, "Deadly": 10900},
+  20: {"Easy": 2800, "Medium": 5700, "Hard": 8500, "Deadly": 12700}
 }
 
 const experience = [
@@ -169,7 +170,7 @@ const EXP_BY_CHALLENGE_RATING = {
 class EncounterBuilder extends React.Component {
   constructor(props){
     super(props);
-    // this.storeDataLocal = this.storeDataLocal.bind(this);
+    // this.saveParams = this.saveParams.bind(this);
     this.state = {      
       data: [],
       // movementCheckboxes: Array(5).fill(false), //holds the movement fields
@@ -181,7 +182,7 @@ class EncounterBuilder extends React.Component {
         {}
       ),
       challengeRatings: Array(),
-      encounterDifficulty: Array(1).fill(""),
+      encounterDifficulty: Array(1).fill("Easy"),
 
       numberOfPlayers: 4,
       playerLevels: [1,1,1,1],
@@ -200,7 +201,11 @@ class EncounterBuilder extends React.Component {
           [option]: false
         }),
         {}
-      )
+      ),
+      encounterParams: {
+        minXP: 0,
+        maxXP: 155001
+      }
     };
   }
 
@@ -217,11 +222,13 @@ class EncounterBuilder extends React.Component {
     var hasMin=true;
     var hasMax=true;
     var challenge=this.state.encounterDifficulty[0];
+    console.log("challenge " + challenge + " Type " + typeof(challenge))
     var challenge2="";
     //Determines upper bounds
     if(challenge.localeCompare("Trivial")==0){
       challenge2="Easy";
       hasMin=false;
+      console.log("min=false")
     }if(challenge.localeCompare("Easy")==0){
       challenge2="Medium";
     }if(challenge.localeCompare("Medium")==0){
@@ -230,25 +237,49 @@ class EncounterBuilder extends React.Component {
       challenge2="Deadly";
     }if(challenge.localeCompare("Deadly")==0){
       hasMax=false;
+      console.log("hasMax=false;")
     }
     var partySize=0;
-    var xpMin=0;
-    var xpMax=0;
+    var xpMin = 0;
+    console.log("xpMin init " + xpMin + " type " + typeof(xpMin) )
+    console.log("c1 " + challenge + " c2 " + challenge2)
+    var xpMax = 0;
     //Gets the partys xp thresholds
     var d;
     for(d=0; d<this.state.playerLevels.length; d++) {
+        console.log("calculating xp min/max");
+    
       if(this.state.playerLevels[d]!=0){
           xpMin=xpMin+PLAYER_XP_THRESHOLD[this.state.playerLevels[d]][challenge];
           xpMax=xpMax+PLAYER_XP_THRESHOLD[this.state.playerLevels[d]][challenge2];
-        partySize++;
+          console.log("xpMin " + xpMin + " type " + typeof(xpMin) )
+          console.log("challenge " + PLAYER_XP_THRESHOLD[this.state.playerLevels[d]][challenge] + typeof(PLAYER_XP_THRESHOLD[this.state.playerLevels[d]][challenge]))
+        console.log("player level " + this.state.playerLevels[d] + typeof(this.state.playerLevels[d]))
+          partySize++;
       }
     }
 
-    if(hasMax==false)
-      xpMax=155001;
-    if(hasMin==false)
-      xpMin=0;
-    
+
+    // if(hasMax==false)
+    //   xpMax=155001;
+    // if(hasMin==false)
+    //   xpMin=0;
+
+    console.log("before save state: mixxp " + xpMin + " maxxp "+ xpMax)
+
+
+
+    this.props.saveEncounterParams(xpMin, xpMax);
+    console.log(this.props.encounterParams)
+    let minXP = this.props.encounterParams.minXP; 
+    let maxXP = this.props.encounterParams.maxXP; 
+
+    console.log("mixxp " + minXP + " maxxp "+ maxXP)
+        
+
+      
+    console.log(this.props.encounterParams.minXP + " / " + this.props.encounterParams.maxXP)
+    console.log("encounter diff EBuilder" + this.state.encounterDifficulty)
     var i;
     for(i=1; i<16; i++){ //for different numbers of monsters
       //console.log(i);
@@ -308,9 +339,9 @@ class EncounterBuilder extends React.Component {
       var position=0;
       position=position+1;
     }
-    console.log("minimum xp "+xpMin);
-    console.log("maximum xp "+xpMax);
-    console.log(this.state.challengeRatings);
+    console.log("minimum xp "+ xpMin);
+    console.log("maximum xp "+ xpMax);
+    console.log("challenge ratings " + this.state.challengeRatings);
     
     // console.log("party size "+partySize);
     
@@ -320,8 +351,10 @@ class EncounterBuilder extends React.Component {
   findInDB = () => {
     this.partyCRs();
     // axios.post('http://13.58.12.74:3001/api/findMonsters',{
+    console.log("querying");
+    console.log("encounter diff " + this.props.encounterDifficulty)
     axios.post('http://localhost:3001/api/findMonsters',{
-
+    
     //movement
 
       movements: this.state.movementCheckboxes,
@@ -399,7 +432,12 @@ class EncounterBuilder extends React.Component {
 
             {/* <!-- BUTTON ROW --> */}
             <div className="parentContainerPairHorizontal">
-              <Link to="/encounterResults">
+              <Link to={{pathname:"/encounterResults",
+                state: {minXP: this.props.minXP,
+                        maxXP: this.props.maxXP,
+                        encounterDifficulty: this.props.encounterDifficulty}
+                    }}
+                >
                 <button 
                   style = {styles.resultsButtonContainer}
                   className="button"
@@ -419,4 +457,4 @@ class EncounterBuilder extends React.Component {
   }
 }
 
-export default EncounterBuilder;
+export default withRouter(EncounterBuilder);

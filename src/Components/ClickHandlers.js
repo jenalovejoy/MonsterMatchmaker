@@ -22,7 +22,7 @@ export function setMaxChallenge(context, i){
         max: i
         },
     }));
-    console.log(context.state.challengeRatings);
+    console.log("challenge rating " + context.state.challengeRatings);
     Object.keys(context.state.alignmentCheckboxes)
         .filter(checkbox => context.state.alignmentCheckboxes[checkbox])
         .forEach(checkbox => {

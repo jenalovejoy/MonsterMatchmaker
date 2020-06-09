@@ -19,13 +19,33 @@ class App extends React.Component {
     super(props);
     this.state = {
       data: [], //stores data from mongo for all the pages
+      encounterParams: {
+        minXP: 0,
+        maxXP: 155001
+      }
     };
     this.storeData = this.storeData.bind(this);
+    this.saveEncounterParams = this.saveEncounterParams.bind(this);
+
   }
 
   storeData(i){
     this.setState({data: i});
     console.log(this.state.data);
+  }
+
+  saveEncounterParams(_minXP, _maxXP){
+    console.log("params sent: " + _minXP + " " + _maxXP)
+    this.setState(
+        {encounterParams: {
+            minXP: _minXP,
+            maxXP: _maxXP
+        }
+    }, () => console.log("params saved " + this.state.encounterParams.minXP + " " + this.state.encounterParams.maxXP));
+    
+
+
+
   }
 
   render() {
@@ -35,10 +55,10 @@ class App extends React.Component {
           <Header />
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route path="/encounterBuilder" render={props => <EncounterBuilder storeData={this.storeData}/>} />
+            <Route path="/encounterBuilder" render={props => <EncounterBuilder storeData={this.storeData} saveEncounterParams={this.saveEncounterParams}/>} />
             <Route path="/monsterFinder" render={props => <MonsterFinder storeData={this.storeData}/>} />
             <Route path="/monsterResults" render={props => <MonsterResults data={this.state.data}/>} />
-            <Route path="/encounterResults" render={props => <EncounterResults data={this.state.data}/>} />
+            <Route path="/encounterResults" render={props => <EncounterResults data={this.state.data} saveEncounterParams={this.state.encounterParams}/>} />
           </Switch>
         </Router>
       </div>
