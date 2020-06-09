@@ -75,14 +75,16 @@ class EncounterResults extends React.Component {
         // All encounters
         let encounters = [];
         let idx = 0;
+        let encounterCount = 0;
         // look at each size of monster encounter group: 1 monster, 2, 3...
         while (monsterCount < 20){
+            encounterCount = 0;
             // Adjust the XPThreshold for the number of monsters in the encounter
             let XPThresholdMax = this.adjustMultiplier(monsterCount, maxXP);
 
             let XPThresholdMin = this.adjustMultiplier(monsterCount, minXP);
             // Pick a "starting" monster as the root, moving from biggest to smallest
-            for (let seed = monsters.length - 1; seed >= 0; seed--){
+            for (let seed = monsters.length - 1; seed >= 0 && encounterCount < 5; seed--){
               let encounter = {"result":[], "details": {}}; // individual encounters
               let XPTotal = 0; // total XP in the encounter so far
               let XPLeft = XPThresholdMax; // how much XP to go in the budget
@@ -105,6 +107,7 @@ class EncounterResults extends React.Component {
                                 //console.log("encounter: " + encounter)
                                 encounter["index"] = idx++;
                                 encounters.push(encounter);
+                                encounterCount++;
                             } 
                             
                             encounter = {"result":[], "details": {}};
@@ -132,6 +135,7 @@ class EncounterResults extends React.Component {
                                         "Percent of Threshold": XPTotal / XPThresholdMax * 100 + "%"};
                                     temp["index"] = idx++;
                                     encounters.push(temp);
+                                    encounterCount++;
                                     //console.log("temp: " + temp.details)
                                   } 
                                   temp["result"] = [];
@@ -236,10 +240,6 @@ class EncounterResults extends React.Component {
             I have made some encounters for you
           </h3>
           </div>
-        <div id="plot-hook-header">
-            <h5 title="Plot Hook Title">Players will be searching for:</h5>
-            <h6 title="Plot Hook">A lost amulet that has magic powers</h6>
-        </div>
             
         <h5 title="Monsters" className="encounter-title">Monsters</h5>
             <div className="results-table">
