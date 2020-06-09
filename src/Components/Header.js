@@ -5,15 +5,15 @@ import React from "react";
 const Header = props => {
 
   return (
-    <header class="header">
+    <header className="header">
       <menu>
-        <Link to="/" class="headerLink">Monster Matchmaker</Link>
+        <Link to="/" className="headerLink">Monster Matchmaker</Link>
       </menu>
       <menu>
-        <Link to="/encounterBuilder" class="headerLink">Encounter Builder</Link>
+        <Link to="/encounterBuilder" className="headerLink">Encounter Builder</Link>
       </menu>
       <menu>
-        <Link to="/monsterFinder" class="headerLink">Monster Search</Link>
+        <Link to="/monsterFinder" className="headerLink">Monster Search</Link>
       </menu>
     </header>
   );

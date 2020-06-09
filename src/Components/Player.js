@@ -28,7 +28,7 @@ class Player extends React.Component {
       this.props.setPlayerLevel(newLevel, this.state.playerNumber);
     }
     return (
-      <ul class="playerLevelItem"><label>
+      <ul className="playerLevelItem"><label>
          <Dropdowns title="Player Level" 
           dropdownData={allLevels}
           storeData={setPlayerLevel} />

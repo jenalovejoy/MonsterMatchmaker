@@ -230,7 +230,7 @@ class EncounterResults extends React.Component {
       <React.Fragment>
         <article >
         <div id="filter-results-title">
-          <h3 class="text-light text-center" id="title-header">
+          <h3 className="text-light text-center" id="title-header">
             I have made some encounters for you
           </h3>
           </div>
@@ -239,77 +239,12 @@ class EncounterResults extends React.Component {
             <h6 title="Plot Hook">A lost amulet that has magic powers</h6>
         </div>
             
-        <h5 title="Monsters" class="encounter-title">Monsters</h5>
-            <div class="results-table">
+        <h5 title="Monsters" className="encounter-title">Monsters</h5>
+            <div className="results-table">
               {/* <ResultsTable id="encounter-results" data={this.bundleResults(this.props.data)}/> */}
               {this.bundleResults(this.props.data).map(encounterResult=>(<EncounterResultTable id="encounter-results" result={encounterResult.result} details={encounterResult.details}/>))} 
             </div>
-          <div class="results-table">
-          <h5 title="Dungeon traps" class="encounter-title">Dungeon Traps</h5>
-
-            <table id="encounter-results">
-              <tr>
-                <th class="results-table-header">Name</th>
-                <th class="results-table-header">Trap Type</th>
-                <th class="results-table-header">Dection DC</th>
-                <th class="results-table-header">Disabling DC</th>
-                <th class="results-table-header">Attack Bonus</th>
-                <th class="results-table-header">Damage Delt</th>
-                <th class="results-table-header">Description</th>
-              </tr>
-              <tr>
-                <td class="results-table-item">Fire Trap</td>
-                <td class="results-table-item">Arcane</td>
-                <td class="results-table-item">13</td>
-                <td class="results-table-item">15</td>
-                <td class="results-table-item">+6 to +8</td>
-                <td class="results-table-item">2D10</td>
-                <td class="results-table-item">Players come across a small, ashy hole in the wall</td>
-              </tr>
-              <tr>
-                <td class="results-table-item">Water Trap</td>
-                <td class="results-table-item">Full Dungeon</td>
-                <td class="results-table-item">17</td>
-                <td class="results-table-item">19</td>
-                <td class="results-table-item">None</td>
-                <td class="results-table-item">None</td>
-                <td class="results-table-item">Room begins to food with water</td>
-              </tr>
-            </table>
-          </div>
-          <div class="results-table">
-          <h5 title="Rewards" class="encounter-title">Rewards</h5>
-
-          <table id="encounter-results">
-              <tr>
-                <th class="results-table-header">Name</th>
-                <th class="results-table-header">Total Value</th>
-                <th class="results-table-header">Description</th>
-              </tr>
-              <tr>
-                <td class="results-table-item">Wand of Mirror Image</td>
-                <td class="results-table-item">3600 GP</td>
-                <td class="results-table-item">
-                Inscription provides clue to function -- 40 to 50 charges
-                </td>
-              </tr>
-              <tr>
-                <td class="results-table-item">Copper Statue</td>
-                <td class="results-table-item">1200 gp</td>
-                <td class="results-table-item">Copper Statue of a Hell-hound. Probably 300 years old.</td>
-              </tr>
-            </table>
-          </div>
-          <div class="results-table">
-            <h5 title="Dungeon Map" class="encounter-title">Dungeon Map</h5>
-
-            <img
-              id="encounter-results"
-              src={map}
-              class="dungeonMap"
-              alt="This is just an example dungeon map that players may or may not use."
-            ></img>
-          </div>
+          
           
         </article>
       </React.Fragment>

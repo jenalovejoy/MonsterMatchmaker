@@ -37,15 +37,16 @@ class PlayerLevelSelector extends React.Component {
 
         {this.state.playerLevels.map((level, i) => (
           <Player 
+            key={i}
             playerNumber={i} 
             selectedLevel={level}
             setPlayerLevel={this.props.setPlayerLevel}
               // action={ClickHandlers.removePlayer(this, this.state.playerNumber)}
               />))}
       </form>
-      <button class="addPlayerButton" 
+      <button className="addPlayerButton" 
             onClick={(i) => ClickHandlers.addPlayer(this)}>+</button>
-      <button class="removePlayerButton" 
+      <button className="removePlayerButton" 
             onClick={(i) => ClickHandlers.removePlayer(this)}>-</button>
     </div>
     );
