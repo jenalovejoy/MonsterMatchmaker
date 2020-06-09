@@ -1,7 +1,6 @@
 import "../CSS/EncounterResults.css";
 import React from "react";
 import EncounterResultTable from "../Components/EncounterResultTable";
-import map from "./example_dungeon_map.png"
 
 class EncounterResults extends React.Component {
 
@@ -179,7 +178,7 @@ class EncounterResults extends React.Component {
 
     checkIncludes(array, ele){
         for(let e of array){
-          if (JSON.stringify(e.result) == JSON.stringify(ele.result)){
+          if (JSON.stringify(e.result) === JSON.stringify(ele.result)){
               
             return true
           }

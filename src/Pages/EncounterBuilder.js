@@ -2,7 +2,6 @@ import AlignmentTypeSelector from "../Components/AlignmentTypeSelector";
 import axios from 'axios';
 import * as ClickHandlers from "./ClickHandlers";
 import EncounterDifficultySelector from "../Components/EncounterDifficultySelector";
-import * as FilterBuilder from "./FilterBuilder"
 import { Link } from "react-router-dom";
 import MonsterTypeSelector from "../Components/MonsterTypeSelector";
 import Movement from "../Components/Movement";
@@ -11,7 +10,6 @@ import React from "react";
 import SizeSelector from "../Components/SizeSelector";
 import styles from "../CSS/FinderStyles.css";
 
-const THE_PARTY=["11","11","11","11","0","0","0","0","0","0"]
 
 const ALIGNMENT_OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", 
                   "Neutral Good", "Neutral Neutral", "Neutral Evil", 
@@ -129,42 +127,6 @@ const challengeRatings = [
   30, 
 ]
 
-const EXP_BY_CHALLENGE_RATING = {
-  "0": 0 | 10,
-  "1/8": 25,
-  "1/4": 50,
-  "1/2": 100,
-  "1": 200,
-  "2": 450,
-  "3": 700,
-  "4": 1100,
-  "5": 1800,
-  "6": 2300,
-  "7": 2900,
-  "8": 3900,
-  "9": 5000,
-  "10": 5900,
-  "11": 7200,
-  "12": 8400,
-  "13": 10000,
-  "14": 11500,
-  "15": 13000,
-  "16": 15000,
-  "17": 18000,
-  "18": 20000,
-  "19": 22000,
-  "20": 25000,
-  "21": 33000,
-  "22": 41000,
-  "23": 50000,
-  "24": 62000,
-  "25": 75000,
-  "26": 90000,
-  "27": 105000,
-  "28": 120000,
-  "29": 135000,
-  "30": 155000, 
-}
 
 class EncounterBuilder extends React.Component {
   constructor(props){
@@ -180,7 +142,7 @@ class EncounterBuilder extends React.Component {
         }),
         {}
       ),
-      challengeRatings: Array(),
+      challengeRatings: [],
       encounterDifficulty: Array(1).fill(""),
 
       numberOfPlayers: 4,
@@ -297,9 +259,6 @@ class EncounterBuilder extends React.Component {
       if(i>14 && partySize>3 && partySize<6)
         multiplier=4;
 
-      var minChallenge="";
-      var hasMinCR=false;
-      var maxChallenge="";
       var x=0;
       for(let val of experience){
         if(val>=xpMin/(i*multiplier) && val<xpMax/(i*multiplier)){

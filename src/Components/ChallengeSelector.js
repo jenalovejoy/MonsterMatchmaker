@@ -20,10 +20,6 @@ const CHALLENGE_OPTIONS = fillWithChallengeRatings();
 console.log(CHALLENGE_OPTIONS);
 
 class ChallengeSelector extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   
     render() {
       return (

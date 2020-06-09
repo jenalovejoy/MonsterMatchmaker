@@ -4,11 +4,6 @@ import React from "react";
 const SIZE_CATEGORIES = ["Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"];
 
 class SizeSelector extends React.Component {
-  constructor(props){
-    super(props);
-  }
-
-
   
     render() {
       return (
