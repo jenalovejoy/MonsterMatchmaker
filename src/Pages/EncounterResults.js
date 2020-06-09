@@ -75,6 +75,7 @@ class EncounterResults extends React.Component {
 
         // All encounters
         let encounters = [];
+        let idx = 0;
         // look at each size of monster encounter group: 1 monster, 2, 3...
         while (monsterCount < 20){
             // Adjust the XPThreshold for the number of monsters in the encounter
@@ -103,6 +104,7 @@ class EncounterResults extends React.Component {
                                     "XP Total": XPTotal, 
                                     "Percent of Threshold": XPTotal / XPThresholdMax * 100 + "%"};
                                 //console.log("encounter: " + encounter)
+                                encounter["index"] = idx++;
                                 encounters.push(encounter);
                             } 
                             
@@ -129,6 +131,7 @@ class EncounterResults extends React.Component {
                                         "Number of Monsters": encounter.result.length, 
                                         "XP Total": XPTotal, 
                                         "Percent of Threshold": XPTotal / XPThresholdMax * 100 + "%"};
+                                    temp["index"] = idx++;
                                     encounters.push(temp);
                                     //console.log("temp: " + temp.details)
                                   } 
@@ -242,7 +245,7 @@ class EncounterResults extends React.Component {
         <h5 title="Monsters" className="encounter-title">Monsters</h5>
             <div className="results-table">
               {/* <ResultsTable id="encounter-results" data={this.bundleResults(this.props.data)}/> */}
-              {this.bundleResults(this.props.data).map(encounterResult=>(<EncounterResultTable id="encounter-results" result={encounterResult.result} details={encounterResult.details}/>))} 
+              {this.bundleResults(this.props.data).map(encounterResult=>(<EncounterResultTable key={encounterResult.index} id="encounter-results" result={encounterResult.result} details={encounterResult.details}/>))} 
             </div>
           
           

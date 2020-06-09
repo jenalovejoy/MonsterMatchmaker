@@ -219,16 +219,16 @@ class EncounterBuilder extends React.Component {
     var challenge=this.state.encounterDifficulty[0];
     var challenge2="";
     //Determines upper bounds
-    if(challenge.localeCompare("Trivial")==0){
+    if(challenge.localeCompare("Trivial")===0){
       challenge2="Easy";
       hasMin=false;
-    }if(challenge.localeCompare("Easy")==0){
+    }if(challenge.localeCompare("Easy")===0){
       challenge2="Medium";
-    }if(challenge.localeCompare("Medium")==0){
+    }if(challenge.localeCompare("Medium")===0){
       challenge2="Hard";
-    }if(challenge.localeCompare("Hard")==0){
+    }if(challenge.localeCompare("Hard")===0){
       challenge2="Deadly";
-    }if(challenge.localeCompare("Deadly")==0){
+    }if(challenge.localeCompare("Deadly")===0){
       hasMax=false;
     }
     var partySize=0;
@@ -237,16 +237,16 @@ class EncounterBuilder extends React.Component {
     //Gets the partys xp thresholds
     var d;
     for(d=0; d<this.state.playerLevels.length; d++) {
-      if(this.state.playerLevels[d]!=0){
+      if(this.state.playerLevels[d]!==0){
           xpMin=xpMin+PLAYER_XP_THRESHOLD[this.state.playerLevels[d]][challenge];
           xpMax=xpMax+PLAYER_XP_THRESHOLD[this.state.playerLevels[d]][challenge2];
         partySize++;
       }
     }
 
-    if(hasMax==false)
+    if(hasMax===false)
       xpMax=155001;
-    if(hasMin==false)
+    if(hasMin===false)
       xpMin=0;
 
 
@@ -257,16 +257,16 @@ class EncounterBuilder extends React.Component {
       //console.log(i);
       var multiplier=1;
       //one monster
-      if(i==1 && partySize<4)
+      if(i===1 && partySize<4)
         multiplier=1.5;
-      if(i==1 && partySize>5)
+      if(i===1 && partySize>5)
         multiplier=0.5;
         //two monsters
-      if(i==2 && partySize<4)
+      if(i===2 && partySize<4)
         multiplier=2;
-      if(i==2 && partySize>5)
+      if(i===2 && partySize>5)
         multiplier=1;
-      if(i==2 && partySize>3 && partySize<6)
+      if(i===2 && partySize>3 && partySize<6)
         multiplier=1.5;
       //three to six monsters
       if(i>2 && i<7 && partySize<4)
@@ -323,7 +323,7 @@ class EncounterBuilder extends React.Component {
   findInDB = () => {
 
     this.partyCRs(); //13.58.12.74
-    axios.post('https://6f2fso95cd.execute-api.us-east-2.amazonaws.com/api/EncounterBuilder',{
+    let data = {
       //movement
 
       movements: this.state.movementCheckboxes,
@@ -335,7 +335,9 @@ class EncounterBuilder extends React.Component {
       sizesGiven: this.state.sizes,
       //challenge
       challengeRatings: this.state.challengeRatings
-    })
+    };
+    console.log(data);
+    axios.post('https://6f2fso95cd.execute-api.us-east-2.amazonaws.com/api/EncounterBuilder',data)
     .then((response) => {
       this.props.storeData(response.data);
 

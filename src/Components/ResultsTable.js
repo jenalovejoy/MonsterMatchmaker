@@ -28,7 +28,7 @@ const TABLE_HEADINGS = [
 class ResultsTable extends React.Component {
 
   createTableHeader = heading => (
-    <th class="results-table-header">{heading}</th>
+    <th key={Math.random().toString(36).substr(2, 9)} className="results-table-header">{heading}</th>
   );
 
   createTableHeadings = () => TABLE_HEADINGS.map(this.createTableHeader);
