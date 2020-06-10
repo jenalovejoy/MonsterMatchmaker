@@ -10,9 +10,9 @@ import React from "react";
 import SizeSelector from "../Components/SizeSelector";
 
 
-const ALIGNMENT_OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil", 
-                  "Neutral Good", "Neutral Neutral", "Neutral Evil", 
-                  "Chaotic Good", "Chaotic Neutral", "Chaotic Evil"];
+const ALIGNMENT_OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil",
+  "Neutral Good", "Neutral Neutral", "Neutral Evil",
+  "Chaotic Good", "Chaotic Neutral", "Chaotic Evil"];
 
 const TYPE_OPTIONS = [
   "Aberration", "Beast", "Celestial", "Construct", "Dragon", "Elemental",
@@ -28,7 +28,7 @@ const MOVEMENT_OPTIONS = [
 ];
 
 class MonsterFinder extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     // this.storeDataLocal = this.storeDataLocal.bind(this);
     this.state = {
@@ -41,8 +41,8 @@ class MonsterFinder extends React.Component {
         }),
         {}
       ),
-      challengeRatings: {min: "",max: ""},
-      sizes: {min: "",max: ""},
+      challengeRatings: { min: "", max: "" },
+      sizes: { min: "", max: "" },
       alignmentCheckboxes: ALIGNMENT_OPTIONS.reduce(
         (options, option) => ({
           ...options,
@@ -61,8 +61,8 @@ class MonsterFinder extends React.Component {
   }
   //for searching the database
   findInDB = () => {
-   
-    axios.post('https://6f2fso95cd.execute-api.us-east-2.amazonaws.com/api/FindMonsters',{
+
+    axios.post('https://6f2fso95cd.execute-api.us-east-2.amazonaws.com/api/FindMonsters', {
       //movement
 
       movements: this.state.movementCheckboxes,
@@ -75,12 +75,12 @@ class MonsterFinder extends React.Component {
       //challenge
       challengeRatings: this.state.challengeRatings
     })
-    .then((response) => {
-      this.props.storeData(response.data);
+      .then((response) => {
+        this.props.storeData(response.data);
 
-    }, (error) => {
-      console.log(error);
-    });
+      }, (error) => {
+        console.log(error);
+      });
   };
 
 
@@ -97,15 +97,15 @@ class MonsterFinder extends React.Component {
             {/* <!-- FIRST PAIRING --> */}
             <div className="parentContainerPairHorizontal">
               {/* <!-- ITEM 1 IN FIRST PAIRING --> */}
-              
+
               <div className="subContainerPairHorizontal">
-                <ChallengeSelector 
+                <ChallengeSelector
                   setMinChallenge={(i) => ClickHandlers.setMinChallenge(this, i)}
                   setMaxChallenge={(i) => ClickHandlers.setMaxChallenge(this, i)}
                 />
               </div>
               <div className="subContainerPairHorizontal">
-                <SizeSelector 
+                <SizeSelector
                   setMinSize={(i) => ClickHandlers.setMinSize(this, i)}
                   setMaxSize={(i) => ClickHandlers.setMaxSize(this, i)} />
               </div>
@@ -115,7 +115,7 @@ class MonsterFinder extends React.Component {
                   onClick={(i) => ClickHandlers.handleMovementClick(this, i)}
                 />
               </div>
-            {/* <!-- end inner horizontal pairing --> */}
+              {/* <!-- end inner horizontal pairing --> */}
             </div>
             {/* <!-- end first pairing --> */}
 
@@ -126,29 +126,29 @@ class MonsterFinder extends React.Component {
                 alignmentCheckboxes={this.state.alignmentCheckboxes}
                 handleCheckBoxChange={(i) => this.handleCheckBoxChange}
               />
-              <MonsterTypeSelector 
+              <MonsterTypeSelector
                 onClick={(i) => ClickHandlers.handleMonsterTypeClick(this, i)}
                 typeCheckboxes={this.state.typeCheckboxes}
                 handleCheckBoxChange={(i) => this.handleCheckBoxChange}
               />
             </div>
-              {/* <!--end second pairing--> */}
+            {/* <!--end second pairing--> */}
 
-              {/* <!-- THIRD PAIRING --> */}
-              <div className="parentContainerPairHorizontal">
-                <Link to="/MonsterResults">
-                  <button
-                    style = {resultsButtonContainer}
-                    className="button"
-                    onClick={() => this.findInDB()}
-                    //Not sure what this is actually for, removal has no effect
-                    // onClick="window.location.href = '/monsterResults';" 
-                    title="Monster Results"
-                  >
-                    Find Monsters
+            {/* <!-- THIRD PAIRING --> */}
+            <div className="parentContainerPairHorizontal">
+              <Link to="/MonsterResults">
+                <button
+                  style={resultsButtonContainer}
+                  className="button"
+                  onClick={() => this.findInDB()}
+                  //Not sure what this is actually for, removal has no effect
+                  // onClick="window.location.href = '/monsterResults';" 
+                  title="Monster Results"
+                >
+                  Find Monsters
                   </button>
-                </Link>
-              </div>
+              </Link>
+            </div>
             {/* <!-- end third pairing --> */}
           </div>
         </article>
@@ -158,7 +158,7 @@ class MonsterFinder extends React.Component {
 }
 export default MonsterFinder;
 
- const resultsButtonContainer = {
+const resultsButtonContainer = {
   paddingTop: '30px',
   display: 'flex',
   justifyContent: 'center'

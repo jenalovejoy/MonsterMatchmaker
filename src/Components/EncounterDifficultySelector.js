@@ -5,18 +5,18 @@ const DIFFICULT_RATING = ["Trivial", "Easy", "Medium", "Hard", "Deadly"];
 
 class EncounterDifficultySelector extends React.Component {
 
-    render() {
-      return (
-        <React.Fragment>
+  render() {
+    return (
+      <React.Fragment>
         <div>
-            <legend style = {{fontSize: '25px'}}>Encounter Difficulty Rating</legend>
-            <Dropdowns title="Difficulty" 
-              storeData={this.props.setMaxChallenge} 
-              dropdownData={DIFFICULT_RATING} />
+          <legend style={{ fontSize: '25px' }}>Encounter Difficulty Rating</legend>
+          <Dropdowns title="Difficulty"
+            storeData={this.props.setMaxChallenge}
+            dropdownData={DIFFICULT_RATING} />
         </div>
-    </React.Fragment>
-      );
-    }
+      </React.Fragment>
+    );
+  }
 }
 
-  export default EncounterDifficultySelector;
+export default EncounterDifficultySelector;

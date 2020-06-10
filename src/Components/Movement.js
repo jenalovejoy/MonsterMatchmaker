@@ -23,11 +23,11 @@ class Movement extends React.Component {
     console.log(speedA[i], i);
   }
 
-  
+
   createCheckbox = option => (
     <Checkbox
       label={option}
-      onClick={()=>this.props.onClick(option)}
+      onClick={() => this.props.onClick(option)}
       key={option}
     />
   );
@@ -36,8 +36,8 @@ class Movement extends React.Component {
 
   render() {
     return (
-      <form  onSubmit={this.handleFormSubmit}>
-        <legend style = {{fontSize: '25px'}}>Movement</legend>
+      <form onSubmit={this.handleFormSubmit}>
+        <legend style={{ fontSize: '25px' }}>Movement</legend>
         <div className="gridFormatAlignment">
           {this.createCheckboxes()}
         </div>

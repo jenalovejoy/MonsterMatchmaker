@@ -20,24 +20,24 @@ const CHALLENGE_OPTIONS = fillWithChallengeRatings();
 console.log(CHALLENGE_OPTIONS);
 
 class ChallengeSelector extends React.Component {
-  
-    render() {
-      return (
-        <React.Fragment>
+
+  render() {
+    return (
+      <React.Fragment>
         <div>
-            <legend style = {{fontSize: '25px'}}>Challenge Rating</legend>
-            <Dropdowns title="Minimum Challenge Rating" 
+          <legend style={{ fontSize: '25px' }}>Challenge Rating</legend>
+          <Dropdowns title="Minimum Challenge Rating"
             storeData={this.props.setMinChallenge}
-            dropdownData={CHALLENGE_OPTIONS}/>
-            {/* fillWithData={()=>this.props.fillWithData(option)}/> */}
-            <Dropdowns title="Maximum Challenge Rating" 
-            storeData={this.props.setMaxChallenge} 
+            dropdownData={CHALLENGE_OPTIONS} />
+          {/* fillWithData={()=>this.props.fillWithData(option)}/> */}
+          <Dropdowns title="Maximum Challenge Rating"
+            storeData={this.props.setMaxChallenge}
             dropdownData={CHALLENGE_OPTIONS} />
         </div>
-    </React.Fragment>
-      );
-    }
+      </React.Fragment>
+    );
   }
+}
 
 
-  export default ChallengeSelector;
+export default ChallengeSelector;

@@ -22,7 +22,7 @@ class MonsterTypeSelector extends React.Component {
   createCheckbox = option => (
     <Checkbox
       label={option}
-      onClick={()=>this.props.onClick(option)}
+      onClick={() => this.props.onClick(option)}
       key={option}
     />
   );
@@ -31,8 +31,8 @@ class MonsterTypeSelector extends React.Component {
 
   render() {
     return (
-      <form  onSubmit={this.handleFormSubmit}>
-        <legend style = {{fontSize: '25px'}}>Type</legend>
+      <form onSubmit={this.handleFormSubmit}>
+        <legend style={{ fontSize: '25px' }}>Type</legend>
         <div className="gridFormatAlignment">
           {this.createCheckboxes()}
         </div>

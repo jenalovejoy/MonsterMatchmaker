@@ -25,30 +25,30 @@ class PlayerLevelSelector extends React.Component {
 
   newPlayer() {
     let n = this.state.numberOfPlayers;
-    this.setState({numberOfPlayers: n + 1});
+    this.setState({ numberOfPlayers: n + 1 });
   }
 
   render() {
 
     return (
       <div>
-      {/* <form id="player-level-select" onSubmit={this.handleSubmit}> */}
-        <legend style = {{fontSize: '25px'}}>Player Levels</legend>
+        {/* <form id="player-level-select" onSubmit={this.handleSubmit}> */}
+        <legend style={{ fontSize: '25px' }}>Player Levels</legend>
 
         {this.state.playerLevels.map((level, i) => (
-          <Player 
+          <Player
             key={i}
-            playerNumber={i} 
+            playerNumber={i}
             selectedLevel={level}
             setPlayerLevel={this.props.setPlayerLevel}
-              // action={ClickHandlers.removePlayer(this, this.state.playerNumber)}
-              />))}
-      {/* </form> */}
-      <button className="addPlayerButton" 
-            onClick={(i) => ClickHandlers.addPlayer(this)}>+</button>
-      <button className="removePlayerButton" 
-            onClick={(i) => ClickHandlers.removePlayer(this)}>-</button>
-    </div>
+          // action={ClickHandlers.removePlayer(this, this.state.playerNumber)}
+          />))}
+        {/* </form> */}
+        <button className="addPlayerButton"
+          onClick={(i) => ClickHandlers.addPlayer(this)}>+</button>
+        <button className="removePlayerButton"
+          onClick={(i) => ClickHandlers.removePlayer(this)}>-</button>
+      </div>
     );
   }
 }

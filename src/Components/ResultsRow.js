@@ -1,9 +1,9 @@
 import React from "react";
 
 class ResultsRow extends React.Component {
-  render(){
+  render() {
     return (
-    <tr key={this.props.id.index}>
+      <tr key={this.props.id.index}>
         <td className="results-table-item">{this.props.id.name}</td>
         <td className="results-table-item">{this.props.id.challenge_rating}</td>
         <td className="results-table-item">{this.props.id.size}</td>
@@ -24,8 +24,9 @@ class ResultsRow extends React.Component {
         <td className="results-table-item">{this.props.id.intelligence}</td>
         <td className="results-table-item">{this.props.id.wisdom}</td>
         <td className="results-table-item">{this.props.id.charisma}</td>
-    </tr>
-    );}
+      </tr>
+    );
+  }
 }
 
 export default ResultsRow;

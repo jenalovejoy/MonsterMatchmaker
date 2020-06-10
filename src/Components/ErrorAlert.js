@@ -14,12 +14,12 @@ class ErrorAlert extends React.Component {
 
     return (
       <div className="error-message">
-            <img
-                id="alert-icon"
-                src={alert}
-                alt="Alert Icon"
-            ></img>
-            {this.state.message}
+        <img
+          id="alert-icon"
+          src={alert}
+          alt="Alert Icon"
+        ></img>
+        {this.state.message}
       </div>
     );
   }

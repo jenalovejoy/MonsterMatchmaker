@@ -29,7 +29,7 @@ class Player extends React.Component {
     }
     return (
       <ul className="playerLevelItem"><label>
-         <Dropdowns title="Player Level" 
+        <Dropdowns title="Player Level"
           dropdownData={allLevels}
           storeData={setPlayerLevel} />
       </label></ul>
