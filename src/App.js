@@ -28,7 +28,7 @@ class App extends React.Component {
     this.saveEncounterParams=this.saveEncounterParams.bind(this);
   }
 
-  storeData(i){
+  storeData(i){  
     this.setState({data: i});
     console.log(this.state.data);
   }

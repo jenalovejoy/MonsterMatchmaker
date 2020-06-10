@@ -122,8 +122,21 @@ export function setEncounterDifficulty(context, i) {
   console.log(context.state.encounterDifficulty[0]);
 }
 
+<<<<<<< HEAD
 export function setPlayerLevel(context, level, playerNumber) {
   let playerLevels = context.state.playerLevels;
+=======
+  // Handling user selection for encounter Difficulty
+  // export function setPlayerLevel(context, level, playerNumber){
+  //   context.setState(prevState => ({
+  //     playerLevels: {
+  //       ...prevState.playerLevels,
+  //       [playerNumber]: level
+  //       },
+  //   }));
+  //   console.log(context.state.playerLevels);
+  // }
+>>>>>>> 7f19e85694e4699214c33dc3d596a0909faa5501
 
   playerLevels[playerNumber] = level;
 
@@ -153,5 +166,12 @@ export function removePlayer(context, i) {
   console.log(context.state.numberOfPlayers);
   console.log(context.state.playerLevels);
 
+<<<<<<< HEAD
 }
 
+=======
+    context.setState(prevState => ({ playerLevels}));
+    console.log(context.state.numberOfPlayers);
+    console.log(context.state.playerLevels);
+}
+>>>>>>> 7f19e85694e4699214c33dc3d596a0909faa5501
