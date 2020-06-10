@@ -14,7 +14,7 @@ class HomePage extends React.Component {
             <Link to="/encounterBuilder">
               <button
                 className="homescreen-button"
-                onClick="window.location.href = '/encounterBuilder';"
+                // onClick={window.location.href = '/encounterBuilder'}
                 title="Build Encounter"
               >
                 Build Encounter
@@ -25,7 +25,7 @@ class HomePage extends React.Component {
             <Link to="monsterFinder">
               <button
                 className="homescreen-button"
-                onClick="window.location.href = '/monsterFinder';"
+                // onClick={window.location.href = '/monsterFinder'}
                 title="Search For Monsters"
               >
                 Filter Monsters

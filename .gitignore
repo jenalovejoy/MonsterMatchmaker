@@ -2,3 +2,4 @@ node_modules
 !app.js
 !webpack.config.js
 .vscode/
+build/
