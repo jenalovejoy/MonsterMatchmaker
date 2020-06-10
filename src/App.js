@@ -18,7 +18,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      data: [], //stores data from mongo for all the pages
+      data: undefined, //stores data from mongo for all the pages
       encounterParams:{
         minXP:0,
         maxXP: 155001

@@ -1,6 +1,8 @@
 import "../CSS/EncounterResults.css";
 import React from "react";
 import EncounterResultTable from "../Components/EncounterResultTable";
+import ErrorAlert from "../Components/ErrorAlert"
+import Loader from "../Components/Loader"
 
 class EncounterResults extends React.Component {
 
@@ -84,11 +86,11 @@ class EncounterResults extends React.Component {
 
       let XPThresholdMin = this.adjustMultiplier(monsterCount, minXP);
       // Pick a "starting" monster as the root, moving from biggest to smallest
-      for (let seed = monsters.length - 1; seed >= 0 && encounterCount < 5; seed--) {
+      for (let seed = monsters.length - 1; encounterCount < 5 && seed >= 0; seed--) {
         let encounter = { "result": [], "details": {} }; // individual encounters
         let XPTotal = 0; // total XP in the encounter so far
         let XPLeft = XPThresholdMax; // how much XP to go in the budget
-        for (let i = seed; i >= 0; i--) { // from seed to smallest
+        for (let i = seed; encounterCount < 5 && i >= 0; i--) { // from seed to smallest
           let currentMonsterHP = monsters[i].XP;
         //   console.log("hp: " + currentMonsterHP)
           if (XPLeft >= currentMonsterHP) { // if the monster is valid -> not too big out of range
@@ -103,15 +105,12 @@ class EncounterResults extends React.Component {
               encounter["details"] = {
                 "Number of Monsters": encounter.result.length,
                 "XP Total": XPTotal,
-                "Percent of Threshold": ((XPTotal / XPThresholdMax) * 100) + "%"
+                "Percent of Threshold": ((XPTotal / XPThresholdMax) * 100).toFixed(2) + "%"
             };
             console.log("one worked: " + encounter["result"] + " xp left: " + XPLeft)
               encounter["index"] = idx++;
               encounters.push(encounter);
-              console.log("e " + encounterCount + " ");
-              for (let r in encounter["result"]){
-                  console.log(r.ID)
-              }
+              console.log("e #" + encounterCount + " ");
 
               encounterCount++;
             }
@@ -137,41 +136,26 @@ class EncounterResults extends React.Component {
                   temp["details"] = {
                     "Number of Monsters": encounter.result.length,
                     "XP Total": XPTotal,
-                    "Percent of Threshold": ((XPTotal / XPThresholdMax) * 100) + "%"
+                    "Percent of Threshold": ((XPTotal / XPThresholdMax) * 100).toFixed(2) + "%"
                   };
                   temp["index"] = idx++;
                   encounters.push(temp);
                   console.log(temp["result"].length)
 
-                  console.log("e " + encounterCount + " " + temp["result"]);
+                  console.log("e # " + encounterCount + " " + temp["result"]);
                     for (let r of temp["result"]){
                         console.log(r.name)
                     }
 
                   encounterCount++;
-                  //console.log("temp: " + temp.details)
                 }
-                // temp["result"] = [];
 
               }
-
-
             }
-
           }
-
         }
       }
       monsterCount++;
-    }
-
-    console.log(encounters.length)
-    for (let e of encounters){
-        console.log(e["index"])
-        for (let r in e["result"]){
-            console.log(r.name)
-        }
-        console.log(e)
     }
 
     // Testing accuracy
@@ -253,7 +237,27 @@ class EncounterResults extends React.Component {
   }
 
 
+
+
   render() {
+    let render;
+    if (this.props.data == undefined) {
+        render = <Loader/>
+    } else if (this.props.data.length > 0) {
+        let bundle = this.bundleResults(this.props.data);
+        if (bundle.length > 0){
+            render =
+                (<div className="results-table">
+                    {bundle.map(encounterResult => (<EncounterResultTable key={encounterResult.index} id="encounter-results" result={encounterResult.result} details={encounterResult.details} />))}
+                </div>
+                );
+        } else {
+            render = <ErrorAlert errorMessage="No possible encounters for this search. Better results can be obtained through a more difficult encounter, or more general monster search" />
+        }
+    } else {
+        render = <ErrorAlert errorMessage="No possible encounters for this search. Better results can be obtained through a more difficult encounter, or more general monster search" />
+    }
+       
     return (
       <React.Fragment>
         <article >
@@ -264,10 +268,7 @@ class EncounterResults extends React.Component {
           </div>
 
           <h5 title="Monsters" className="encounter-title">Monsters</h5>
-          <div className="results-table">
-            {/* <ResultsTable id="encounter-results" data={this.bundleResults(this.props.data)}/> */}
-            {this.bundleResults(this.props.data).map(encounterResult => (<EncounterResultTable key={encounterResult.index} id="encounter-results" result={encounterResult.result} details={encounterResult.details} />))}
-          </div>
+          {render}
 
 
         </article>
@@ -275,4 +276,5 @@ class EncounterResults extends React.Component {
     );
   }
 }
+
 export default EncounterResults;

@@ -121,16 +121,20 @@ class MonsterFinder extends React.Component {
 
             {/* <!-- ALIGNMENT AND TYPE ROW --> */}
             <div className="parentContainerPairHorizontal">
-              <AlignmentTypeSelector
-                onClick={(i) => ClickHandlers.handleAlignmentClick(this, i)}
-                alignmentCheckboxes={this.state.alignmentCheckboxes}
-                handleCheckBoxChange={(i) => this.handleCheckBoxChange}
-              />
-              <MonsterTypeSelector
-                onClick={(i) => ClickHandlers.handleMonsterTypeClick(this, i)}
-                typeCheckboxes={this.state.typeCheckboxes}
-                handleCheckBoxChange={(i) => this.handleCheckBoxChange}
-              />
+                <div className="subContainerPairHorizontal">
+                    <AlignmentTypeSelector
+                        onClick={(i) => ClickHandlers.handleAlignmentClick(this, i)}
+                        alignmentCheckboxes={this.state.alignmentCheckboxes}
+                        handleCheckBoxChange={(i) => this.handleCheckBoxChange}
+                    />
+                </div>
+                <div className="subContainerPairHorizontal">
+                    <MonsterTypeSelector
+                        onClick={(i) => ClickHandlers.handleMonsterTypeClick(this, i)}
+                        typeCheckboxes={this.state.typeCheckboxes}
+                        handleCheckBoxChange={(i) => this.handleCheckBoxChange}
+                    />
+                </div>
             </div>
             {/* <!--end second pairing--> */}
 

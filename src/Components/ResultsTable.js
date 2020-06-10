@@ -38,24 +38,23 @@ class ResultsTable extends React.Component {
 
     let render;
     // if there are results, show the table
-    if (this.props.data.length > 0) {
-      render =
-        (<table id={this.props.id}>
-          <thead>
-            <tr>
-              {this.createTableHeadings(TABLE_HEADINGS)}
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.data.map(id => (<ResultsRow key={Math.random().toString(36).substr(2, 9)} id={id} />))}
-          </tbody>
-        </table>);
-
-    } else if (this.props.data == undefined) {
-      render = <ErrorAlert errorMessage="No results for this query" />
-    } else {
+    if (this.props.data == undefined) {
       render = <Loader/>
-
+    } else if (this.props.data.length > 0) {
+        render =
+            (<table id={this.props.id}>
+            <thead>
+                <tr>
+                {this.createTableHeadings(TABLE_HEADINGS)}
+                </tr>
+            </thead>
+            <tbody>
+                {this.props.data.map(id => (<ResultsRow key={Math.random().toString(36).substr(2, 9)} id={id} />))}
+            </tbody>
+            </table>
+            );
+    } else {
+        render = <ErrorAlert errorMessage="No results for this query" />
     }
 
     return (

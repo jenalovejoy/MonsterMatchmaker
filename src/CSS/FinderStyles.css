@@ -39,6 +39,7 @@
   justify-content: space-between; /* justifies to far left and right, may not work on Edge */
   align-items: flex-start;
   padding-right: 50px;
+  padding-top: 50px;
 }
 
 .subContainerPairVertical {
