@@ -42,7 +42,7 @@ class MonsterFinder extends React.Component {
         {}
       ),
       challengeRatings: { min: "", max: "" },
-      sizes: { min: "", max: "" },
+      sizes: {min: "Tiny", max: "Gargantuan"},
       alignmentCheckboxes: ALIGNMENT_OPTIONS.reduce(
         (options, option) => ({
           ...options,

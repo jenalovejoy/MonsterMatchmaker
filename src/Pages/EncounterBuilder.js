@@ -147,7 +147,7 @@ class EncounterBuilder extends React.Component {
 
       numberOfPlayers: 4,
       playerLevels: [1, 1, 1, 1],
-      sizes: { min: "Tiny", max: "Gargantuan" },
+      sizes: {min: "Tiny", max: "Gargantuan"},
 
       alignmentCheckboxes: ALIGNMENT_OPTIONS.reduce(
         (options, option) => ({

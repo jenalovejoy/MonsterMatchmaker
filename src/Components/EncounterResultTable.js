@@ -9,7 +9,7 @@ class EncounterResultTable extends React.Component {
 
       <React.Fragment>
         <EncounterDetails details={this.props.details} />
-        {/* {console.log(this.props.result)} */}
+        {console.log(this.props.result)}
         <ResultsTable id="encounter-results" data={this.props.result} />
       </React.Fragment>
     );
