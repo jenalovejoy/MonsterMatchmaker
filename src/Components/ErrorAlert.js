@@ -13,7 +13,7 @@ class ErrorAlert extends React.Component {
   render() {
 
     return (
-      <div class="error-message">
+      <div className="error-message">
             <img
                 id="alert-icon"
                 src={alert}

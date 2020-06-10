@@ -7,11 +7,11 @@ class MonsterResults extends React.Component {
     return (
       <React.Fragment>
         <div id="filter-results-title">
-        <h3 class="text-light text-center" id="title-header">
+        <h3 className="text-light text-center" id="title-header">
             I have found some monsters for you
           </h3>
         </div>
-        <div class="results-table">
+        <div className="results-table">
           <ResultsTable id="monster-results" data={this.props.data}/>
         </div>
         
