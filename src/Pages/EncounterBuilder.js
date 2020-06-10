@@ -280,7 +280,7 @@ class EncounterBuilder extends React.Component {
 
   //for searching the database
   findInDB = () => {
-
+    this.props.storeData(undefined);
     this.partyCRs(); //13.58.12.74
     let data = {
       //movement
@@ -348,16 +348,20 @@ class EncounterBuilder extends React.Component {
 
             {/* <!-- ALIGNMENT AND TYPE ROW --> */}
             <div className="parentContainerPairHorizontal">
-              <AlignmentTypeSelector
-                onClick={(i) => ClickHandlers.handleAlignmentClick(this, i)}
-                alignmentCheckboxes={this.state.alignmentCheckboxes}
-                handleCheckBoxChange={(i) => this.handleCheckBoxChange}
-              />
-              <MonsterTypeSelector
-                onClick={(i) => ClickHandlers.handleMonsterTypeClick(this, i)}
-                typeCheckboxes={this.state.typeCheckboxes}
-                handleCheckBoxChange={(i) => this.handleCheckBoxChange}
-              />
+                <div className="subContainerPairHorizontal">
+                    <AlignmentTypeSelector
+                        onClick={(i) => ClickHandlers.handleAlignmentClick(this, i)}
+                        alignmentCheckboxes={this.state.alignmentCheckboxes}
+                        handleCheckBoxChange={(i) => this.handleCheckBoxChange}
+                    />
+                </div>
+                <div className="subContainerPairHorizontal">
+                <MonsterTypeSelector
+                    onClick={(i) => ClickHandlers.handleMonsterTypeClick(this, i)}
+                    typeCheckboxes={this.state.typeCheckboxes}
+                    handleCheckBoxChange={(i) => this.handleCheckBoxChange}
+                />
+                </div>
             </div>
 
             {/* <!-- BUTTON ROW --> */}

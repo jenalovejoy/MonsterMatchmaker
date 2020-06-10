@@ -31,7 +31,8 @@ class ChallengeSelector extends React.Component {
             dropdownData={CHALLENGE_OPTIONS} />
           <Dropdowns title="Maximum Challenge Rating"
             storeData={this.props.setMaxChallenge}
-            dropdownData={CHALLENGE_OPTIONS} />
+            dropdownData={CHALLENGE_OPTIONS}
+            value="30"/>
         </div>
       </React.Fragment>
     );

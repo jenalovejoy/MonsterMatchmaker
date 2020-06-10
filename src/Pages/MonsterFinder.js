@@ -61,7 +61,7 @@ class MonsterFinder extends React.Component {
   }
   //for searching the database
   findInDB = () => {
-
+    this.props.storeData(undefined);
     axios.post('https://6f2fso95cd.execute-api.us-east-2.amazonaws.com/api/FindMonsters', {
       //movement
 
