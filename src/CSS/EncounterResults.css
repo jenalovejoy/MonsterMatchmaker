@@ -23,8 +23,8 @@ header {
     padding: 50px;
 }
 .loader {
-    border: 16px solid white; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
+    border: 16px solid white;
+    border-top: 16px solid lightblue; 
     border-radius: 50%;
     width: 100px;
     height: 100px;
@@ -118,9 +118,9 @@ header {
   text-align: center;
 }
 
-.dungeonMap {
-  width: 250px;
-  height: 250px;
+.results-table {
+    max-width: 80%;
+    overflow-x: auto;
 }
 
 .encounter-details {

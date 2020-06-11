@@ -38,11 +38,11 @@ class ResultsTable extends React.Component {
 
     let render;
     // if there are results, show the table
-    if (this.props.data == undefined) {
+    if (this.props.data === undefined) {
       render = <Loader/>
     } else if (this.props.data.length > 0) {
         render =
-            (<table id={this.props.id}>
+            (<table id={this.props.id} className="results-table">
             <thead>
                 <tr>
                 {this.createTableHeadings(TABLE_HEADINGS)}
