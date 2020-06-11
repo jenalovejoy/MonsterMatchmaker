@@ -18,7 +18,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      data: [], //stores data from mongo for all the pages
+      data: undefined, //stores data from mongo for all the pages
       encounterParams:{
         minXP:0,
         maxXP: 155001
@@ -28,7 +28,7 @@ class App extends React.Component {
     this.saveEncounterParams=this.saveEncounterParams.bind(this);
   }
 
-  storeData(i){
+  storeData(i){  
     this.setState({data: i});
     console.log(this.state.data);
   }

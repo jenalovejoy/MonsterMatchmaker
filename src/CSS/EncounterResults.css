@@ -18,6 +18,26 @@ header {
   color: white;
 }
 
+.loader-container {
+    text-align: center;
+    padding: 50px;
+}
+.loader {
+    border: 16px solid white;
+    border-top: 16px solid lightblue; 
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 2s linear infinite;  
+    display: inline-block;
+
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
 #promptHeader {
   padding-top: 20px;
   padding-left: 50px;
@@ -98,9 +118,9 @@ header {
   text-align: center;
 }
 
-.dungeonMap {
-  width: 250px;
-  height: 250px;
+.results-table {
+    max-width: 80%;
+    overflow-x: auto;
 }
 
 .encounter-details {

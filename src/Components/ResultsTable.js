@@ -1,6 +1,7 @@
 import React from "react";
 import ResultsRow from "./ResultsRow";
 import ErrorAlert from "./ErrorAlert";
+import Loader from "./Loader";
 
 const TABLE_HEADINGS = [
   "Monster Name",
@@ -37,21 +38,23 @@ class ResultsTable extends React.Component {
 
     let render;
     // if there are results, show the table
-    if (this.props.data.length !== 0) {
-      render =
-        (<table id={this.props.id}>
-          <thead>
-            <tr>
-              {this.createTableHeadings(TABLE_HEADINGS)}
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.data.map(id => (<ResultsRow key={Math.random().toString(36).substr(2, 9)} id={id} />))}
-          </tbody>
-        </table>);
-
+    if (this.props.data === undefined) {
+      render = <Loader/>
+    } else if (this.props.data.length > 0) {
+        render =
+            (<table id={this.props.id} className="results-table">
+            <thead>
+                <tr>
+                {this.createTableHeadings(TABLE_HEADINGS)}
+                </tr>
+            </thead>
+            <tbody>
+                {this.props.data.map(id => (<ResultsRow key={Math.random().toString(36).substr(2, 9)} id={id} />))}
+            </tbody>
+            </table>
+            );
     } else {
-      render = <ErrorAlert errorMessage="No results for this query" />
+        render = <ErrorAlert errorMessage="No results for this query" />
     }
 
     return (

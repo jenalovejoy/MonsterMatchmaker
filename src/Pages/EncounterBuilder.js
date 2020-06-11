@@ -9,6 +9,7 @@ import PlayerLevelSelector from "../Components/PlayerLevelSelector";
 import React from "react";
 import SizeSelector from "../Components/SizeSelector";
 import styles from "../CSS/FinderStyles.css";
+import {withRouter} from "react-router";
 
 
 const ALIGNMENT_OPTIONS = ["Lawful Good", "Lawful Neutral", "Lawful Evil",
@@ -29,26 +30,26 @@ const MOVEMENT_OPTIONS = [
 ];
 
 const PLAYER_XP_THRESHOLD = {
-  "1": { "Easy": 25, "Medium": 50, "Hard": 75, "Deadly": 100 },
-  "2": { "Easy": 50, "Medium": 100, "Hard": 150, "Deadly": 200 },
-  "3": { "Easy": 75, "Medium": 150, "Hard": 225, "Deadly": 400 },
-  "4": { "Easy": 125, "Medium": 250, "Hard": 375, "Deadly": 500 },
-  "5": { "Easy": 250, "Medium": 500, "Hard": 750, "Deadly": 1100 },
-  "6": { "Easy": 300, "Medium": 600, "Hard": 900, "Deadly": 1400 },
-  "7": { "Easy": 350, "Medium": 750, "Hard": 1100, "Deadly": 1700 },
-  "8": { "Easy": 450, "Medium": 900, "Hard": 1400, "Deadly": 2100 },
-  "9": { "Easy": 550, "Medium": 1100, "Hard": 1600, "Deadly": 2400 },
-  "10": { "Easy": 600, "Medium": 1200, "Hard": 1900, "Deadly": 2800 },
-  "11": { "Easy": 800, "Medium": 1600, "Hard": 2400, "Deadly": 3600 },
-  "12": { "Easy": 1000, "Medium": 2000, "Hard": 3000, "Deadly": 4500 },
-  "13": { "Easy": 1100, "Medium": 2200, "Hard": 3400, "Deadly": 5100 },
-  "14": { "Easy": 1250, "Medium": 2500, "Hard": 3800, "Deadly": 5700 },
-  "15": { "Easy": 1400, "Medium": 2800, "Hard": 4300, "Deadly": 6400 },
-  "16": { "Easy": 1600, "Medium": 3200, "Hard": 4800, "Deadly": 7200 },
-  "17": { "Easy": 2000, "Medium": 3900, "Hard": 5900, "Deadly": 8800 },
-  "18": { "Easy": 2100, "Medium": 4200, "Hard": 6300, "Deadly": 9500 },
-  "19": { "Easy": 2400, "Medium": 2900, "Hard": 7300, "Deadly": 10900 },
-  "20": { "Easy": 2800, "Medium": 5700, "Hard": 8500, "Deadly": 12700 }
+  1: {"Easy": 25, "Medium": 50, "Hard": 75, "Deadly": 100},
+  2: {"Easy": 50, "Medium": 100, "Hard": 150, "Deadly": 200},
+  3: {"Easy": 75, "Medium": 150, "Hard": 225, "Deadly": 400},
+  4: {"Easy": 125, "Medium": 250, "Hard": 375, "Deadly": 500},
+  5: {"Easy": 250, "Medium": 500, "Hard": 750, "Deadly": 1100},
+  6: {"Easy": 300, "Medium": 600, "Hard": 900, "Deadly": 1400},
+  7: {"Easy": 350, "Medium": 750, "Hard": 1100, "Deadly": 1700},
+  8: {"Easy": 450, "Medium": 900, "Hard": 1400, "Deadly": 2100},
+  9: {"Easy": 550, "Medium": 1100, "Hard": 1600, "Deadly": 2400},
+  10: {"Easy": 600, "Medium": 1200, "Hard": 1900, "Deadly": 2800},
+  11: {"Easy": 800, "Medium": 1600, "Hard": 2400, "Deadly": 3600},
+  12: {"Easy": 1000, "Medium": 2000, "Hard": 3000, "Deadly": 4500},
+  13: {"Easy": 1100, "Medium": 2200, "Hard": 3400, "Deadly": 5100},
+  14: {"Easy": 1250, "Medium": 2500, "Hard": 3800, "Deadly": 5700},
+  15: {"Easy": 1400, "Medium": 2800, "Hard": 4300, "Deadly": 6400},
+  16: {"Easy": 1600, "Medium": 3200, "Hard": 4800, "Deadly": 7200},
+  17: {"Easy": 2000, "Medium": 3900, "Hard": 5900, "Deadly": 8800},
+  18: {"Easy": 2100, "Medium": 4200, "Hard": 6300, "Deadly": 9500},
+  19: {"Easy": 2400, "Medium": 2900, "Hard": 7300, "Deadly": 10900},
+  20: {"Easy": 2800, "Medium": 5700, "Hard": 8500, "Deadly": 12700}
 }
 
 const experience = [
@@ -143,11 +144,11 @@ class EncounterBuilder extends React.Component {
         {}
       ),
       challengeRatings: [0, 0.125, 0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 30],
-      encounterDifficulty: Array(1).fill(""),
+      encounterDifficulty: ["Easy"],
 
       numberOfPlayers: 4,
       playerLevels: [1, 1, 1, 1],
-      sizes: { min: "Tiny", max: "Gargantuan" },
+      sizes: {min: "Tiny", max: "Gargantuan"},
 
       alignmentCheckboxes: ALIGNMENT_OPTIONS.reduce(
         (options, option) => ({
@@ -162,7 +163,11 @@ class EncounterBuilder extends React.Component {
           [option]: false
         }),
         {}
-      )
+      ),
+      encounterParams: {
+        minXP: 0,
+        maxXP: 155001
+      }
     };
   }
 
@@ -280,7 +285,7 @@ class EncounterBuilder extends React.Component {
 
   //for searching the database
   findInDB = () => {
-
+    this.props.storeData(undefined);
     this.partyCRs(); //13.58.12.74
     let data = {
       //movement
@@ -348,16 +353,20 @@ class EncounterBuilder extends React.Component {
 
             {/* <!-- ALIGNMENT AND TYPE ROW --> */}
             <div className="parentContainerPairHorizontal">
-              <AlignmentTypeSelector
-                onClick={(i) => ClickHandlers.handleAlignmentClick(this, i)}
-                alignmentCheckboxes={this.state.alignmentCheckboxes}
-                handleCheckBoxChange={(i) => this.handleCheckBoxChange}
-              />
-              <MonsterTypeSelector
-                onClick={(i) => ClickHandlers.handleMonsterTypeClick(this, i)}
-                typeCheckboxes={this.state.typeCheckboxes}
-                handleCheckBoxChange={(i) => this.handleCheckBoxChange}
-              />
+                <div className="subContainerPairHorizontal">
+                    <AlignmentTypeSelector
+                        onClick={(i) => ClickHandlers.handleAlignmentClick(this, i)}
+                        alignmentCheckboxes={this.state.alignmentCheckboxes}
+                        handleCheckBoxChange={(i) => this.handleCheckBoxChange}
+                    />
+                </div>
+                <div className="subContainerPairHorizontal">
+                <MonsterTypeSelector
+                    onClick={(i) => ClickHandlers.handleMonsterTypeClick(this, i)}
+                    typeCheckboxes={this.state.typeCheckboxes}
+                    handleCheckBoxChange={(i) => this.handleCheckBoxChange}
+                />
+                </div>
             </div>
 
             {/* <!-- BUTTON ROW --> */}
@@ -382,4 +391,4 @@ class EncounterBuilder extends React.Component {
   }
 }
 
-export default EncounterBuilder;
+export default withRouter(EncounterBuilder);

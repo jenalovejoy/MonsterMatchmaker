@@ -8,7 +8,8 @@ class Dropdowns extends React.Component {
     this.state = {
       headerTitle: this.props.title, // String representing dropdown 
       category: this.props.category, // String representing category type
-      dropdownData: this.props.dropdownData
+      dropdownData: this.props.dropdownData,
+      value: this.props.value
     };
 
     // required code

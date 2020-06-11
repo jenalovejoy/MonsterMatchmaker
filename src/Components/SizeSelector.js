@@ -18,7 +18,8 @@ class SizeSelector extends React.Component {
           <Dropdowns title="Maximum Creature Size"
             category="Size"
             storeData={this.props.setMaxSize}
-            dropdownData={SIZE_CATEGORIES} />
+            dropdownData={SIZE_CATEGORIES} 
+            value="Gargantuan"/>
 
         </div>
       </React.Fragment>

@@ -16,6 +16,15 @@
   margin: 4px 2px;
   cursor: pointer;
 }
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 .parentContainerListVertical {
   display: flex; /* or inline-flex */
   flex-direction: column; /*order left to right normally*/
@@ -29,7 +38,9 @@
   flex-wrap: wrap; /*place second item below when small*/
   justify-content: space-between; /* justifies to far left and right, may not work on Edge */
   align-items: flex-start;
-  padding: 30px
+  padding: 30px;
+  padding-bottom: 0px;
+  padding-top: 0px;
 }
 
 .subContainerPairHorizontal {
@@ -38,7 +49,7 @@
   flex-wrap: wrap; /*place second item below when small*/
   justify-content: space-between; /* justifies to far left and right, may not work on Edge */
   align-items: flex-start;
-  padding-right: 50px;
+  padding: 30px;
 }
 
 .subContainerPairVertical {

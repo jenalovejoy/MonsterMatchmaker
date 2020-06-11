@@ -42,7 +42,7 @@ class MonsterFinder extends React.Component {
         {}
       ),
       challengeRatings: { min: "", max: "" },
-      sizes: { min: "", max: "" },
+      sizes: {min: "Tiny", max: "Gargantuan"},
       alignmentCheckboxes: ALIGNMENT_OPTIONS.reduce(
         (options, option) => ({
           ...options,
@@ -61,7 +61,7 @@ class MonsterFinder extends React.Component {
   }
   //for searching the database
   findInDB = () => {
-
+    this.props.storeData(undefined);
     axios.post('https://6f2fso95cd.execute-api.us-east-2.amazonaws.com/api/FindMonsters', {
       //movement
 
@@ -121,16 +121,20 @@ class MonsterFinder extends React.Component {
 
             {/* <!-- ALIGNMENT AND TYPE ROW --> */}
             <div className="parentContainerPairHorizontal">
-              <AlignmentTypeSelector
-                onClick={(i) => ClickHandlers.handleAlignmentClick(this, i)}
-                alignmentCheckboxes={this.state.alignmentCheckboxes}
-                handleCheckBoxChange={(i) => this.handleCheckBoxChange}
-              />
-              <MonsterTypeSelector
-                onClick={(i) => ClickHandlers.handleMonsterTypeClick(this, i)}
-                typeCheckboxes={this.state.typeCheckboxes}
-                handleCheckBoxChange={(i) => this.handleCheckBoxChange}
-              />
+                <div className="subContainerPairHorizontal">
+                    <AlignmentTypeSelector
+                        onClick={(i) => ClickHandlers.handleAlignmentClick(this, i)}
+                        alignmentCheckboxes={this.state.alignmentCheckboxes}
+                        handleCheckBoxChange={(i) => this.handleCheckBoxChange}
+                    />
+                </div>
+                <div className="subContainerPairHorizontal">
+                    <MonsterTypeSelector
+                        onClick={(i) => ClickHandlers.handleMonsterTypeClick(this, i)}
+                        typeCheckboxes={this.state.typeCheckboxes}
+                        handleCheckBoxChange={(i) => this.handleCheckBoxChange}
+                    />
+                </div>
             </div>
             {/* <!--end second pairing--> */}
 
